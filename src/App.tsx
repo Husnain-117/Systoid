@@ -7,23 +7,24 @@ import Portfolio from './components/portfolio';
 import Team from './components/team';
 import Contact from './components/contact';
 import Footer from './components/footer';
+
 import './App.css';
+import Testimonials from './components/testimonials';
 
 function App() {
   return (
-    <>
+    <main className="min-h-screen">
       <Header />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Portfolio />
-        <Team />
-        <Contact />
-      </main>
+      <Hero />
+      <Services />
+      <About />
+      <Portfolio />
+      <Team />
+      <Testimonials />
+      <Contact />
       <Footer />
-    </>
-  );
+    </main>
+  )
 }
 
 export default App;

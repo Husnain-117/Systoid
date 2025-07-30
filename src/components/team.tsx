@@ -2,9 +2,8 @@
 import { useEffect, useState, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Github, Linkedin, Twitter, Mail } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail, Users, ChevronLeft, ChevronRight } from "lucide-react"
 
-// Custom hook for scroll-in-view animation (reused from About component)
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
@@ -14,11 +13,11 @@ function useInView() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          observer.unobserve(entry.target) // Unobserve once visible
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
+        threshold: 0.1,
+        rootMargin: "50px",
       },
     )
 
@@ -37,20 +36,21 @@ function useInView() {
 }
 
 export default function Team() {
-  // Define the color palette based on the consistent theme
+  const [currentMemberIndex, setCurrentMemberIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  // Enhanced professional color palette
   const colors = {
-    background: "#222629", // Dark gray
-    cardBg: "rgba(71, 75, 79, 0.2)", // Card background
-    cardBorder: "rgba(107, 110, 112, 0.2)", // Card border
-    accentGreen: "#86C232", // Light green
-    darkerGreen: "#61892F", // Darker green
-    whiteText: "#FFFFFF", // White
-    grayText: "#A0A0A0", // Medium gray for text
-    badgeBg: "rgba(71, 75, 79, 0.3)", // Badge background
-    badgeBorder: "rgba(107, 110, 112, 0.2)", // Badge border
-    ctaBgGradientStart: "rgba(134, 194, 50, 0.1)", // CTA section background gradient start
-    ctaBgGradientEnd: "rgba(97, 137, 47, 0.1)", // CTA section background gradient end
-    ctaBorder: "rgba(134, 194, 50, 0.2)", // CTA section border
+    deepNavy: "#1A1D29",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    pureWhite: "#FFFFFF",
+    warmGray: "#8B9DC3",
+    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    cardBg: "rgba(139, 157, 195, 0.08)",
+    cardBorder: "rgba(0, 217, 255, 0.2)",
+    accentGlow: "rgba(0, 217, 255, 0.2)",
+    greenGlow: "rgba(0, 255, 136, 0.2)",
   }
 
   const teamMembers = [
@@ -58,107 +58,178 @@ export default function Team() {
       name: "Alex Johnson",
       role: "CEO & Founder",
       bio: "Visionary leader with 10+ years in software development and business strategy.",
-      imageQuery: "professional man smiling",
+      imageQuery: "professional businessman headshot smiling portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "alex@Systoid.com",
+        email: "alex@systoid.com",
       },
     },
     {
       name: "Sarah Chen",
       role: "CTO",
       bio: "Technical architect specializing in scalable systems and emerging technologies.",
-      imageQuery: "professional woman coding",
+      imageQuery: "professional woman software engineer coding portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "sarah@Systoid.com",
+        email: "sarah@systoid.com",
       },
     },
     {
       name: "Michael Rodriguez",
       role: "Lead Developer",
       bio: "Full-stack developer passionate about creating elegant solutions to complex problems.",
-      imageQuery: "man working on computer",
+      imageQuery: "hispanic man developer working on computer portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "michael@Systoid.com",
+        email: "michael@systoid.com",
       },
     },
     {
       name: "Emily Davis",
       role: "UI/UX Designer",
       bio: "Creative designer focused on user-centered design and exceptional user experiences.",
-      imageQuery: "woman designing on tablet",
+      imageQuery: "woman designer working on tablet creative portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "emily@Systoid.com",
+        email: "emily@systoid.com",
       },
     },
     {
       name: "David Kim",
       role: "Mobile Developer",
       bio: "Mobile app specialist with expertise in iOS, Android, and cross-platform development.",
-      imageQuery: "man using smartphone",
+      imageQuery: "asian man mobile developer with smartphone portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "david@Systoid.com",
+        email: "david@systoid.com",
       },
     },
     {
       name: "Lisa Thompson",
       role: "Digital Marketing Lead",
       bio: "Marketing strategist with proven track record in digital campaigns and brand growth.",
-      imageQuery: "woman analyzing marketing data",
+      imageQuery: "professional woman analyzing marketing data charts portrait",
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "lisa@Systoid.com",
+        email: "lisa@systoid.com",
       },
     },
   ]
 
-  // Refs for scroll animations
+  const nextMember = () => {
+    setIsAnimating(true)
+    setTimeout(() => {
+      setCurrentMemberIndex((prevIndex) => (prevIndex + 1) % teamMembers.length)
+      setIsAnimating(false)
+    }, 500) // Match this duration with the CSS animation duration
+  }
+
+  const prevMember = () => {
+    setIsAnimating(true)
+    setTimeout(() => {
+      setCurrentMemberIndex((prevIndex) => (prevIndex - 1 + teamMembers.length) % teamMembers.length)
+      setIsAnimating(false)
+    }, 500) // Match this duration with the CSS animation duration
+  }
+
+  useEffect(() => {
+    const autoSlide = setInterval(nextMember, 5000) // Auto-shift every 5 seconds
+    return () => clearInterval(autoSlide)
+  }, [teamMembers.length])
+
   const [headerRef, headerInView] = useInView()
-  const [teamGridRef, teamGridInView] = useInView()
+  const [teamCarouselRef, teamCarouselInView] = useInView()
   const [ctaRef, ctaInView] = useInView()
+
+  const currentMember = teamMembers[currentMemberIndex]
 
   return (
     <section
       id="team"
       style={{
-        paddingTop: "80px", // py-20
-        paddingBottom: "80px", // py-20
-        backgroundColor: colors.background, // bg-[#222629]
+        paddingTop: "80px",
+        paddingBottom: "80px",
+        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Enhanced Galaxy Background */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `
+              radial-gradient(circle at 15% 35%, ${colors.electricCyan}12 1px, transparent 1px),
+              radial-gradient(circle at 85% 15%, ${colors.vibrantGreen}10 1px, transparent 1px),
+              radial-gradient(circle at 45% 85%, ${colors.electricCyan}08 1px, transparent 1px)
+            `,
+            backgroundSize: "200px 200px, 180px 180px, 240px 240px",
+            animation: "teamGalaxy 18s linear infinite",
+            opacity: 0.4,
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            top: "25%",
+            left: "12%",
+            width: "180px",
+            height: "180px",
+            background: `radial-gradient(circle, ${colors.electricCyan}18, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(50px)",
+            animation: "teamFloat1 14s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "35%",
+            right: "15%",
+            width: "220px",
+            height: "220px",
+            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(60px)",
+            animation: "teamFloat2 18s ease-in-out infinite reverse",
+          }}
+        />
+      </div>
+
       <div
         className="team-container-inner"
         style={{
-          maxWidth: "1280px", // container mx-auto
+          maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px", // px-4 sm:px-6 lg:px-8
+          padding: "0 16px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <div
           ref={headerRef}
           style={{
             textAlign: "center",
-            marginBottom: "64px", // mb-16
+            marginBottom: "60px",
             opacity: headerInView ? 1 : 0,
-            transform: headerInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            transform: headerInView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
             transitionDelay: "0.1s",
           }}
         >
@@ -166,34 +237,56 @@ export default function Team() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px", // space-x-2
-              backgroundColor: colors.badgeBg, // bg-[#474B4F]/30
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.badgeBorder}`, // border border-[#6B6E70]/20
-              borderRadius: "9999px", // rounded-full
-              padding: "8px 16px", // px-4 py-2
-              marginBottom: "24px", // mb-6
+              gap: "12px",
+              backgroundColor: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "9999px",
+              padding: "12px 24px",
+              marginBottom: "24px",
+              boxShadow: `0 8px 32px ${colors.accentGlow}`,
             }}
           >
-            <Mail style={{ height: "16px", width: "16px", color: colors.accentGreen }} />
-            <span style={{ fontSize: "0.875rem", color: colors.grayText }}>Our Team</span>
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                borderRadius: "50%",
+                padding: "6px",
+                animation: "iconPulse 3s ease-in-out infinite",
+              }}
+            >
+              <Users style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+            </div>
+            <span
+              style={{
+                fontSize: "0.95rem",
+                color: colors.warmGray,
+                fontWeight: "600",
+              }}
+            >
+              Our Team
+            </span>
           </div>
           <h2
             style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)", // text-3xl sm:text-4xl lg:text-5xl
-              fontWeight: "bold",
-              color: colors.whiteText, // text-white
-              marginBottom: "24px", // mb-6
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: "900",
+              color: colors.pureWhite,
+              marginBottom: "24px",
+              textShadow: `0 0 40px ${colors.electricCyan}30`,
+              letterSpacing: "-0.02em",
             }}
           >
             Meet the Experts Behind Systoid
           </h2>
           <p
             style={{
-              fontSize: "1.125rem", // text-lg
-              color: colors.grayText, // text-[#6B6E70]
-              maxWidth: "768px", // max-w-3xl
-              margin: "0 auto", // mx-auto
+              fontSize: "1.1rem",
+              color: colors.warmGray,
+              maxWidth: "700px",
+              margin: "0 auto",
+              lineHeight: "1.7",
+              fontWeight: "400",
             }}
           >
             Our diverse team of talented professionals brings together years of experience, creativity, and passion to
@@ -201,309 +294,503 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Team Grid */}
+        {/* Enhanced Team Slideshow */}
         <div
-          ref={teamGridRef}
-          className="team-grid"
+          ref={teamCarouselRef}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-            gap: "32px", // gap-8
-            opacity: teamGridInView ? 1 : 0,
-            transform: teamGridInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            position: "relative",
+            maxWidth: "400px", // Max width for a single portrait card
+            margin: "0 auto",
+            opacity: teamCarouselInView ? 1 : 0,
+            transform: teamCarouselInView ? "translateY(0)" : "translateY(40px)",
+            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
             transitionDelay: "0.3s",
           }}
         >
-          {teamMembers.map((member, index) => (
-            <Card
-              key={index}
-              style={{
-                backgroundColor: colors.cardBg, // bg-[#474B4F]/20
-                backdropFilter: "blur(4px)", // backdrop-blur-sm
-                border: `1px solid ${colors.cardBorder}`, // border-[#6B6E70]/20
-                transition: "all 0.3s ease",
-                transform: "scale(1)", // Initial scale
-                boxShadow: "none", // Initial shadow
-                borderRadius: "12px", // rounded-xl
-                overflow: "hidden",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.03)" // hover:scale-105
-                e.currentTarget.style.borderColor = `${colors.accentGreen}80` // hover:border-[#86C232]/50
-                e.currentTarget.style.boxShadow = "0 10px 20px rgba(0,0,0,0.3)" // hover:shadow-xl
-                const image = e.currentTarget.querySelector(".member-image") as HTMLElement
-                if (image) image.style.transform = "scale(1.1)" // group-hover:scale-110
-                const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
-                if (overlay) overlay.style.opacity = "1" // group-hover:opacity-100
-                const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
-                if (socialLinks) socialLinks.style.opacity = "1" // group-hover:opacity-100
-                const name = e.currentTarget.querySelector(".member-name") as HTMLElement
-                if (name) name.style.color = colors.accentGreen // group-hover:text-[#86C232]
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "scale(1)"
-                e.currentTarget.style.borderColor = colors.cardBorder
-                e.currentTarget.style.boxShadow = "none"
-                const image = e.currentTarget.querySelector(".member-image") as HTMLElement
-                if (image) image.style.transform = "scale(1)"
-                const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
-                if (overlay) overlay.style.opacity = "0"
-                const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
-                if (socialLinks) socialLinks.style.opacity = "0"
-                const name = e.currentTarget.querySelector(".member-name") as HTMLElement
-                if (name) name.style.color = colors.whiteText
-              }}
-            >
-              <CardContent style={{ padding: "0" }}>
-                {/* Image */}
-                <div style={{ position: "relative", overflow: "hidden" }}>
-                  <img
-                    src={`/placeholder.svg?height=300&width=300&query=${member.imageQuery}`}
-                    alt={member.name}
+          <Card
+            key={currentMemberIndex} // Key to force re-render and trigger transition
+            style={{
+              backgroundColor: colors.cardBg,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+              borderRadius: "20px",
+              overflow: "hidden",
+              cursor: "pointer",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              animation: isAnimating ? "slideOut 0.5s forwards" : "slideIn 0.5s forwards",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = colors.electricCyan
+              e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.25), 0 0 0 1px ${colors.electricCyan}60`
+              const image = e.currentTarget.querySelector(".member-image") as HTMLElement
+              if (image) image.style.transform = "scale(1.08)"
+              const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
+              if (overlay) overlay.style.opacity = "1"
+              const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
+              if (socialLinks) socialLinks.style.opacity = "1"
+              const name = e.currentTarget.querySelector(".member-name") as HTMLElement
+              if (name) name.style.color = colors.electricCyan
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = colors.cardBorder
+              e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
+              const image = e.currentTarget.querySelector(".member-image") as HTMLElement
+              if (image) image.style.transform = "scale(1)"
+              const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
+              if (overlay) overlay.style.opacity = "0"
+              const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
+              if (socialLinks) socialLinks.style.opacity = "0"
+              const name = e.currentTarget.querySelector(".member-name") as HTMLElement
+              if (name) name.style.color = colors.pureWhite
+            }}
+          >
+            <CardContent style={{ padding: "0", flexGrow: 1 }}>
+              {/* Member Image - Portrait View */}
+              <div style={{ position: "relative", overflow: "hidden", height: "380px" }}>
+                <img
+                  src={`/placeholder.svg?height=380&width=280&query=${currentMember.imageQuery}`}
+                  alt={currentMember.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  }}
+                  className="member-image"
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "0",
+                    background: `linear-gradient(45deg, ${colors.deepNavy}cc, transparent)`,
+                    opacity: 0,
+                    transition: "opacity 0.4s ease",
+                  }}
+                  className="member-overlay"
+                />
+
+                {/* Social Links */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "16px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    display: "flex",
+                    gap: "8px",
+                    opacity: 0,
+                    transition: "all 0.4s ease",
+                  }}
+                  className="social-links"
+                >
+                  <a
+                    href={currentMember.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      width: "100%",
-                      height: "256px", // h-64
-                      objectFit: "cover",
-                      transition: "transform 0.3s ease",
-                    }}
-                    className="member-image"
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: "0",
-                      background: `linear-gradient(to top, ${colors.background}cc, transparent)`, // from-[#222629]/80
-                      opacity: 0,
-                      transition: "opacity 0.3s ease",
-                    }}
-                    className="member-overlay"
-                  ></div>
-                  {/* Social Links */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "16px", // bottom-4
-                      left: "50%",
-                      transform: "translateX(-50%)",
+                      width: "36px",
+                      height: "36px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      borderRadius: "10px",
                       display: "flex",
-                      gap: "12px", // space-x-3
-                      opacity: 0,
-                      transition: "opacity 0.3s ease",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
                     }}
-                    className="social-links"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0) scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                    }}
                   >
-                    <a
-                      href={member.social.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: "40px", // w-10
-                        height: "40px", // h-10
-                        backgroundColor: colors.accentGreen, // bg-[#86C232]
-                        borderRadius: "9999px", // rounded-full
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "background-color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.darkerGreen)} // hover:bg-[#61892F]
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGreen)}
-                    >
-                      <Linkedin style={{ height: "20px", width: "20px", color: colors.whiteText }} />
-                    </a>
-                    <a
-                      href={member.social.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        backgroundColor: colors.accentGreen,
-                        borderRadius: "9999px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "background-color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.darkerGreen)}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGreen)}
-                    >
-                      <Twitter style={{ height: "20px", width: "20px", color: colors.whiteText }} />
-                    </a>
-                    <a
-                      href={member.social.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        backgroundColor: colors.accentGreen,
-                        borderRadius: "9999px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "background-color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.darkerGreen)}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGreen)}
-                    >
-                      <Github style={{ height: "20px", width: "20px", color: colors.whiteText }} />
-                    </a>
-                    <a
-                      href={`mailto:${member.social.email}`}
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        backgroundColor: colors.accentGreen,
-                        borderRadius: "9999px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "background-color 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.darkerGreen)}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.accentGreen)}
-                    >
-                      <Mail style={{ height: "20px", width: "20px", color: colors.whiteText }} />
-                    </a>
-                  </div>
+                    <Linkedin style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                  </a>
+                  <a
+                    href={currentMember.social.twitter}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      borderRadius: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0) scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                    }}
+                  >
+                    <Twitter style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                  </a>
+                  <a
+                    href={currentMember.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      borderRadius: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0) scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                    }}
+                  >
+                    <Github style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                  </a>
+                  <a
+                    href={`mailto:${currentMember.social.email}`}
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      borderRadius: "10px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transition: "all 0.3s ease",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "translateY(0) scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                    }}
+                  >
+                    <Mail style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                  </a>
                 </div>
-                {/* Content */}
-                <div style={{ padding: "24px" }}>
-                  {" "}
-                  {/* p-6 */}
-                  <h3
-                    className="member-name"
-                    style={{
-                      fontSize: "1.25rem", // text-xl
-                      fontWeight: "bold",
-                      color: colors.whiteText, // text-white
-                      marginBottom: "8px", // mb-2
-                      transition: "color 0.3s ease",
-                    }}
-                  >
-                    {member.name}
-                  </h3>
-                  <div
-                    style={{
-                      color: colors.accentGreen, // text-[#86C232]
-                      fontWeight: "500", // font-medium
-                      marginBottom: "12px", // mb-3
-                    }}
-                  >
-                    {member.role}
-                  </div>
-                  <p
-                    style={{
-                      color: colors.grayText, // text-[#6B6E70]
-                      fontSize: "0.875rem", // text-sm
-                      lineHeight: "1.6", // leading-relaxed
-                    }}
-                  >
-                    {member.bio}
-                  </p>
+              </div>
+
+              {/* Content */}
+              <div style={{ padding: "20px" }}>
+                <h3
+                  className="member-name"
+                  style={{
+                    fontSize: "1.2rem",
+                    fontWeight: "800",
+                    color: colors.pureWhite,
+                    marginBottom: "6px",
+                    transition: "color 0.3s ease",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {currentMember.name}
+                </h3>
+                <div
+                  style={{
+                    color: colors.electricCyan,
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                    fontSize: "0.9rem",
+                  }}
+                >
+                  {currentMember.role}
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+                <p
+                  style={{
+                    color: colors.warmGray,
+                    fontSize: "0.85rem",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  {currentMember.bio}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevMember}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "-50px", // Position outside the card
+              transform: "translateY(-50%)",
+              background: colors.glassMorphism,
+              backdropFilter: "blur(15px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "50%",
+              width: "48px",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+              zIndex: 10,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+              e.currentTarget.style.color = colors.deepNavy
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"
+              e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = colors.glassMorphism
+              e.currentTarget.style.color = colors.warmGray
+              e.currentTarget.style.transform = "translateY(-50%) scale(1)"
+              e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+            }}
+          >
+            <ChevronLeft style={{ height: "24px", width: "24px", color: colors.pureWhite }} />
+          </button>
+          <button
+            onClick={nextMember}
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "-50px", // Position outside the card
+              transform: "translateY(-50%)",
+              background: colors.glassMorphism,
+              backdropFilter: "blur(15px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "50%",
+              width: "48px",
+              height: "48px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+              zIndex: 10,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+              e.currentTarget.style.color = colors.deepNavy
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"
+              e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = colors.glassMorphism
+              e.currentTarget.style.color = colors.warmGray
+              e.currentTarget.style.transform = "translateY(-50%) scale(1)"
+              e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+            }}
+          >
+            <ChevronRight style={{ height: "24px", width: "24px", color: colors.pureWhite }} />
+          </button>
+
+          {/* Testimonial Indicators (dots) */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "32px" }}>
+            {teamMembers.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setIsAnimating(true)
+                  setTimeout(() => {
+                    setCurrentMemberIndex(index)
+                    setIsAnimating(false)
+                  }, 500)
+                }}
+                style={{
+                  width: "12px",
+                  height: "12px",
+                  borderRadius: "50%",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  backgroundColor: index === currentMemberIndex ? colors.electricCyan : colors.warmGray,
+                  transform: index === currentMemberIndex ? "scale(1.2)" : "scale(1)",
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Join Team CTA */}
+        {/* Enhanced CTA Section */}
         <div
           ref={ctaRef}
           style={{
             textAlign: "center",
-            marginTop: "64px", // mt-16
+            marginTop: "60px",
             opacity: ctaInView ? 1 : 0,
-            transform: ctaInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            transform: ctaInView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
             transitionDelay: "0.5s",
           }}
         >
           <div
             style={{
-              background: `linear-gradient(to right, ${colors.ctaBgGradientStart}, ${colors.ctaBgGradientEnd})`,
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.ctaBorder}`, // border border-[#86C232]/20
-              borderRadius: "16px", // rounded-2xl
-              padding: "32px", // p-8
-              maxWidth: "896px", // max-w-4xl
-              margin: "0 auto", // mx-auto
+              background: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "24px",
+              padding: "40px 32px",
+              maxWidth: "800px",
+              margin: "0 auto",
+              boxShadow: `0 20px 40px rgba(0,0,0,0.2)`,
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <h3
+            <div
               style={{
-                fontSize: "1.5rem", // text-2xl
-                fontWeight: "bold",
-                color: colors.whiteText, // text-white
-                marginBottom: "16px", // mb-4
+                position: "absolute",
+                inset: 0,
+                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                animation: "ctaRotate 20s linear infinite",
+                opacity: 0.3,
               }}
-            >
-              Join Our Growing Team
-            </h3>
-            <p
-              style={{
-                color: colors.grayText, // text-[#6B6E70]
-                marginBottom: "24px", // mb-6
-              }}
-            >
-              We're always looking for talented individuals who share our passion for innovation and excellence.
-            </p>
-            <button
-              style={{
-                background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                color: colors.whiteText, // text-white
-                fontWeight: "600", // font-semibold
-                padding: "12px 32px", // px-8 py-3
-                borderRadius: "8px", // rounded-lg
-                transition: "all 0.3s ease",
-                transform: "scale(1)",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = `linear-gradient(to right, ${colors.darkerGreen}, ${colors.accentGreen})`
-                e.currentTarget.style.transform = "scale(1.05)"
-                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.3)"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`
-                e.currentTarget.style.transform = "scale(1)"
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)"
-              }}
-            >
-              View Open Positions
-            </button>
+            />
+            <div style={{ position: "relative", zIndex: 2 }}>
+              <h3
+                style={{
+                  fontSize: "1.75rem",
+                  fontWeight: "900",
+                  color: colors.pureWhite,
+                  marginBottom: "16px",
+                  textShadow: `0 0 30px ${colors.electricCyan}40`,
+                }}
+              >
+                Join Our Growing Team
+              </h3>
+              <p
+                style={{
+                  color: colors.warmGray,
+                  marginBottom: "32px",
+                  fontSize: "1.05rem",
+                  lineHeight: "1.6",
+                  maxWidth: "500px",
+                  margin: "0 auto 32px auto",
+                }}
+              >
+                We're always looking for talented individuals who share our passion for innovation and excellence.
+              </p>
+              <button
+                style={{
+                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                  color: colors.deepNavy,
+                  fontWeight: "800",
+                  padding: "16px 40px",
+                  borderRadius: "12px",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: "scale(1)",
+                  boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                  fontSize: "1.1rem",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`
+                  e.currentTarget.style.transform = "scale(1.05) translateY(-2px)"
+                  e.currentTarget.style.boxShadow = `0 15px 35px ${colors.electricCyan}60`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+                  e.currentTarget.style.transform = "scale(1)"
+                  e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}40`
+                }}
+              >
+                View Open Positions
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Global styles for media queries */}
+      {/* Enhanced Animations */}
       <style>
         {`
-          /* Responsive container padding */
-          @media (min-width: 640px) { /* sm:px-6 */
+          @keyframes teamGalaxy {
+            0% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-10px) translateX(6px); }
+            66% { transform: translateY(-20px) translateX(-4px); }
+            100% { transform: translateY(0px) translateX(0px); }
+          }
+
+          @keyframes teamFloat1 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.6;
+            }
+            50% { 
+              transform: translateY(-18px) translateX(10px); 
+              opacity: 0.8;
+            }
+          }
+
+          @keyframes teamFloat2 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.5;
+            }
+            50% { 
+              transform: translateY(15px) translateX(-12px); 
+              opacity: 0.7;
+            }
+          }
+
+          @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+          }
+
+          @keyframes ctaRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+
+          @keyframes slideOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-100%); }
+          }
+
+          @media (min-width: 640px) {
             .team-container-inner {
               padding-left: 24px;
               padding-right: 24px;
             }
           }
-          @media (min-width: 1024px) { /* lg:px-8 */
+          @media (min-width: 1024px) {
             .team-container-inner {
               padding-left: 32px;
               padding-right: 32px;
             }
           }
 
-          /* Team Grid Layout */
-          @media (min-width: 768px) { /* md:grid-cols-2 */
-            .team-grid {
-              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            }
-          }
-          @media (min-width: 1024px) { /* lg:grid-cols-3 */
-            .team-grid {
-              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+          /* Adjust arrow positioning for smaller screens */
+          @media (max-width: 600px) {
+            .team-carousel-container button {
+              left: -20px !important;
+              right: -20px !important;
             }
           }
         `}

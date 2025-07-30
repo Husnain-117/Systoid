@@ -4,7 +4,6 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import { Target, Eye, Award, Users, Clock, Shield, TrendingUp, Heart } from "lucide-react"
 
-// Custom hook for scroll-in-view animation
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
@@ -14,12 +13,11 @@ function useInView() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          // Optionally, unobserve after it's visible once
-          observer.unobserve(entry.target)
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
+        threshold: 0.1,
+        rootMargin: "50px",
       },
     )
 
@@ -38,18 +36,18 @@ function useInView() {
 }
 
 export default function About() {
-  // Define the color palette based on the provided component's theme
+  // Enhanced professional color palette
   const colors = {
-    backgroundStart: "#222629", // Dark gray
-    backgroundEnd: "rgba(71, 75, 79, 0.2)", // Transparent dark gray for gradient
-    accentGreen: "#86C232", // Light green
-    darkerGreen: "#61892F", // Darker green
-    mediumGray: "#6B6E70", // Medium gray for text
-    lightGrayBg: "rgba(71, 75, 79, 0.2)", // Card background
-    lightGrayBorder: "rgba(107, 110, 112, 0.2)", // Card border
-    whiteText: "#FFFFFF", // White
-    badgeBg: "rgba(71, 75, 79, 0.3)", // Badge background
-    badgeBorder: "rgba(107, 110, 112, 0.2)", // Badge border
+    deepNavy: "#1A1D29",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    pureWhite: "#FFFFFF",
+    warmGray: "#8B9DC3",
+    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    cardBg: "rgba(139, 157, 195, 0.08)",
+    cardBorder: "rgba(0, 217, 255, 0.2)",
+    accentGlow: "rgba(0, 217, 255, 0.2)",
+    greenGlow: "rgba(0, 255, 136, 0.2)",
   }
 
   const values = [
@@ -76,13 +74,12 @@ export default function About() {
   ]
 
   const stats = [
-    { icon: TrendingUp, number: "500+", label: "Projects Completed", color: colors.accentGreen },
-    { icon: Users, number: "50+", label: "Happy Clients", color: colors.darkerGreen },
-    { icon: Clock, number: "5+", label: "Years Experience", color: colors.accentGreen },
-    { icon: Shield, number: "99%", label: "Success Rate", color: colors.darkerGreen },
+    { icon: TrendingUp, number: "500+", label: "Projects Completed", color: colors.electricCyan },
+    { icon: Users, number: "50+", label: "Happy Clients", color: colors.vibrantGreen },
+    { icon: Clock, number: "5+", label: "Years Experience", color: colors.electricCyan },
+    { icon: Shield, number: "99%", label: "Success Rate", color: colors.vibrantGreen },
   ]
 
-  // Refs for scroll animations
   const [headerRef, headerInView] = useInView()
   const [contentRef, contentInView] = useInView()
   const [valuesRef, valuesInView] = useInView()
@@ -91,63 +88,134 @@ export default function About() {
     <section
       id="about"
       style={{
-        paddingTop: "80px", // py-20
-        paddingBottom: "80px", // py-20
-        background: `linear-gradient(to bottom, ${colors.backgroundStart}, ${colors.backgroundEnd})`, // bg-gradient-to-b from-[#222629] to-[#474B4F]/20
+        paddingTop: "100px",
+        paddingBottom: "100px",
+        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Enhanced Background Elements */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "15%",
+            left: "8%",
+            width: "250px",
+            height: "250px",
+            background: `radial-gradient(circle, ${colors.electricCyan}20, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(60px)",
+            animation: "aboutFloat1 14s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "25%",
+            right: "12%",
+            width: "300px",
+            height: "300px",
+            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(80px)",
+            animation: "aboutFloat2 18s ease-in-out infinite reverse",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "500px",
+            height: "500px",
+            background: `conic-gradient(from 45deg, ${colors.electricCyan}12, transparent, ${colors.vibrantGreen}12)`,
+            borderRadius: "50%",
+            filter: "blur(100px)",
+            animation: "aboutRotate 30s linear infinite",
+          }}
+        />
+      </div>
+
       <div
         className="about-container-inner"
         style={{
-          maxWidth: "1280px", // container mx-auto
+          maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px", // px-4 sm:px-6 lg:px-8
+          padding: "0 16px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <div
           ref={headerRef}
           style={{
             textAlign: "center",
-            marginBottom: "64px", // mb-16
+            marginBottom: "80px",
             opacity: headerInView ? 1 : 0,
-            transform: headerInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
-            transitionDelay: "0.1s",
+            transform: headerInView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px", // space-x-2
-              backgroundColor: colors.badgeBg, // bg-[#474B4F]/30
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.badgeBorder}`, // border border-[#6B6E70]/20
-              borderRadius: "9999px", // rounded-full
-              padding: "8px 16px", // px-4 py-2
-              marginBottom: "24px", // mb-6
+              gap: "12px",
+              backgroundColor: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "9999px",
+              padding: "12px 24px",
+              marginBottom: "32px",
+              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              animation: "badgeFloat 4s ease-in-out infinite",
             }}
           >
-            <Heart style={{ height: "16px", width: "16px", color: colors.accentGreen }} />
-            <span style={{ fontSize: "0.875rem", color: colors.mediumGray }}>About Systoid</span>
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                borderRadius: "50%",
+                padding: "6px",
+                animation: "heartbeat 2s ease-in-out infinite",
+              }}
+            >
+              <Heart style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+            </div>
+            <span
+              style={{
+                fontSize: "0.95rem",
+                color: colors.warmGray,
+                fontWeight: "600",
+              }}
+            >
+              About Systoid
+            </span>
           </div>
           <h2
             style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)", // text-3xl sm:text-4xl lg:text-5xl
-              fontWeight: "bold",
-              color: colors.whiteText, // text-white
-              marginBottom: "24px", // mb-6
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
+              fontWeight: "900",
+              color: colors.pureWhite,
+              marginBottom: "32px",
+              textShadow: `0 0 40px ${colors.electricCyan}30`,
+              letterSpacing: "-0.02em",
+              animation: "titleGlow 3s ease-in-out infinite alternate",
             }}
           >
             Crafting Digital Excellence Since 2019
           </h2>
           <p
             style={{
-              fontSize: "1.125rem", // text-lg
-              color: colors.mediumGray, // text-[#6B6E70]
-              maxWidth: "768px", // max-w-3xl
-              margin: "0 auto", // mx-auto
+              fontSize: "1.2rem",
+              color: colors.warmGray,
+              maxWidth: "800px",
+              margin: "0 auto",
+              lineHeight: "1.7",
+              fontWeight: "400",
             }}
           >
             We are a passionate team of developers, designers, and digital strategists committed to delivering
@@ -155,41 +223,58 @@ export default function About() {
           </p>
         </div>
 
+        {/* Enhanced Content Section */}
         <div
           ref={contentRef}
           className="about-content-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-            gap: "64px", // gap-16
+            gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+            gap: "80px",
             alignItems: "center",
-            marginBottom: "80px", // mb-20
+            marginBottom: "100px",
             opacity: contentInView ? 1 : 0,
-            transform: contentInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            transform: contentInView ? "translateY(0)" : "translateY(40px)",
+            transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
             transitionDelay: "0.3s",
           }}
         >
           {/* Left Content */}
-          <div>
+          <div
+            style={{
+              transform: contentInView ? "translateX(0)" : "translateX(-30px)",
+              transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
+              transitionDelay: "0.5s",
+            }}
+          >
             <h3
               style={{
-                fontSize: "clamp(1.5rem, 4vw, 2rem)", // text-2xl sm:text-3xl
-                fontWeight: "bold",
-                color: colors.whiteText, // text-white
-                marginBottom: "24px", // mb-6
+                fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
+                fontWeight: "900",
+                color: colors.pureWhite,
+                marginBottom: "32px",
+                textShadow: `0 0 30px ${colors.electricCyan}30`,
+                letterSpacing: "-0.01em",
               }}
             >
               Building Tomorrow's Digital Solutions Today
             </h3>
-            <div style={{ marginBottom: "32px", listStyle: "none", padding: 0 }}>
-              {" "}
-              {/* space-y-6 */}
+            <div style={{ marginBottom: "40px" }}>
               <p
                 style={{
-                  color: colors.mediumGray, // text-[#6B6E70]
-                  lineHeight: "1.6", // leading-relaxed
-                  marginBottom: "16px",
+                  color: colors.warmGray,
+                  lineHeight: "1.8",
+                  marginBottom: "24px",
+                  fontSize: "1.1rem",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.transform = "translateX(8px)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
                 At Systoid, we believe that great software is born from the perfect blend of creativity, technical
@@ -198,9 +283,19 @@ export default function About() {
               </p>
               <p
                 style={{
-                  color: colors.mediumGray, // text-[#6B6E70]
-                  lineHeight: "1.6", // leading-relaxed
-                  marginBottom: "16px",
+                  color: colors.warmGray,
+                  lineHeight: "1.8",
+                  marginBottom: "24px",
+                  fontSize: "1.1rem",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.transform = "translateX(8px)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
                 Over the years, we've evolved into a comprehensive software house that specializes in web applications,
@@ -210,161 +305,238 @@ export default function About() {
               </p>
               <p
                 style={{
-                  color: colors.mediumGray, // text-[#6B6E70]
-                  lineHeight: "1.6", // leading-relaxed
+                  color: colors.warmGray,
+                  lineHeight: "1.8",
+                  fontSize: "1.1rem",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.transform = "translateX(8px)"
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
                 What sets us apart is our commitment to understanding your unique challenges and crafting tailored
                 solutions that drive real business value. We don't just write code; we build partnerships that last.
               </p>
             </div>
-            {/* Key Highlights */}
+
+            {/* Enhanced Key Highlights */}
             <div
               style={{
-                marginTop: "32px", // mt-8
+                marginTop: "40px",
                 display: "grid",
-                gridTemplateColumns: "repeat(2, minmax(0, 1fr))", // grid-cols-2
-                gap: "16px", // gap-4
+                gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                gap: "20px",
               }}
             >
               <div
                 style={{
-                  backgroundColor: colors.lightGrayBg, // bg-[#474B4F]/20
-                  backdropFilter: "blur(4px)", // backdrop-blur-sm
-                  border: `1px solid ${colors.lightGrayBorder}`, // border border-[#6B6E70]/20
-                  borderRadius: "8px", // rounded-lg
-                  padding: "16px", // p-4
+                  backgroundColor: colors.cardBg,
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  border: `1px solid ${colors.cardBorder}`,
+                  borderRadius: "20px",
+                  padding: "32px 24px",
                   textAlign: "center",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: "translateZ(0)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateZ(20px) scale(1.05)"
+                  e.currentTarget.style.boxShadow = `0 20px 40px ${colors.electricCyan}30`
+                  e.currentTarget.style.borderColor = colors.electricCyan
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateZ(0) scale(1)"
+                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.borderColor = colors.cardBorder
                 }}
               >
                 <div
                   style={{
-                    fontSize: "1.5rem", // text-2xl
-                    fontWeight: "bold",
-                    color: colors.accentGreen, // text-[#86C232]
-                    marginBottom: "4px", // mb-1
+                    fontSize: "2rem",
+                    fontWeight: "900",
+                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginBottom: "8px",
+                    textShadow: `0 0 20px ${colors.electricCyan}40`,
                   }}
                 >
                   100%
                 </div>
-                <div style={{ fontSize: "0.875rem", color: colors.mediumGray }}>Client Satisfaction</div>
+                <div style={{ fontSize: "0.95rem", color: colors.warmGray, fontWeight: "600" }}>
+                  Client Satisfaction
+                </div>
               </div>
               <div
                 style={{
-                  backgroundColor: colors.lightGrayBg, // bg-[#474B4F]/20
-                  backdropFilter: "blur(4px)", // backdrop-blur-sm
-                  border: `1px solid ${colors.lightGrayBorder}`, // border border-[#6B6E70]/20
-                  borderRadius: "8px", // rounded-lg
-                  padding: "16px", // p-4
+                  backgroundColor: colors.cardBg,
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  border: `1px solid ${colors.cardBorder}`,
+                  borderRadius: "20px",
+                  padding: "32px 24px",
                   textAlign: "center",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: "translateZ(0)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateZ(20px) scale(1.05)"
+                  e.currentTarget.style.boxShadow = `0 20px 40px ${colors.vibrantGreen}30`
+                  e.currentTarget.style.borderColor = colors.vibrantGreen
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateZ(0) scale(1)"
+                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.borderColor = colors.cardBorder
                 }}
               >
                 <div
                   style={{
-                    fontSize: "1.5rem", // text-2xl
-                    fontWeight: "bold",
-                    color: colors.accentGreen, // text-[#86C232]
-                    marginBottom: "4px", // mb-1
+                    fontSize: "2rem",
+                    fontWeight: "900",
+                    background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    marginBottom: "8px",
+                    textShadow: `0 0 20px ${colors.vibrantGreen}40`,
                   }}
                 >
                   24/7
                 </div>
-                <div style={{ fontSize: "0.875rem", color: colors.mediumGray }}>Support Available</div>
+                <div style={{ fontSize: "0.95rem", color: colors.warmGray, fontWeight: "600" }}>Support Available</div>
               </div>
             </div>
           </div>
-          {/* Right Content - Stats */}
+
+          {/* Enhanced Stats */}
           <div
             className="about-stats-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))", // grid-cols-2
-              gap: "24px", // gap-6
+              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+              gap: "32px",
+              transform: contentInView ? "translateX(0)" : "translateX(30px)",
+              transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
+              transitionDelay: "0.7s",
             }}
           >
             {stats.map((stat, index) => (
               <Card
                 key={index}
                 style={{
-                  backgroundColor: colors.lightGrayBg, // bg-[#474B4F]/20
-                  backdropFilter: "blur(4px)", // backdrop-blur-sm
-                  border: `1px solid ${colors.lightGrayBorder}`, // border-[#6B6E70]/20
-                  transition: "all 0.3s ease",
-                  transform: "scale(1)", // Initial scale
-                  boxShadow: "none", // Initial shadow
+                  backgroundColor: colors.cardBg,
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  border: `1px solid ${colors.cardBorder}`,
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: "translateZ(0)",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
                   cursor: "pointer",
-                  borderRadius: "12px", // rounded-xl
+                  borderRadius: "24px",
+                  animation: `cardFloat${index} ${6 + index}s ease-in-out infinite`,
+                  position: "relative",
+                  overflow: "hidden",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)"
-                  e.currentTarget.style.borderColor = `${colors.accentGreen}80` // hover:border-[#86C232]/50
-                  e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.2)"
+                  e.currentTarget.style.transform = "translateZ(30px) scale(1.05)"
+                  e.currentTarget.style.borderColor = stat.color
+                  e.currentTarget.style.boxShadow = `0 25px 50px ${stat.color}40`
                   const iconDiv = e.currentTarget.querySelector(".stat-icon-div") as HTMLElement
                   if (iconDiv) {
-                    iconDiv.style.transform = "scale(1.1)"
+                    iconDiv.style.transform = "scale(1.2) rotate(360deg)"
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)"
-                  e.currentTarget.style.borderColor = colors.lightGrayBorder
-                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.transform = "translateZ(0) scale(1)"
+                  e.currentTarget.style.borderColor = colors.cardBorder
+                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)"
                   const iconDiv = e.currentTarget.querySelector(".stat-icon-div") as HTMLElement
                   if (iconDiv) {
-                    iconDiv.style.transform = "scale(1)"
+                    iconDiv.style.transform = "scale(1) rotate(0deg)"
                   }
                 }}
               >
-                <CardContent style={{ padding: "24px", textAlign: "center" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: `linear-gradient(135deg, ${stat.color}10, transparent)`,
+                    opacity: 0,
+                    transition: "opacity 0.3s ease",
+                  }}
+                  className="stat-bg-overlay"
+                />
+                <CardContent style={{ padding: "32px", textAlign: "center", position: "relative", zIndex: 2 }}>
                   <div
                     className="stat-icon-div"
                     style={{
-                      width: "48px", // w-12
-                      height: "48px", // h-12
-                      margin: "0 auto 16px auto", // mx-auto mb-4
-                      borderRadius: "9999px", // rounded-full
-                      background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
+                      width: "64px",
+                      height: "64px",
+                      margin: "0 auto 24px auto",
+                      borderRadius: "20px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      transition: "transform 0.3s ease",
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                      boxShadow: `0 10px 25px ${stat.color}40`,
                     }}
                   >
-                    <stat.icon style={{ height: "24px", width: "24px", color: colors.whiteText }} />
+                    <stat.icon style={{ height: "32px", width: "32px", color: colors.pureWhite }} />
                   </div>
                   <div
                     style={{
-                      fontSize: "1.875rem", // text-3xl
-                      fontWeight: "bold",
-                      marginBottom: "8px", // mb-2
-                      color: stat.color, // Dynamic color from stat.color
+                      fontSize: "2.5rem",
+                      fontWeight: "900",
+                      marginBottom: "12px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      backgroundClip: "text",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      textShadow: `0 0 20px ${stat.color}40`,
                     }}
                   >
                     {stat.number}
                   </div>
-                  <div style={{ fontSize: "0.875rem", color: colors.mediumGray }}>{stat.label}</div>
+                  <div
+                    style={{
+                      fontSize: "0.95rem",
+                      color: colors.warmGray,
+                      fontWeight: "600",
+                    }}
+                  >
+                    {stat.label}
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
 
-        {/* Values Section */}
+        {/* Enhanced Values Section */}
         <div
           ref={valuesRef}
           style={{
             opacity: valuesInView ? 1 : 0,
-            transform: valuesInView ? "translateY(0)" : "translateY(20px)",
-            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            transform: valuesInView ? "translateY(0)" : "translateY(40px)",
+            transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
             transitionDelay: "0.5s",
           }}
         >
           <h3
             style={{
-              fontSize: "clamp(1.5rem, 4vw, 2rem)", // text-2xl sm:text-3xl
-              fontWeight: "bold",
-              color: colors.whiteText, // text-white
+              fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
+              fontWeight: "900",
+              color: colors.pureWhite,
               textAlign: "center",
-              marginBottom: "48px", // mb-12
+              marginBottom: "60px",
+              textShadow: `0 0 30px ${colors.electricCyan}30`,
+              letterSpacing: "-0.01em",
             }}
           >
             Our Core Values
@@ -373,81 +545,93 @@ export default function About() {
             className="values-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-              gap: "32px", // gap-8
+              gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+              gap: "40px",
             }}
           >
             {values.map((value, index) => (
               <Card
                 key={index}
                 style={{
-                  backgroundColor: colors.lightGrayBg, // bg-[#474B4F]/20
-                  backdropFilter: "blur(4px)", // backdrop-blur-sm
-                  border: `1px solid ${colors.lightGrayBorder}`, // border-[#6B6E70]/20
-                  transition: "all 0.3s ease",
-                  transform: "scale(1)", // Initial scale
-                  boxShadow: "none", // Initial shadow
+                  backgroundColor: colors.cardBg,
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  border: `1px solid ${colors.cardBorder}`,
+                  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: valuesInView ? "translateZ(0)" : "translateZ(-50px)",
+                  transitionDelay: `${index * 0.1}s`,
+                  boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
                   cursor: "pointer",
-                  borderRadius: "12px", // rounded-xl
+                  borderRadius: "24px",
                   textAlign: "center",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "scale(1.05)"
-                  e.currentTarget.style.borderColor = `${colors.accentGreen}80` // hover:border-[#86C232]/50
-                  e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.2)"
+                  e.currentTarget.style.transform = "translateZ(20px) scale(1.03)"
+                  e.currentTarget.style.borderColor = colors.electricCyan
+                  e.currentTarget.style.boxShadow = `0 25px 50px ${colors.electricCyan}30`
                   const iconDiv = e.currentTarget.querySelector(".value-icon-div") as HTMLElement
                   if (iconDiv) {
-                    iconDiv.style.transform = "scale(1.1)"
+                    iconDiv.style.transform = "scale(1.2) rotate(10deg)"
                   }
                   const title = e.currentTarget.querySelector(".value-title") as HTMLElement
                   if (title) {
-                    title.style.color = colors.accentGreen
+                    title.style.color = colors.electricCyan
                   }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "scale(1)"
-                  e.currentTarget.style.borderColor = colors.lightGrayBorder
-                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.transform = "translateZ(0) scale(1)"
+                  e.currentTarget.style.borderColor = colors.cardBorder
+                  e.currentTarget.style.boxShadow = "0 15px 35px rgba(0,0,0,0.2)"
                   const iconDiv = e.currentTarget.querySelector(".value-icon-div") as HTMLElement
                   if (iconDiv) {
-                    iconDiv.style.transform = "scale(1)"
+                    iconDiv.style.transform = "scale(1) rotate(0deg)"
                   }
                   const title = e.currentTarget.querySelector(".value-title") as HTMLElement
                   if (title) {
-                    title.style.color = colors.whiteText
+                    title.style.color = colors.pureWhite
                   }
                 }}
               >
-                <CardContent style={{ padding: "24px" }}>
+                <CardContent style={{ padding: "40px" }}>
                   <div
                     className="value-icon-div"
                     style={{
-                      width: "64px", // w-16
-                      height: "64px", // h-16
-                      margin: "0 auto 16px auto", // mx-auto mb-4
-                      borderRadius: "9999px", // rounded-full
-                      background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
+                      width: "80px",
+                      height: "80px",
+                      margin: "0 auto 24px auto",
+                      borderRadius: "20px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      transition: "transform 0.3s ease",
+                      transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                      boxShadow: `0 15px 30px ${colors.electricCyan}40`,
                     }}
                   >
-                    <value.icon style={{ height: "32px", width: "32px", color: colors.whiteText }} />
+                    <value.icon style={{ height: "40px", width: "40px", color: colors.pureWhite }} />
                   </div>
                   <h4
                     className="value-title"
                     style={{
-                      fontSize: "1.125rem", // text-lg
-                      fontWeight: "bold",
-                      color: colors.whiteText, // text-white
-                      marginBottom: "12px", // mb-3
+                      fontSize: "1.4rem",
+                      fontWeight: "800",
+                      color: colors.pureWhite,
+                      marginBottom: "16px",
                       transition: "color 0.3s ease",
+                      letterSpacing: "-0.01em",
                     }}
                   >
                     {value.title}
                   </h4>
-                  <p style={{ color: colors.mediumGray, fontSize: "0.875rem", lineHeight: "1.6" }}>
+                  <p
+                    style={{
+                      color: colors.warmGray,
+                      fontSize: "1rem",
+                      lineHeight: "1.7",
+                      fontWeight: "400",
+                    }}
+                  >
                     {value.description}
                   </p>
                 </CardContent>
@@ -457,37 +641,96 @@ export default function About() {
         </div>
       </div>
 
-      {/* Global styles for media queries */}
+      {/* Enhanced Animations */}
       <style>
         {`
-          /* Responsive container padding */
-          @media (min-width: 640px) { /* sm:px-6 */
+          @keyframes aboutFloat1 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.7;
+            }
+            50% { 
+              transform: translateY(-25px) translateX(15px); 
+              opacity: 0.9;
+            }
+          }
+
+          @keyframes aboutFloat2 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.6;
+            }
+            50% { 
+              transform: translateY(20px) translateX(-20px); 
+              opacity: 0.8;
+            }
+          }
+
+          @keyframes aboutRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+          }
+
+          @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+
+          @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+          }
+
+          @keyframes titleGlow {
+            0% { text-shadow: 0 0 40px ${colors.electricCyan}30; }
+            100% { text-shadow: 0 0 40px ${colors.vibrantGreen}30; }
+          }
+
+          @keyframes cardFloat0 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+
+          @keyframes cardFloat1 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+          }
+
+          @keyframes cardFloat2 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+          }
+
+          @keyframes cardFloat3 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+          }
+
+          @media (min-width: 640px) {
             .about-container-inner {
               padding-left: 24px;
               padding-right: 24px;
             }
           }
-          @media (min-width: 1024px) { /* lg:px-8 */
+          @media (min-width: 1024px) {
             .about-container-inner {
               padding-left: 32px;
               padding-right: 32px;
             }
           }
 
-          /* About Content Grid Layout */
-          @media (min-width: 1024px) { /* lg:grid-cols-2 */
+          @media (min-width: 1024px) {
             .about-content-grid {
               grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
           }
 
-          /* Values Grid Layout */
-          @media (min-width: 768px) { /* md:grid-cols-2 */
+          @media (min-width: 768px) {
             .values-grid {
               grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
           }
-          @media (min-width: 1024px) { /* lg:grid-cols-4 */
+          @media (min-width: 1024px) {
             .values-grid {
               grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
             }

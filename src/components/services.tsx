@@ -1,26 +1,63 @@
 "use client"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Smartphone, Globe, Monitor, Megaphone, Cog, Palette, ArrowRight, Zap } from "lucide-react"
-import { useState } from "react"
+import { Smartphone, Globe, Monitor, Megaphone, Cog, Palette, ArrowRight, Zap } from 'lucide-react'
+import { useState, useEffect, useRef } from "react"
+
+// Local service illustrations (add/replace with your assets)
+import webImg from "../assets/web.jpg";
+import mobileImg from "../assets/app.jpg";
+import desktopImg from "../assets/desktop.jpg";
+import marketingImg from "../assets/marketing.jpg";
+import softwareImg from "../assets/solutions.jpg";
+import designImg from "../assets/uiux.jpg";
+
+function useInView() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px",
+      },
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [])
+
+  return [ref, inView] as const
+}
 
 export default function Services() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
-  // Define the color palette based on the provided component's theme
+  // Enhanced professional color palette
   const colors = {
-    background: "#222629", // Dark gray
-    accentGreen: "#86C232", // Light green
-    darkerGreen: "#61892F", // Darker green
-    mediumGray: "#6B6E70", // Medium gray for text
-    lightGrayBg: "rgba(71, 75, 79, 0.2)", // Card background
-    lightGrayBorder: "rgba(107, 110, 112, 0.2)", // Card border
-    whiteText: "#FFFFFF", // White
-    badgeBg: "rgba(71, 75, 79, 0.3)", // Badge background
-    badgeBorder: "rgba(107, 110, 112, 0.2)", // Badge border
-    ctaBgGradientStart: "rgba(134, 194, 50, 0.1)", // CTA section background gradient start
-    ctaBgGradientEnd: "rgba(97, 137, 47, 0.1)", // CTA section background gradient end
-    ctaBorder: "rgba(134, 194, 50, 0.2)", // CTA section border
+    deepNavy: "#1A1D29",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    pureWhite: "#FFFFFF",
+    warmGray: "#8B9DC3",
+    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    cardBg: "rgba(139, 157, 195, 0.08)",
+    cardBorder: "rgba(0, 217, 255, 0.2)",
+    accentGlow: "rgba(0, 217, 255, 0.2)",
+    greenGlow: "rgba(0, 255, 136, 0.2)",
   }
 
   const services = [
@@ -30,7 +67,8 @@ export default function Services() {
       description:
         "Custom web applications built with modern technologies like React, Next.js, and Node.js for scalable solutions.",
       features: ["Responsive Design", "Progressive Web Apps", "E-commerce Solutions", "CMS Development"],
-      imageQuery: "modern web application interface",
+      image: webImg,
+      gradient: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
     },
     {
       icon: Smartphone,
@@ -38,7 +76,8 @@ export default function Services() {
       description:
         "Native and cross-platform mobile applications for iOS and Android with exceptional user experience.",
       features: ["Native iOS/Android", "React Native", "Flutter", "App Store Optimization"],
-      imageQuery: "sleek mobile app interface",
+      image: mobileImg,
+      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
     },
     {
       icon: Monitor,
@@ -46,7 +85,8 @@ export default function Services() {
       description:
         "Powerful desktop applications for Windows, macOS, and Linux using modern frameworks and technologies.",
       features: ["Cross-platform", "Electron Apps", "Native Performance", "Auto-updates"],
-      imageQuery: "desktop software interface",
+      image: desktopImg,
+      gradient: `linear-gradient(135deg, ${colors.electricCyan}CC, ${colors.vibrantGreen}CC)`,
     },
     {
       icon: Megaphone,
@@ -54,7 +94,8 @@ export default function Services() {
       description:
         "Comprehensive digital marketing strategies to boost your online presence and drive business growth.",
       features: ["SEO Optimization", "Social Media Marketing", "PPC Campaigns", "Content Strategy"],
-      imageQuery: "digital marketing analytics dashboard",
+      image: marketingImg,
+      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}CC, ${colors.electricCyan}CC)`,
     },
     {
       icon: Cog,
@@ -62,73 +103,167 @@ export default function Services() {
       description:
         "Custom software solutions tailored to your business needs with enterprise-grade security and scalability.",
       features: ["Enterprise Software", "API Development", "Cloud Solutions", "DevOps Services"],
-      imageQuery: "abstract software development code",
+      image: softwareImg,
+      gradient: `linear-gradient(135deg, ${colors.electricCyan}DD, ${colors.vibrantGreen}AA)`,
     },
     {
       icon: Palette,
       title: "UI/UX Design",
       description: "Beautiful and intuitive user interfaces designed to enhance user experience and drive engagement.",
       features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-      imageQuery: "user interface design wireframe",
+      image: designImg,
+      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}DD, ${colors.electricCyan}AA)`,
     },
   ]
+
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact")
+    if (contactElement) {
+      contactElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
+  const [headerRef, headerInView] = useInView()
+  const [servicesGridRef, servicesGridInView] = useInView()
+  const [ctaRef, ctaInView] = useInView()
 
   return (
     <section
       id="services"
       style={{
-        paddingTop: "80px", // py-20
-        paddingBottom: "80px", // py-20
-        backgroundColor: colors.background, // bg-[#222629]
+        paddingTop: "80px",
+        paddingBottom: "80px",
+        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Enhanced Galaxy Background */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
+        {/* Galaxy Dots Pattern */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `
+              radial-gradient(circle at 25% 25%, ${colors.electricCyan}12 1px, transparent 1px),
+              radial-gradient(circle at 75% 75%, ${colors.vibrantGreen}10 1px, transparent 1px),
+              radial-gradient(circle at 50% 10%, ${colors.electricCyan}08 1px, transparent 1px),
+              radial-gradient(circle at 10% 60%, ${colors.vibrantGreen}06 1px, transparent 1px)
+            `,
+            backgroundSize: "150px 150px, 200px 200px, 180px 180px, 220px 220px",
+            animation: "galaxyDrift 20s linear infinite",
+            opacity: 0.3,
+          }}
+        />
+        
+        {/* Floating Elements */}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%",
+            right: "15%",
+            width: "250px",
+            height: "250px",
+            background: `radial-gradient(circle, ${colors.electricCyan}18, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(60px)",
+            animation: "serviceFloat1 14s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "30%",
+            left: "10%",
+            width: "300px",
+            height: "300px",
+            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(80px)",
+            animation: "serviceFloat2 18s ease-in-out infinite reverse",
+          }}
+        />
+      </div>
+
       <div
         className="services-container-inner"
         style={{
-          maxWidth: "1280px", // container mx-auto
+          maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px", // px-4
+          padding: "0 16px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <div
+          ref={headerRef}
           style={{
             textAlign: "center",
-            marginBottom: "64px", // mb-16
+            marginBottom: "60px",
+            opacity: headerInView ? 1 : 0,
+            transform: headerInView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px", // space-x-2
-              backgroundColor: colors.badgeBg, // bg-[#474B4F]/30
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.badgeBorder}`, // border border-[#6B6E70]/20
-              borderRadius: "9999px", // rounded-full
-              padding: "8px 16px", // px-4 py-2
-              marginBottom: "24px", // mb-6
+              gap: "12px",
+              backgroundColor: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "9999px",
+              padding: "12px 24px",
+              marginBottom: "24px",
+              boxShadow: `0 8px 32px ${colors.accentGlow}`,
             }}
           >
-            <Zap style={{ height: "16px", width: "16px", color: colors.accentGreen }} />
-            <span style={{ fontSize: "0.875rem", color: colors.mediumGray }}>Our Services</span>
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                borderRadius: "50%",
+                padding: "6px",
+                animation: "iconPulse 3s ease-in-out infinite",
+              }}
+            >
+              <Zap style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+            </div>
+            <span
+              style={{
+                fontSize: "0.95rem",
+                color: colors.warmGray,
+                fontWeight: "600",
+              }}
+            >
+              Our Services
+            </span>
           </div>
           <h2
             style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)", // text-3xl sm:text-4xl lg:text-5xl
-              fontWeight: "bold",
-              color: colors.whiteText, // text-white
-              marginBottom: "24px", // mb-6
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: "900",
+              color: colors.pureWhite,
+              marginBottom: "24px",
+              textShadow: `0 0 40px ${colors.electricCyan}30`,
+              letterSpacing: "-0.02em",
             }}
           >
             Comprehensive Digital Solutions
           </h2>
           <p
             style={{
-              fontSize: "1.125rem", // text-lg
-              color: colors.mediumGray, // text-[#6B6E70]
-              maxWidth: "768px", // max-w-3xl
-              margin: "0 auto", // mx-auto
+              fontSize: "1.1rem",
+              color: colors.warmGray,
+              maxWidth: "700px",
+              margin: "0 auto",
+              lineHeight: "1.7",
+              fontWeight: "400",
             }}
           >
             From concept to deployment, we provide end-to-end digital solutions that transform your business and drive
@@ -136,232 +271,381 @@ export default function Services() {
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* Enhanced Services Grid - Smaller Cards */}
         <div
+          ref={servicesGridRef}
           className="services-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-            gap: "32px", // gap-8
+            gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+            gap: "24px", // Reduced gap
+            maxHeight: "80vh", // Limit height to fit on screen
+            overflowY: "auto", // Add scroll if needed
           }}
         >
           {services.map((service, index) => (
             <Card
               key={index}
               style={{
-                backgroundColor: colors.lightGrayBg, // bg-[#474B4F]/20
-                backdropFilter: "blur(4px)", // backdrop-blur-sm
-                border: `1px solid ${colors.lightGrayBorder}`, // border-[#6B6E70]/20
-                transition: "all 0.3s ease",
-                transform: hoveredCard === index ? "scale(1.03)" : "scale(1)", // hover:scale-105
-                boxShadow: hoveredCard === index ? "0 10px 20px rgba(0,0,0,0.3)" : "none", // hover:shadow-xl
+                backgroundColor: colors.cardBg,
+                backdropFilter: "blur(20px) saturate(180%)",
+                border: `1px solid ${colors.cardBorder}`,
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                transform: servicesGridInView
+                  ? hoveredCard === index
+                    ? "scale(1.02) translateY(-8px)" // Reduced scale
+                    : "scale(1)"
+                  : "scale(0.95) translateY(20px)",
+                opacity: servicesGridInView ? 1 : 0,
+                transitionDelay: servicesGridInView ? `${index * 0.1}s` : "0s",
+                boxShadow:
+                  hoveredCard === index
+                    ? `0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px ${colors.electricCyan}60`
+                    : "0 8px 25px rgba(0,0,0,0.15)",
                 cursor: "pointer",
-                borderRadius: "12px", // rounded-xl
-                overflow: "hidden", // Ensure image corners are rounded
+                borderRadius: "20px", // Smaller border radius
+                overflow: "hidden",
+                position: "relative",
+                height: "auto", // Let content determine height
+                minHeight: "320px", // Minimum height for consistency
               }}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Service Image */}
+              {/* Animated Background Gradient */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: service.gradient,
+                  opacity: hoveredCard === index ? 0.08 : 0,
+                  transition: "opacity 0.5s ease",
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Smaller Service Image */}
               <div
                 style={{
                   width: "100%",
-                  height: "200px", // Fixed height for images
+                  height: "180px", // Reduced height
                   overflow: "hidden",
-                  marginBottom: "24px", // mb-6
+                  position: "relative",
                 }}
               >
                 <img
-                  src={`/placeholder.svg?height=200&width=400&query=${service.imageQuery}`}
+                  src={service.image}
                   alt={service.title}
                   style={{
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    transition: "transform 0.5s ease",
-                    transform: hoveredCard === index ? "scale(1.1)" : "scale(1)",
+                    transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transform: hoveredCard === index ? "scale(1.08)" : "scale(1)",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      hoveredCard === index
+                        ? `linear-gradient(45deg, ${colors.electricCyan}25, ${colors.vibrantGreen}25)`
+                        : "transparent",
+                    transition: "all 0.4s ease",
                   }}
                 />
               </div>
 
-              <CardContent style={{ padding: "32px" }}>
-                {/* Icon */}
+              <CardContent style={{ padding: "24px", position: "relative", zIndex: 2 }}> {/* Reduced padding */}
+                {/* Smaller Icon */}
                 <div
                   style={{
-                    width: "64px", // w-16
-                    height: "64px", // h-16
-                    borderRadius: "12px", // rounded-xl
-                    background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
+                    width: "60px", // Reduced size
+                    height: "60px",
+                    borderRadius: "16px",
+                    background: service.gradient,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    marginBottom: "24px", // mb-6
-                    transition: "all 0.3s ease",
-                    transform: hoveredCard === index ? "scale(1.1) rotate(3deg)" : "scale(1) rotate(0deg)",
-                    boxShadow: hoveredCard === index ? "0 4px 15px rgba(134, 194, 50, 0.4)" : "none",
+                    marginBottom: "20px", // Reduced margin
+                    transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transform:
+                      hoveredCard === index ? "scale(1.08) rotate(3deg) translateY(-4px)" : "scale(1) rotate(0deg)",
+                    boxShadow:
+                      hoveredCard === index
+                        ? `0 15px 30px ${colors.electricCyan}40`
+                        : `0 8px 20px ${colors.electricCyan}25`,
+                    position: "relative",
+                    overflow: "hidden",
                   }}
                 >
-                  <service.icon style={{ height: "32px", width: "32px", color: colors.whiteText }} />
+                  <service.icon
+                    style={{ height: "30px", width: "30px", color: colors.pureWhite, position: "relative", zIndex: 2 }} // Reduced size
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: `conic-gradient(from 0deg, ${colors.electricCyan}60, ${colors.vibrantGreen}60, ${colors.electricCyan}60)`,
+                      animation: hoveredCard === index ? "iconRotate 2s linear infinite" : "none",
+                      opacity: 0.3,
+                    }}
+                  />
                 </div>
-                {/* Title */}
+
+                {/* Smaller Title */}
                 <h3
                   style={{
-                    fontSize: "1.25rem", // text-xl
-                    fontWeight: "bold",
-                    color: hoveredCard === index ? colors.accentGreen : colors.whiteText, // group-hover:text-[#86C232]
-                    marginBottom: "16px", // mb-4
+                    fontSize: "1.25rem", // Reduced size
+                    fontWeight: "800",
+                    color: hoveredCard === index ? colors.electricCyan : colors.pureWhite,
+                    marginBottom: "12px", // Reduced margin
                     transition: "color 0.3s ease",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   {service.title}
                 </h3>
-                {/* Description */}
+
+                {/* Smaller Description */}
                 <p
                   style={{
-                    color: colors.mediumGray, // text-[#6B6E70]
-                    marginBottom: "24px", // mb-6
-                    lineHeight: "1.6", // leading-relaxed
+                    color: colors.warmGray,
+                    marginBottom: "20px", // Reduced margin
+                    lineHeight: "1.6",
+                    fontSize: "0.95rem", // Reduced size
                   }}
                 >
                   {service.description}
                 </p>
-                {/* Features */}
-                <ul style={{ marginBottom: "24px", listStyle: "none", padding: 0 }}>
-                  {" "}
-                  {/* space-y-2 mb-6 */}
-                  {service.features.map((feature, featureIndex) => (
+
+                {/* Compact Features List */}
+                <ul style={{ marginBottom: "20px", listStyle: "none", padding: 0 }}> {/* Reduced margin */}
+                  {service.features.slice(0, 3).map((feature, featureIndex) => ( // Show only 3 features
                     <li
                       key={featureIndex}
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        fontSize: "0.875rem", // text-sm
-                        color: colors.mediumGray, // text-[#6B6E70]
-                        marginBottom: "8px", // space-y-2
+                        fontSize: "0.85rem", // Reduced size
+                        color: colors.warmGray,
+                        marginBottom: "8px", // Reduced margin
+                        transition: "all 0.3s ease",
+                        transform: hoveredCard === index ? "translateX(6px)" : "translateX(0)",
+                        transitionDelay: `${featureIndex * 0.05}s`,
                       }}
                     >
                       <div
                         style={{
-                          width: "6px", // w-1.5
-                          height: "6px", // h-1.5
-                          backgroundColor: colors.accentGreen, // bg-[#86C232]
-                          borderRadius: "50%", // rounded-full
-                          marginRight: "12px", // mr-3
+                          width: "6px", // Reduced size
+                          height: "6px",
+                          background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                          borderRadius: "50%",
+                          marginRight: "12px",
+                          transition: "all 0.3s ease",
+                          transform: hoveredCard === index ? "scale(1.3)" : "scale(1)",
+                          boxShadow: hoveredCard === index ? `0 0 8px ${colors.electricCyan}60` : "none",
                         }}
-                      ></div>
+                      />
                       {feature}
                     </li>
                   ))}
                 </ul>
-                {/* Learn More Link */}
+
+                {/* Compact CTA Link */}
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    color: colors.accentGreen, // text-[#86C232]
-                    fontWeight: "500", // font-medium
-                    transition: "transform 0.3s ease",
-                    transform: hoveredCard === index ? "translateX(8px)" : "translateX(0)", // group-hover:translate-x-2
+                    color: colors.electricCyan,
+                    fontWeight: "700",
+                    transition: "all 0.3s ease",
+                    transform: hoveredCard === index ? "translateX(8px)" : "translateX(0)",
+                    cursor: "pointer",
+                    fontSize: "0.95rem", // Reduced size
                   }}
+                  onClick={scrollToContact}
                 >
-                  <span>Learn More</span>
-                  <ArrowRight style={{ marginLeft: "8px", height: "16px", width: "16px" }} /> {/* ml-2 h-4 w-4 */}
+                  <span>Get Free Consultation</span>
+                  <ArrowRight
+                    style={{
+                      marginLeft: "8px",
+                      height: "16px", // Reduced size
+                      width: "16px",
+                      transition: "transform 0.3s ease",
+                      transform: hoveredCard === index ? "translateX(4px)" : "translateX(0)",
+                    }}
+                  />
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* Enhanced CTA Section */}
         <div
+          ref={ctaRef}
           style={{
             textAlign: "center",
-            marginTop: "64px", // mt-16
+            marginTop: "60px",
+            opacity: ctaInView ? 1 : 0,
+            transform: ctaInView ? "translateY(0)" : "translateY(30px)",
+            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
           <div
             style={{
-              background: `linear-gradient(to right, ${colors.ctaBgGradientStart}, ${colors.ctaBgGradientEnd})`,
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.ctaBorder}`, // border border-[#86C232]/20
-              borderRadius: "16px", // rounded-2xl
-              padding: "32px", // p-8
-              maxWidth: "896px", // max-w-4xl
-              margin: "0 auto", // mx-auto
+              background: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "24px",
+              padding: "40px 32px", // Reduced padding
+              maxWidth: "800px", // Reduced max width
+              margin: "0 auto",
+              boxShadow: `0 20px 40px rgba(0,0,0,0.25)`,
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <h3
+            <div
               style={{
-                fontSize: "1.5rem", // text-2xl
-                fontWeight: "bold",
-                color: colors.whiteText, // text-white
-                marginBottom: "16px", // mb-4
+                position: "absolute",
+                inset: 0,
+                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                animation: "ctaRotate 25s linear infinite",
+                opacity: 0.3,
               }}
-            >
-              Ready to Transform Your Business?
-            </h3>
-            <p
-              style={{
-                color: colors.mediumGray, // text-[#6B6E70]
-                marginBottom: "24px", // mb-6
-              }}
-            >
-              Let's discuss how our comprehensive digital solutions can help you achieve your goals.
-            </p>
-            <button
-              style={{
-                background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                color: colors.whiteText, // text-white
-                fontWeight: "600", // font-semibold
-                padding: "12px 32px", // px-8 py-3
-                borderRadius: "8px", // rounded-lg
-                transition: "all 0.3s ease",
-                transform: "scale(1)",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = `linear-gradient(to right, ${colors.darkerGreen}, ${colors.accentGreen})`
-                e.currentTarget.style.transform = "scale(1.05)"
-                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.3)"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`
-                e.currentTarget.style.transform = "scale(1)"
-                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)"
-              }}
-            >
-              Get Free Consultation
-            </button>
+            />
+            <div style={{ position: "relative", zIndex: 2 }}>
+              <h3
+                style={{
+                  fontSize: "1.75rem", // Reduced size
+                  fontWeight: "900",
+                  color: colors.pureWhite,
+                  marginBottom: "16px",
+                  textShadow: `0 0 30px ${colors.electricCyan}40`,
+                }}
+              >
+                Ready to Transform Your Business?
+              </h3>
+              <p
+                style={{
+                  color: colors.warmGray,
+                  marginBottom: "32px",
+                  fontSize: "1.05rem", // Reduced size
+                  lineHeight: "1.6",
+                  maxWidth: "500px",
+                  margin: "0 auto 32px auto",
+                }}
+              >
+                Let's discuss how our comprehensive digital solutions can help you achieve your goals and drive
+                unprecedented growth.
+              </p>
+              <button
+                onClick={scrollToContact}
+                style={{
+                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                  color: colors.deepNavy,
+                  fontWeight: "800",
+                  padding: "16px 40px",
+                  borderRadius: "12px",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                  transform: "scale(1)",
+                  boxShadow: `0 10px 30px ${colors.electricCyan}40`,
+                  fontSize: "1.1rem",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`
+                  e.currentTarget.style.transform = "scale(1.05) translateY(-2px)"
+                  e.currentTarget.style.boxShadow = `0 15px 40px ${colors.electricCyan}60`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+                  e.currentTarget.style.transform = "scale(1)"
+                  e.currentTarget.style.boxShadow = `0 10px 30px ${colors.electricCyan}40`
+                }}
+              >
+                Get Free Consultation
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Global styles for media queries */}
+      {/* Enhanced Animations */}
       <style>
         {`
-          /* Responsive container padding */
-          @media (min-width: 640px) { /* sm:px-6 */
+          @keyframes galaxyDrift {
+            0% { transform: translateY(0px) translateX(0px); }
+            25% { transform: translateY(-15px) translateX(8px); }
+            50% { transform: translateY(-30px) translateX(-5px); }
+            75% { transform: translateY(-15px) translateX(-8px); }
+            100% { transform: translateY(0px) translateX(0px); }
+          }
+
+          @keyframes serviceFloat1 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.6;
+            }
+            50% { 
+              transform: translateY(-25px) translateX(15px); 
+              opacity: 0.8;
+            }
+          }
+
+          @keyframes serviceFloat2 {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.5;
+            }
+            50% { 
+              transform: translateY(20px) translateX(-12px); 
+              opacity: 0.7;
+            }
+          }
+
+          @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+          }
+
+          @keyframes iconRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @keyframes ctaRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @media (min-width: 640px) {
             .services-container-inner {
               padding-left: 24px;
               padding-right: 24px;
             }
           }
-          @media (min-width: 1024px) { /* lg:px-8 */
+          @media (min-width: 1024px) {
             .services-container-inner {
               padding-left: 32px;
               padding-right: 32px;
             }
           }
 
-          /* Services Grid Layout */
-          @media (min-width: 768px) { /* md:grid-cols-2 */
+          @media (min-width: 768px) {
             .services-grid {
               grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+              gap: 20px !important;
             }
           }
-          @media (min-width: 1024px) { /* lg:grid-cols-3 */
+          @media (min-width: 1024px) {
             .services-grid {
               grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+              gap: 24px !important;
             }
           }
         `}

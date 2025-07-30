@@ -1,24 +1,24 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import Button from "@mui/material/Button"
-import { Menu, X, Code2 } from "lucide-react"
-import { Link } from "react-router-dom" // Assuming react-router-dom is installed
+import { Menu, X } from 'lucide-react'
+import Logo from "../assets/logo.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Define the color palette based on the provided image
+  // Enhanced professional color palette
   const colors = {
-    headerBg: "#2C2F33", // Dark charcoal gray
-    accentGreen: "#8BC34A", // Vibrant green
-    darkerGreen: "#7CB342", // Darker green for hover
-    whiteText: "#FFFFFF", // White
-    grayText: "#A0A0A0", // Medium gray for nav links
-    mobileMenuBorderColor: "rgba(71, 75, 79, 0.3)", // Transparent gray for mobile menu border
+    deepNavy: "#1A1D29",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    pureWhite: "#FFFFFF",
+    warmGray: "#8B9DC3",
+    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    accentGlow: "rgba(0, 217, 255, 0.2)",
   }
 
   useEffect(() => {
@@ -38,15 +38,37 @@ export default function Header() {
     { name: "Contact", href: "#contact" },
   ]
 
-  // Function to handle smooth scrolling for hash links
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const targetId = href.substring(1)
     const targetElement = document.getElementById(targetId)
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" })
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
     }
-    setIsMenuOpen(false) // Close mobile menu after clicking a link
+    setIsMenuOpen(false)
+  }
+
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact")
+    if (contactElement) {
+      contactElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
+  const scrollToHome = () => {
+    const homeElement = document.getElementById("home")
+    if (homeElement) {
+      homeElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
   }
 
   return (
@@ -56,10 +78,11 @@ export default function Header() {
         top: 0,
         width: "100%",
         zIndex: 50,
-        transition: "all 0.3s ease",
-        backgroundColor: isScrolled ? colors.headerBg : "transparent",
-        backdropFilter: isScrolled ? "blur(4px)" : "none",
-        boxShadow: isScrolled ? "0 4px 12px rgba(0,0,0,0.2)" : "none",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        backgroundColor: isScrolled ? colors.glassMorphism : "transparent",
+        backdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
+        boxShadow: isScrolled ? `0 8px 32px ${colors.accentGlow}` : "none",
+        borderBottom: isScrolled ? `1px solid ${colors.electricCyan}20` : "none",
       }}
     >
       <div
@@ -67,7 +90,7 @@ export default function Header() {
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px", // px-4
+          padding: "0 16px",
         }}
       >
         <div
@@ -75,91 +98,155 @@ export default function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            height: "64px", // h-16
+            height: "72px",
           }}
         >
-          {/* Logo */}
+          {/* Fixed Logo with Proper Systoid Branding */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px", // space-x-2
+              gap: "12px",
               cursor: "pointer",
-              transition: "transform 0.2s ease",
+              transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              transform: "scale(1)",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onClick={scrollToHome}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)"
+              const iconDiv = e.currentTarget.querySelector(".logo-icon") as HTMLElement
+              if (iconDiv) {
+                iconDiv.style.transform = "rotate(360deg) scale(1.1)"
+                iconDiv.style.boxShadow = `0 0 30px ${colors.electricCyan}80, 0 0 60px ${colors.vibrantGreen}40`
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "scale(1)"
+              const iconDiv = e.currentTarget.querySelector(".logo-icon") as HTMLElement
+              if (iconDiv) {
+                iconDiv.style.transform = "rotate(0deg) scale(1)"
+                iconDiv.style.boxShadow = `0 0 20px ${colors.electricCyan}60`
+              }
+            }}
           >
+            {/* User-provided Logo */}
             <div
+              className="logo-icon"
               style={{
-                background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                padding: "8px", // p-2
-                borderRadius: "8px", // rounded-lg
+                /* Rich layered background: deep navy base with faint cyan + green accents */
+                background: `
+                  radial-gradient(circle at 30% 30%, ${colors.electricCyan}33 0%, transparent 60%),
+                  radial-gradient(circle at 70% 70%, ${colors.vibrantGreen}26 0%, transparent 60%),
+                  ${colors.deepNavy}
+                `,
+                padding: "12px",            // a little more breathing room
+                borderRadius: "20px",        // smoother pill-box corners
+                transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                /* layered glow for depth */
+                boxShadow: `0 0 12px ${colors.electricCyan}40, 0 0 24px ${colors.vibrantGreen}30`,
+                position: "relative",
+                overflow: "hidden",
+                width: "56px",               // slightly larger icon
+                height: "56px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Code2 style={{ height: "24px", width: "24px", color: colors.whiteText }} /> {/* h-6 w-6 text-white */}
+              <img
+                src={Logo}
+                alt="Systoid Logo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  borderRadius: "10px",   // subtle rounding so it integrates with container radius
+                  position: "relative",
+                  zIndex: 2,
+                }}
+              />
+              {/* animated neon halo */}
+              <div className="logo-glow" />
             </div>
             <span
+              className="logo-text"
               style={{
-                fontSize: "1.5rem", // text-2xl
-                fontWeight: "bold",
-                color: colors.whiteText,
+                fontSize: "1.75rem",
+                fontWeight: "800",
+                color: colors.pureWhite,
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                letterSpacing: "-0.02em",
+                textShadow: `0 0 20px ${colors.electricCyan}40`,
               }}
             >
               Systoid
             </span>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Enhanced Desktop Navigation */}
           <nav
             className="desktop-nav-container"
             style={{
-              display: "none", // hidden
+              display: "none",
               alignItems: "center",
-              gap: "32px", // space-x-8
+              gap: "40px",
             }}
           >
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.name}
-                to={item.href}
-                className="nav-link-item" // Custom class for pseudo-element
+                href={item.href}
+                className="nav-link-item"
                 style={{
-                  color: colors.grayText, // text-[#6B6E70]
-                  transition: "all 0.2s ease",
-                  fontWeight: "500", // font-medium
-                  textDecoration: "none", // Remove default underline
+                  color: colors.warmGray,
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  fontWeight: "600",
+                  textDecoration: "none",
+                  position: "relative",
+                  padding: "12px 0",
+                  fontSize: "0.95rem",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = colors.accentGreen)} // hover:text-[#86C232]
-                onMouseLeave={(e) => (e.currentTarget.style.color = colors.grayText)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = colors.electricCyan
+                  e.currentTarget.style.transform = "translateY(-2px)"
+                  e.currentTarget.style.textShadow = `0 0 10px ${colors.electricCyan}60`
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.textShadow = "none"
+                }}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* Enhanced CTA Button */}
           <div
             className="desktop-cta-container"
             style={{
-              display: "none", // hidden
+              display: "none",
             }}
           >
             <Button
+              onClick={scrollToContact}
               sx={{
-                backgroundColor: colors.accentGreen, // bg-[#86C232]
-                color: colors.whiteText, // text-white
-                fontWeight: "600", // font-semibold
-                padding: "8px 24px", // px-6 py-2
-                borderRadius: "8px", // rounded-lg
-                transition: "all 0.2s ease", // transition-all duration-200
-                transform: "scale(1)", // transform
-                boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // shadow-md
+                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                color: colors.deepNavy,
+                fontWeight: "700",
+                padding: "12px 28px",
+                borderRadius: "12px",
+                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                transform: "scale(1)",
+                boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                textTransform: "none",
+                fontSize: "0.95rem",
                 "&:hover": {
-                  backgroundColor: colors.darkerGreen, // hover:bg-[#61892F]
-                  transform: "scale(1.05)", // hover:scale-105
-                  boxShadow: "0 6px 12px rgba(0,0,0,0.2)", // hover:shadow-lg
+                  background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                  transform: "scale(1.05) translateY(-2px)",
+                  boxShadow: `0 12px 35px ${colors.electricCyan}60`,
                 },
               }}
             >
@@ -167,17 +254,30 @@ export default function Header() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Enhanced Mobile Menu Button */}
           <button
             className="mobile-menu-button-container"
             style={{
               background: "none",
               border: "none",
-              color: colors.whiteText, // text-white
+              color: colors.pureWhite,
               cursor: "pointer",
-              padding: "0", // Remove default button padding
+              padding: "12px",
+              borderRadius: "12px",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              position: "relative",
             }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = colors.accentGlow
+              e.currentTarget.style.transform = "scale(1.1)"
+              e.currentTarget.style.boxShadow = `0 0 20px ${colors.electricCyan}40`
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent"
+              e.currentTarget.style.transform = "scale(1)"
+              e.currentTarget.style.boxShadow = "none"
+            }}
           >
             {isMenuOpen ? (
               <X style={{ height: "24px", width: "24px" }} />
@@ -187,66 +287,74 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Enhanced Mobile Menu */}
         {isMenuOpen && (
           <div
-            className="mobile-menu-container" // Custom class for animation
+            className="mobile-menu-container"
             style={{
               position: "absolute",
               left: 0,
               right: 0,
               top: "100%",
-              backgroundColor: colors.headerBg, // bg-[#222629]/98
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              borderTop: `1px solid ${colors.mobileMenuBorderColor}`, // border-t border-[#474B4F]
-              boxShadow: "0 4px 12px rgba(0,0,0,0.2)", // shadow-lg
+              backgroundColor: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.electricCyan}30`,
+              boxShadow: `0 20px 40px ${colors.accentGlow}`,
+              borderRadius: "0 0 20px 20px",
             }}
           >
             <div
               style={{
-                padding: "8px 0", // px-2 pt-2 pb-3
+                padding: "20px 0",
                 display: "flex",
                 flexDirection: "column",
-                gap: "4px", // space-y-1
+                gap: "8px",
               }}
             >
               {navItems.map((item) => (
-                <Link
+                <a
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   style={{
                     display: "block",
-                    padding: "12px 16px", // px-3 py-2
-                    color: colors.grayText, // text-[#6B6E70]
+                    padding: "16px 20px",
+                    color: colors.warmGray,
                     textDecoration: "none",
-                    transition: "all 0.2s ease", // transition-all duration-200
-                    fontWeight: "500", // font-medium
-                    borderRadius: "6px", // rounded-md
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    fontWeight: "600",
+                    borderRadius: "12px",
+                    margin: "0 12px",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = colors.accentGreen
-                    e.currentTarget.style.backgroundColor = "rgba(71, 75, 79, 0.2)" // hover:bg-[#474B4F]/20
+                    e.currentTarget.style.color = colors.electricCyan
+                    e.currentTarget.style.backgroundColor = colors.accentGlow
+                    e.currentTarget.style.transform = "translateX(8px)"
+                    e.currentTarget.style.textShadow = `0 0 10px ${colors.electricCyan}60`
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = colors.grayText
+                    e.currentTarget.style.color = colors.warmGray
                     e.currentTarget.style.backgroundColor = "transparent"
+                    e.currentTarget.style.transform = "translateX(0)"
+                    e.currentTarget.style.textShadow = "none"
                   }}
                   onClick={(e) => handleSmoothScroll(e, item.href)}
                 >
                   {item.name}
-                </Link>
+                </a>
               ))}
-              <div style={{ padding: "8px 12px" }}>
-                {" "}
-                {/* px-3 py-2 */}
+              <div style={{ padding: "12px 20px" }}>
                 <Button
+                  onClick={scrollToContact}
                   sx={{
-                    width: "100%", // w-full
-                    backgroundColor: colors.accentGreen, // bg-[#86C232]
-                    color: colors.whiteText, // text-white
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)", // shadow-md
+                    width: "100%",
+                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    color: colors.deepNavy,
+                    fontWeight: "700",
+                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
                     "&:hover": {
-                      backgroundColor: colors.darkerGreen, // hover:bg-[#61892F]
+                      background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                      transform: "translateY(-2px)",
+                      boxShadow: `0 12px 35px ${colors.electricCyan}60`,
                     },
                   }}
                 >
@@ -258,48 +366,37 @@ export default function Header() {
         )}
       </div>
 
-      {/* Global styles for pseudo-elements and media queries */}
+      {/* Enhanced Animations */}
       <style>
         {`
-          /* Responsive container padding */
-          @media (min-width: 640px) { /* sm:px-6 */
-            .header-container-inner {
-              padding-left: 24px;
-              padding-right: 24px;
-            }
-          }
-          @media (min-width: 1024px) { /* lg:px-8 */
-            .header-container-inner {
-              padding-left: 32px;
-              padding-right: 32px;
-            }
+          @keyframes logoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
           }
 
-          /* Desktop Navigation Link Hover Underline */
-          .nav-link-item {
-            position: relative;
-            display: inline-block;
-            text-decoration: none;
-          }
           .nav-link-item::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            background-color: ${colors.accentGreen};
+            height: 3px;
+            background: linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen});
             left: 0;
-            bottom: -4px; /* Adjust position as needed */
-            transition: width 0.2s ease-in-out;
+            bottom: 0;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 2px;
           }
           .nav-link-item:hover::after {
             width: 100%;
           }
 
-          /* Mobile Menu Animation */
+          .mobile-menu-container {
+            animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+
           @keyframes slideDown {
             from {
               opacity: 0;
-              transform: translateY(-10px);
+              transform: translateY(-20px);
             }
             to {
               opacity: 1;
@@ -307,11 +404,28 @@ export default function Header() {
             }
           }
 
-          .mobile-menu-container {
-            animation: slideDown 0.3s ease-out forwards;
+          /* Animated halo around logo */
+          .logo-glow {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: conic-gradient(from 0deg, ${colors.electricCyan}40, ${colors.vibrantGreen}40, ${colors.electricCyan}40);
+            filter: blur(8px);
+            opacity: 0.55;
+            animation: rotateGlow 10s linear infinite, pulseGlow 4s ease-in-out infinite alternate;
+            z-index: 1;
           }
 
-          /* Responsive display for desktop/mobile elements */
+          @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @keyframes pulseGlow {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+          }
+
           @media (min-width: 768px) {
             .desktop-nav-container {
               display: flex !important;

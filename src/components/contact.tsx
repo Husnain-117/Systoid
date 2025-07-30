@@ -1,14 +1,12 @@
 "use client"
 import Card from "@mui/material/Card"
 import type React from "react"
-
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Calendar, Globe } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Calendar, Globe } from 'lucide-react'
 import { useState, useEffect, useRef } from "react"
 
-// Custom hook for scroll-in-view animation (reused from About and Portfolio components)
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
@@ -18,11 +16,11 @@ function useInView() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          observer.unobserve(entry.target) // Unobserve once visible
+          observer.unobserve(entry.target)
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
+        threshold: 0.1,
       },
     )
 
@@ -49,22 +47,23 @@ export default function Contact() {
     message: "",
   })
 
-  // Define the color palette based on the consistent theme
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+
+  // Enhanced professional color palette
   const colors = {
-    background: "#222629", // Dark gray
-    cardBg: "rgba(71, 75, 79, 0.2)", // Card background
-    cardBorder: "rgba(107, 110, 112, 0.2)", // Card border
-    accentGreen: "#86C232", // Light green
-    darkerGreen: "#61892F", // Darker green
-    whiteText: "#FFFFFF", // White
-    grayText: "#A0A0A0", // Medium gray for text
-    badgeBg: "rgba(71, 75, 79, 0.3)", // Badge background
-    badgeBorder: "rgba(107, 110, 112, 0.2)", // Badge border
-    ctaBgGradientStart: "rgba(134, 194, 50, 0.1)", // CTA section background gradient start
-    ctaBgGradientEnd: "rgba(97, 137, 47, 0.1)", // CTA section background gradient end
-    ctaBorder: "rgba(134, 194, 50, 0.2)", // CTA section border
-    inputBg: "#222629", // Dark background for text fields
-    inputBorder: "#6B6E70", // Border for text fields
+    deepNavy: "#1A1D29",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    pureWhite: "#FFFFFF",
+    warmGray: "#8B9DC3",
+    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    cardBg: "rgba(139, 157, 195, 0.08)",
+    cardBorder: "rgba(0, 217, 255, 0.2)",
+    accentGlow: "rgba(0, 217, 255, 0.2)",
+    greenGlow: "rgba(0, 255, 136, 0.2)",
+    inputBg: "#0F1419",
+    inputBorder: "#8B9DC3",
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -74,30 +73,49 @@ export default function Contact() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log("Form submitted:", formData)
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      setSubmitStatus("success")
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        service: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error("Error sending email:", error)
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
-      details: "hello@Systoid.com",
+      details: "husnainn.akram@gmail.com",
       subDetails: "We reply within 24 hours",
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+1 (555) 123-4567",
+      details: "+923087816472",
       subDetails: "Mon-Fri 9AM-6PM EST",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "123 Tech Street, Silicon Valley",
-      subDetails: "CA 94000, United States",
+      details: "Sahiwal, Pakistan",
+      subDetails: "Postal Code : 57000",
     },
     {
       icon: Clock,
@@ -118,7 +136,6 @@ export default function Contact() {
     "Other",
   ]
 
-  // Refs for scroll animations
   const [headerRef, headerInView] = useInView()
   const [mainContentRef, mainContentInView] = useInView()
   const [bottomCtaRef, bottomCtaInView] = useInView()
@@ -127,25 +144,74 @@ export default function Contact() {
     <section
       id="contact"
       style={{
-        paddingTop: "80px", // py-20
-        paddingBottom: "80px", // py-20
-        backgroundColor: colors.background, // bg-[#222629]
+        paddingTop: "80px",
+        paddingBottom: "80px",
+        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        position: "relative",
+        overflow: "hidden",
       }}
     >
+      {/* Enhanced Galaxy Background */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `
+              radial-gradient(circle at 25% 40%, ${colors.electricCyan}10 1px, transparent 1px),
+              radial-gradient(circle at 75% 20%, ${colors.vibrantGreen}08 1px, transparent 1px),
+              radial-gradient(circle at 50% 80%, ${colors.electricCyan}06 1px, transparent 1px)
+            `,
+            backgroundSize: "160px 160px, 200px 200px, 180px 180px",
+            animation: "contactGalaxy 20s linear infinite",
+            opacity: 0.4,
+          }}
+        />
+        
+        <div
+          style={{
+            position: "absolute",
+            top: "30%",
+            right: "20%",
+            width: "160px",
+            height: "160px",
+            background: `radial-gradient(circle, ${colors.electricCyan}15, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(40px)",
+            animation: "contactFloat 10s ease-in-out infinite",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "25%",
+            left: "15%",
+            width: "200px",
+            height: "200px",
+            background: `radial-gradient(circle, ${colors.vibrantGreen}12, transparent 70%)`,
+            borderRadius: "50%",
+            filter: "blur(50px)",
+            animation: "contactFloat 14s ease-in-out infinite reverse",
+          }}
+        />
+      </div>
+
       <div
         className="contact-container-inner"
         style={{
-          maxWidth: "1280px", // container mx-auto
+          maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px", // px-4 sm:px-6 lg:px-8
+          padding: "0 16px",
+          position: "relative",
+          zIndex: 2,
         }}
       >
-        {/* Section Header */}
+        {/* Enhanced Section Header */}
         <div
           ref={headerRef}
           style={{
             textAlign: "center",
-            marginBottom: "64px", // mb-16
+            marginBottom: "60px",
             opacity: headerInView ? 1 : 0,
             transform: headerInView ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
@@ -156,34 +222,56 @@ export default function Contact() {
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "8px", // space-x-2
-              backgroundColor: colors.badgeBg, // bg-[#474B4F]/30
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.badgeBorder}`, // border border-[#6B6E70]/20
-              borderRadius: "9999px", // rounded-full
-              padding: "8px 16px", // px-4 py-2
-              marginBottom: "24px", // mb-6
+              gap: "12px",
+              backgroundColor: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "9999px",
+              padding: "12px 24px",
+              marginBottom: "24px",
+              boxShadow: `0 8px 32px ${colors.accentGlow}`,
             }}
           >
-            <MessageCircle style={{ height: "16px", width: "16px", color: colors.accentGreen }} />
-            <span style={{ fontSize: "0.875rem", color: colors.grayText }}>Get In Touch</span>
+            <div
+              style={{
+                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                borderRadius: "50%",
+                padding: "6px",
+                animation: "iconPulse 3s ease-in-out infinite",
+              }}
+            >
+              <MessageCircle style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+            </div>
+            <span
+              style={{
+                fontSize: "0.95rem",
+                color: colors.warmGray,
+                fontWeight: "600",
+              }}
+            >
+              Get In Touch
+            </span>
           </div>
           <h2
             style={{
-              fontSize: "clamp(2rem, 5vw, 3rem)", // text-3xl sm:text-4xl lg:text-5xl
-              fontWeight: "bold",
-              color: colors.whiteText, // text-white
-              marginBottom: "24px", // mb-6
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: "900",
+              color: colors.pureWhite,
+              marginBottom: "24px",
+              textShadow: `0 0 40px ${colors.electricCyan}30`,
+              letterSpacing: "-0.02em",
             }}
           >
             Let's Start Your Next Project
           </h2>
           <p
             style={{
-              fontSize: "1.125rem", // text-lg
-              color: colors.grayText, // text-[#6B6E70]
-              maxWidth: "768px", // max-w-3xl
-              margin: "0 auto", // mx-auto
+              fontSize: "1.1rem",
+              color: colors.warmGray,
+              maxWidth: "700px",
+              margin: "0 auto",
+              lineHeight: "1.7",
+              fontWeight: "400",
             }}
           >
             Ready to transform your ideas into reality? Get in touch with us today and let's discuss how we can help you
@@ -196,98 +284,113 @@ export default function Contact() {
           className="contact-main-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-            gap: "48px", // gap-12
+            gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+            gap: "40px",
             opacity: mainContentInView ? 1 : 0,
             transform: mainContentInView ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
             transitionDelay: "0.3s",
           }}
         >
-          {/* Contact Information */}
+          {/* Enhanced Contact Information */}
           <div className="lg:col-span-1">
             <div style={{ marginBottom: "32px" }}>
               <h3
                 style={{
-                  fontSize: "1.5rem", // text-2xl
-                  fontWeight: "bold",
-                  color: colors.whiteText, // text-white
-                  marginBottom: "24px", // mb-6
+                  fontSize: "1.4rem",
+                  fontWeight: "800",
+                  color: colors.pureWhite,
+                  marginBottom: "20px",
+                  letterSpacing: "-0.01em",
                 }}
               >
                 Contact Information
               </h3>
               <p
                 style={{
-                  color: colors.grayText, // text-[#6B6E70]
-                  marginBottom: "32px", // mb-8
+                  color: colors.warmGray,
+                  marginBottom: "32px",
+                  lineHeight: "1.6",
+                  fontSize: "1rem",
                 }}
               >
                 We're here to help and answer any question you might have. We look forward to hearing from you.
               </p>
             </div>
-            {/* Contact Details */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-              {" "}
-              {/* space-y-6 */}
+            
+            {/* Enhanced Contact Details */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
                   style={{
                     display: "flex",
                     alignItems: "flex-start",
-                    gap: "16px", // space-x-4
-                    transition: "transform 0.3s ease, color 0.3s ease",
+                    gap: "16px",
+                    padding: "20px",
+                    backgroundColor: colors.cardBg,
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    border: `1px solid ${colors.cardBorder}`,
+                    borderRadius: "16px",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateX(8px)"
+                    e.currentTarget.style.transform = "translateX(6px)"
+                    e.currentTarget.style.borderColor = colors.electricCyan
+                    e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}30`
                     const title = e.currentTarget.querySelector(".info-title") as HTMLElement
-                    if (title) title.style.color = colors.accentGreen
+                    if (title) title.style.color = colors.electricCyan
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateX(0)"
+                    e.currentTarget.style.borderColor = colors.cardBorder
+                    e.currentTarget.style.boxShadow = "none"
                     const title = e.currentTarget.querySelector(".info-title") as HTMLElement
-                    if (title) title.style.color = colors.whiteText
+                    if (title) title.style.color = colors.pureWhite
                   }}
                 >
                   <div
                     style={{
-                      width: "48px", // w-12
-                      height: "48px", // h-12
-                      background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                      borderRadius: "8px", // rounded-lg
+                      width: "44px",
+                      height: "44px",
+                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      borderRadius: "12px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
+                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
                     }}
                   >
-                    <info.icon style={{ height: "24px", width: "24px", color: colors.whiteText }} />
+                    <info.icon style={{ height: "20px", width: "20px", color: colors.pureWhite }} />
                   </div>
                   <div>
                     <h4
                       className="info-title"
                       style={{
-                        color: colors.whiteText, // text-white
-                        fontWeight: "600", // font-semibold
-                        marginBottom: "4px", // mb-1
+                        color: colors.pureWhite,
+                        fontWeight: "700",
+                        marginBottom: "4px",
                         transition: "color 0.3s ease",
+                        fontSize: "1rem",
                       }}
                     >
                       {info.title}
                     </h4>
                     <p
                       style={{
-                        color: colors.accentGreen, // text-[#86C232]
-                        fontWeight: "500", // font-medium
+                        color: colors.electricCyan,
+                        fontWeight: "600",
+                        marginBottom: "4px",
+                        fontSize: "0.95rem",
                       }}
                     >
                       {info.details}
                     </p>
                     <p
                       style={{
-                        color: colors.grayText, // text-[#6B6E70]
-                        fontSize: "0.875rem", // text-sm
+                        color: colors.warmGray,
+                        fontSize: "0.85rem",
                       }}
                     >
                       {info.subDetails}
@@ -296,96 +399,131 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-            {/* Quick Actions */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px", paddingTop: "32px" }}>
-              {" "}
-              {/* space-y-4 pt-8 */}
+
+            {/* Enhanced Quick Actions */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "32px" }}>
               <Button
                 sx={{
-                  width: "100%", // w-full
-                  background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                  color: colors.whiteText, // text-white
-                  fontWeight: "600", // font-semibold
-                  padding: "12px 24px", // py-3
-                  borderRadius: "8px", // rounded-lg
-                  transition: "all 0.3s ease",
+                  width: "100%",
+                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                  color: colors.deepNavy,
+                  fontWeight: "700",
+                  padding: "14px 24px",
+                  borderRadius: "12px",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                  boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                  textTransform: "none",
                   "&:hover": {
-                    background: `linear-gradient(to right, ${colors.darkerGreen}, ${colors.accentGreen})`,
-                    transform: "scale(1.02)", // hover:scale-105
-                    boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+                    background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                    transform: "scale(1.02) translateY(-2px)",
+                    boxShadow: `0 12px 30px ${colors.electricCyan}60`,
                   },
                 }}
               >
-                <Calendar style={{ marginRight: "8px", height: "20px", width: "20px" }} /> {/* mr-2 h-5 w-5 */}
+                <Calendar style={{ marginRight: "8px", height: "18px", width: "18px" }} />
                 Schedule a Meeting
               </Button>
               <Button
                 variant="outlined"
                 sx={{
-                  width: "100%", // w-full
-                  borderColor: colors.grayText, // border-[#6B6E70]
-                  color: colors.grayText, // text-[#6B6E70]
-                  backgroundColor: "transparent", // bg-transparent
-                  padding: "12px 24px", // py-3
-                  borderRadius: "8px", // rounded-lg
-                  transition: "all 0.3s ease",
+                  width: "100%",
+                  borderColor: colors.warmGray,
+                  color: colors.warmGray,
+                  backgroundColor: colors.cardBg,
+                  backdropFilter: "blur(20px) saturate(180%)",
+                  padding: "14px 24px",
+                  borderRadius: "12px",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  textTransform: "none",
                   "&:hover": {
-                    backgroundColor: colors.grayText, // hover:bg-[#6B6E70]
-                    color: colors.whiteText, // hover:text-white
-                    borderColor: colors.grayText, // Keep border color consistent
+                    backgroundColor: colors.electricCyan,
+                    color: colors.deepNavy,
+                    borderColor: colors.electricCyan,
+                    transform: "translateY(-2px)",
+                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
                   },
                 }}
               >
-                <Globe style={{ marginRight: "8px", height: "20px", width: "20px" }} /> {/* mr-2 h-5 w-5 */}
+                <Globe style={{ marginRight: "8px", height: "18px", width: "18px" }} />
                 View Our Portfolio
               </Button>
             </div>
           </div>
-          {/* Contact Form */}
+
+          {/* Enhanced Contact Form */}
           <div className="lg:col-span-2">
             <Card
               style={{
-                backgroundColor: colors.cardBg, // bg-[#474B4F]/20
-                backdropFilter: "blur(4px)", // backdrop-blur-sm
-                border: `1px solid ${colors.cardBorder}`, // border-[#6B6E70]/20
+                backgroundColor: colors.cardBg,
+                backdropFilter: "blur(20px) saturate(180%)",
+                border: `1px solid ${colors.cardBorder}`,
                 transition: "all 0.3s ease",
-                transform: "scale(1)", // Initial scale
-                boxShadow: "none", // Initial shadow
-                borderRadius: "12px", // rounded-xl
+                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                borderRadius: "20px",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = `${colors.accentGreen}80` // hover:border-[#86C232]/50
-                e.currentTarget.style.boxShadow = "0 10px 20px rgba(0,0,0,0.3)" // hover:shadow-xl
+                e.currentTarget.style.borderColor = `${colors.electricCyan}60`
+                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)"
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = colors.cardBorder
-                e.currentTarget.style.boxShadow = "none"
+                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
               }}
             >
               <CardContent style={{ padding: "32px" }}>
-                {" "}
-                {/* p-8 */}
                 <h3
                   style={{
-                    fontSize: "1.5rem", // text-2xl
-                    fontWeight: "bold",
-                    color: colors.whiteText, // text-white
-                    marginBottom: "24px", // mb-6
+                    fontSize: "1.4rem",
+                    fontWeight: "800",
+                    color: colors.pureWhite,
+                    marginBottom: "24px",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   Send us a Message
                 </h3>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                  {" "}
-                  {/* space-y-6 */}
+
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <div
+                    style={{
+                      padding: "16px",
+                      backgroundColor: `${colors.vibrantGreen}20`,
+                      border: `1px solid ${colors.vibrantGreen}60`,
+                      borderRadius: "12px",
+                      marginBottom: "24px",
+                      color: colors.vibrantGreen,
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    ✅ Message sent successfully! We'll get back to you soon.
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div
+                    style={{
+                      padding: "16px",
+                      backgroundColor: "rgba(220, 53, 69, 0.1)",
+                      border: "1px solid rgba(220, 53, 69, 0.3)",
+                      borderRadius: "12px",
+                      marginBottom: "24px",
+                      color: "#dc3545",
+                      fontSize: "0.95rem",
+                    }}
+                  >
+                    ❌ Failed to send message. Please try again or contact us directly.
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                   {/* Name and Email */}
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-                      gap: "24px", // gap-6
+                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+                      gap: "20px",
                     }}
                     className="form-grid-cols"
                   >
@@ -400,17 +538,24 @@ export default function Contact() {
                         fullWidth
                         margin="normal"
                         variant="outlined"
-                        InputLabelProps={{ style: { color: colors.grayText } }}
+                        InputLabelProps={{
+                          style: { color: colors.warmGray },
+                          sx: {
+                            "&.Mui-focused": {
+                              color: `${colors.electricCyan} !important`,
+                            },
+                          },
+                        }}
                         InputProps={{
                           style: {
-                            color: colors.whiteText,
+                            color: colors.pureWhite,
                             background: colors.inputBg,
-                            borderRadius: "8px",
+                            borderRadius: "12px",
                           },
                           sx: {
                             "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.accentGreen} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.accentGreen} !important` },
+                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
                           },
                         }}
                       />
@@ -420,34 +565,43 @@ export default function Contact() {
                         id="email"
                         name="email"
                         label="Email Address *"
+                        type="email"
                         required
                         value={formData.email}
                         onChange={handleInputChange}
                         fullWidth
                         margin="normal"
                         variant="outlined"
-                        InputLabelProps={{ style: { color: colors.grayText } }}
+                        InputLabelProps={{
+                          style: { color: colors.warmGray },
+                          sx: {
+                            "&.Mui-focused": {
+                              color: `${colors.electricCyan} !important`,
+                            },
+                          },
+                        }}
                         InputProps={{
                           style: {
-                            color: colors.whiteText,
+                            color: colors.pureWhite,
                             background: colors.inputBg,
-                            borderRadius: "8px",
+                            borderRadius: "12px",
                           },
                           sx: {
                             "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.accentGreen} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.accentGreen} !important` },
+                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
                           },
                         }}
                       />
                     </div>
                   </div>
+
                   {/* Company and Service */}
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))", // grid-cols-1
-                      gap: "24px", // gap-6
+                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+                      gap: "20px",
                     }}
                     className="form-grid-cols"
                   >
@@ -461,17 +615,24 @@ export default function Contact() {
                         fullWidth
                         margin="normal"
                         variant="outlined"
-                        InputLabelProps={{ style: { color: colors.grayText } }}
+                        InputLabelProps={{
+                          style: { color: colors.warmGray },
+                          sx: {
+                            "&.Mui-focused": {
+                              color: `${colors.electricCyan} !important`,
+                            },
+                          },
+                        }}
                         InputProps={{
                           style: {
-                            color: colors.whiteText,
+                            color: colors.pureWhite,
                             background: colors.inputBg,
-                            borderRadius: "8px",
+                            borderRadius: "12px",
                           },
                           sx: {
                             "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.accentGreen} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.accentGreen} !important` },
+                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
                           },
                         }}
                       />
@@ -488,48 +649,39 @@ export default function Contact() {
                         fullWidth
                         margin="normal"
                         variant="outlined"
-                        InputLabelProps={{ style: { color: colors.grayText } }}
+                        InputLabelProps={{
+                          style: { color: colors.warmGray },
+                          sx: {
+                            "&.Mui-focused": {
+                              color: `${colors.electricCyan} !important`,
+                            },
+                          },
+                        }}
                         InputProps={{
                           style: {
-                            color: colors.whiteText,
+                            color: colors.pureWhite,
                             background: colors.inputBg,
-                            borderRadius: "8px",
+                            borderRadius: "12px",
                           },
                           sx: {
                             "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.accentGreen} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.accentGreen} !important` },
+                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
                           },
                         }}
                         SelectProps={{
-                          native: true, // Use native select for better styling control
-                          style: { color: colors.whiteText },
-                          IconComponent: () => (
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              style={{ color: colors.grayText, marginRight: "12px" }}
-                            >
-                              <path d="m6 9 6 6 6-6" />
-                            </svg>
-                          ),
+                          native: true,
+                          style: { color: colors.pureWhite },
                         }}
                       >
-                        <option value="" style={{ backgroundColor: colors.inputBg, color: colors.grayText }}>
+                        <option value="" style={{ backgroundColor: colors.inputBg, color: colors.warmGray }}>
                           Select a service
                         </option>
                         {services.map((service, index) => (
                           <option
                             key={index}
                             value={service}
-                            style={{ backgroundColor: colors.inputBg, color: colors.whiteText }}
+                            style={{ backgroundColor: colors.inputBg, color: colors.pureWhite }}
                           >
                             {service}
                           </option>
@@ -537,6 +689,7 @@ export default function Contact() {
                       </TextField>
                     </div>
                   </div>
+
                   {/* Message */}
                   <div>
                     <TextField
@@ -545,88 +698,108 @@ export default function Contact() {
                       label="Project Details *"
                       required
                       multiline
-                      rows={6}
+                      rows={5}
                       value={formData.message}
                       onChange={handleInputChange}
                       fullWidth
                       margin="normal"
                       variant="outlined"
-                      InputLabelProps={{ style: { color: colors.grayText } }}
+                      InputLabelProps={{
+                        style: { color: colors.warmGray },
+                        sx: {
+                          "&.Mui-focused": {
+                            color: `${colors.electricCyan} !important`,
+                          },
+                        },
+                      }}
                       InputProps={{
                         style: {
-                          color: colors.whiteText,
+                          color: colors.pureWhite,
                           background: colors.inputBg,
-                          borderRadius: "8px",
+                          borderRadius: "12px",
                         },
                         sx: {
                           "& fieldset": { borderColor: colors.inputBorder },
-                          "&:hover fieldset": { borderColor: `${colors.accentGreen} !important` },
-                          "&.Mui-focused fieldset": { borderColor: `${colors.accentGreen} !important` },
+                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
                         },
                       }}
                     />
                   </div>
-                  {/* Submit Button */}
+
+                  {/* Enhanced Submit Button */}
                   <Button
                     type="submit"
+                    disabled={isSubmitting}
                     sx={{
-                      width: "100%", // w-full
-                      background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                      color: colors.whiteText, // text-white
-                      fontWeight: "600", // font-semibold
-                      padding: "12px 24px", // py-3
-                      borderRadius: "8px", // rounded-lg
-                      transition: "all 0.3s ease",
+                      width: "100%",
+                      background: isSubmitting
+                        ? colors.warmGray
+                        : `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      color: colors.deepNavy,
+                      fontWeight: "800",
+                      padding: "16px 24px",
+                      borderRadius: "12px",
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                       transform: "scale(1)",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-                      "&:hover": {
-                        background: `linear-gradient(to right, ${colors.darkerGreen}, ${colors.accentGreen})`,
-                        transform: "scale(1.02)", // hover:scale-105
-                        boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+                      boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                      textTransform: "none",
+                      fontSize: "1.05rem",
+                      "&:hover": !isSubmitting
+                        ? {
+                            background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                            transform: "scale(1.02) translateY(-2px)",
+                            boxShadow: `0 12px 30px ${colors.electricCyan}60`,
+                          }
+                        : {},
+                      "&:disabled": {
+                        background: colors.warmGray,
+                        color: colors.pureWhite,
+                        opacity: 0.7,
                       },
                     }}
-                    className="group" // Add group class for icon hover
                   >
                     <Send
                       style={{
-                        marginRight: "8px", // mr-2
-                        height: "20px", // h-5
-                        width: "20px", // w-5
+                        marginRight: "8px",
+                        height: "18px",
+                        width: "18px",
                         transition: "transform 0.3s ease",
                       }}
-                      className="group-hover:translate-x-1"
                     />
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
-                {/* Additional Info */}
+
+                {/* Enhanced Additional Info */}
                 <div
                   style={{
-                    marginTop: "32px", // mt-8
-                    padding: "24px", // p-6
-                    backgroundColor: `${colors.accentGreen}1a`, // bg-[#86C232]/10
-                    borderRadius: "8px", // rounded-lg
-                    border: `1px solid ${colors.ctaBorder}`, // border border-[#86C232]/20
+                    marginTop: "32px",
+                    padding: "24px",
+                    backgroundColor: `${colors.electricCyan}10`,
+                    borderRadius: "16px",
+                    border: `1px solid ${colors.cardBorder}`,
                   }}
                 >
                   <h4
                     style={{
-                      color: colors.whiteText, // text-white
-                      fontWeight: "600", // font-semibold
-                      marginBottom: "8px", // mb-2
+                      color: colors.pureWhite,
+                      fontWeight: "700",
+                      marginBottom: "12px",
+                      fontSize: "1.05rem",
                     }}
                   >
                     What happens next?
                   </h4>
                   <ul
                     style={{
-                      color: colors.grayText, // text-[#6B6E70]
-                      fontSize: "0.875rem", // text-sm
+                      color: colors.warmGray,
+                      fontSize: "0.9rem",
                       listStyle: "none",
                       padding: 0,
                       display: "flex",
                       flexDirection: "column",
-                      gap: "4px", // space-y-1
+                      gap: "8px",
                     }}
                   >
                     <li>• We'll review your message within 24 hours</li>
@@ -640,11 +813,11 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Map or Additional CTA */}
+        {/* Enhanced Bottom CTA */}
         <div
           ref={bottomCtaRef}
           style={{
-            marginTop: "64px", // mt-16
+            marginTop: "60px",
             opacity: bottomCtaInView ? 1 : 0,
             transform: bottomCtaInView ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
@@ -653,31 +826,44 @@ export default function Contact() {
         >
           <Card
             style={{
-              background: `linear-gradient(to right, ${colors.ctaBgGradientStart}, ${colors.ctaBgGradientEnd})`,
-              backdropFilter: "blur(4px)", // backdrop-blur-sm
-              border: `1px solid ${colors.ctaBorder}`, // border-[#86C232]/20
-              borderRadius: "16px", // rounded-2xl
+              background: colors.glassMorphism,
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.cardBorder}`,
+              borderRadius: "24px",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            <CardContent style={{ padding: "32px", textAlign: "center" }}>
-              {" "}
-              {/* p-8 */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                animation: "ctaRotate 20s linear infinite",
+                opacity: 0.3,
+              }}
+            />
+            <CardContent style={{ padding: "40px", textAlign: "center", position: "relative", zIndex: 2 }}>
               <h3
                 style={{
-                  fontSize: "1.5rem", // text-2xl
-                  fontWeight: "bold",
-                  color: colors.whiteText, // text-white
-                  marginBottom: "16px", // mb-4
+                  fontSize: "1.75rem",
+                  fontWeight: "900",
+                  color: colors.pureWhite,
+                  marginBottom: "16px",
+                  textShadow: `0 0 30px ${colors.electricCyan}40`,
                 }}
               >
                 Prefer to Talk Directly?
               </h3>
               <p
                 style={{
-                  color: colors.grayText, // text-[#6B6E70]
-                  marginBottom: "24px", // mb-6
-                  maxWidth: "800px", // max-w-2xl
-                  margin: "0 auto 24px auto", // mx-auto
+                  color: colors.warmGray,
+                  marginBottom: "32px",
+                  maxWidth: "600px",
+                  margin: "0 auto 32px auto",
+                  fontSize: "1.05rem",
+                  lineHeight: "1.6",
                 }}
               >
                 Sometimes it's easier to just have a conversation. Book a free 30-minute consultation call with our team
@@ -686,50 +872,58 @@ export default function Contact() {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "column", // flex-col
+                  flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: "16px", // space-y-4 sm:space-y-0 sm:space-x-4
+                  gap: "12px",
                 }}
                 className="bottom-cta-buttons"
               >
                 <Button
                   sx={{
-                    background: `linear-gradient(to right, ${colors.accentGreen}, ${colors.darkerGreen})`,
-                    color: colors.whiteText, // text-white
-                    fontWeight: "600", // font-semibold
-                    padding: "12px 32px", // px-8 py-3
-                    borderRadius: "8px", // rounded-lg
-                    transition: "all 0.3s ease",
+                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    color: colors.deepNavy,
+                    fontWeight: "800",
+                    padding: "16px 32px",
+                    borderRadius: "12px",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     transform: "scale(1)",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    textTransform: "none",
+                    fontSize: "1.05rem",
                     "&:hover": {
-                      background: `linear-gradient(to right, ${colors.darkerGreen}, ${colors.accentGreen})`,
-                      transform: "scale(1.05)",
-                      boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
+                      background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                      transform: "scale(1.05) translateY(-2px)",
+                      boxShadow: `0 12px 30px ${colors.electricCyan}60`,
                     },
                   }}
                 >
-                  <Phone style={{ marginRight: "8px", height: "20px", width: "20px" }} /> {/* mr-2 h-5 w-5 */}
+                  <Phone style={{ marginRight: "8px", height: "18px", width: "18px" }} />
                   Book a Call
                 </Button>
                 <Button
                   variant="outlined"
+                  href="mailto:husnainakram336@gmail.com"
                   sx={{
-                    borderColor: colors.grayText, // border-[#6B6E70]
-                    color: colors.grayText, // text-[#6B6E70]
-                    backgroundColor: "transparent", // bg-transparent
-                    padding: "12px 32px", // px-8 py-3
-                    borderRadius: "8px", // rounded-lg
-                    transition: "all 0.3s ease",
+                    borderColor: colors.warmGray,
+                    color: colors.warmGray,
+                    backgroundColor: colors.cardBg,
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    padding: "16px 32px",
+                    borderRadius: "12px",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    textTransform: "none",
+                    fontSize: "1.05rem",
                     "&:hover": {
-                      backgroundColor: colors.grayText, // hover:bg-[#6B6E70]
-                      color: colors.whiteText, // hover:text-white
-                      borderColor: colors.grayText, // Keep border color consistent
+                      backgroundColor: colors.electricCyan,
+                      color: colors.deepNavy,
+                      borderColor: colors.electricCyan,
+                      transform: "translateY(-2px)",
+                      boxShadow: `0 8px 25px ${colors.electricCyan}40`,
                     },
                   }}
                 >
-                  <Mail style={{ marginRight: "8px", height: "20px", width: "20px" }} /> {/* mr-2 h-5 w-5 */}
+                  <Mail style={{ marginRight: "8px", height: "18px", width: "18px" }} />
                   Send Email
                 </Button>
               </div>
@@ -738,69 +932,67 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Global styles for media queries */}
+      {/* Enhanced Animations */}
       <style>
         {`
-          /* Responsive container padding */
-          @media (min-width: 640px) { /* sm:px-6 */
+          @keyframes contactGalaxy {
+            0% { transform: translateY(0px) translateX(0px); }
+            33% { transform: translateY(-8px) translateX(5px); }
+            66% { transform: translateY(-16px) translateX(-3px); }
+            100% { transform: translateY(0px) translateX(0px); }
+          }
+
+          @keyframes contactFloat {
+            0%, 100% { 
+              transform: translateY(0px) translateX(0px); 
+              opacity: 0.6;
+            }
+            50% { 
+              transform: translateY(-15px) translateX(8px); 
+              opacity: 0.8;
+            }
+          }
+
+          @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+          }
+
+          @keyframes ctaRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          @media (min-width: 640px) {
             .contact-container-inner {
               padding-left: 24px;
               padding-right: 24px;
             }
           }
-          @media (min-width: 1024px) { /* lg:px-8 */
+          @media (min-width: 1024px) {
             .contact-container-inner {
               padding-left: 32px;
               padding-right: 32px;
             }
           }
 
-          /* Main Content Grid Layout */
-          @media (min-width: 1024px) { /* lg:grid-cols-3 */
+          @media (min-width: 1024px) {
             .contact-main-grid {
               grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
             }
           }
 
-          /* Form Grid Columns */
-          @media (min-width: 768px) { /* md:grid-cols-2 */
+          @media (min-width: 768px) {
             .form-grid-cols {
               grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
           }
 
-          /* Bottom CTA Buttons Layout */
-          @media (min-width: 640px) { /* sm:flex-row */
+          @media (min-width: 640px) {
             .bottom-cta-buttons {
               flex-direction: row !important;
-              gap: 16px !important; /* sm:space-x-4 */
+              gap: 16px !important;
             }
-          }
-
-          /* Custom styles for Material UI TextField outline */
-          .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-            border-color: ${colors.inputBorder};
-            border-radius: 8px;
-          }
-          .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-            border-color: ${colors.accentGreen} !important;
-          }
-          .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-            border-color: ${colors.accentGreen} !important;
-          }
-          .MuiInputLabel-outlined {
-            color: ${colors.grayText};
-          }
-          .MuiInputLabel-outlined.Mui-focused {
-            color: ${colors.accentGreen} !important;
-          }
-          .MuiInputBase-input {
-            color: ${colors.whiteText};
-            background-color: ${colors.inputBg};
-            border-radius: 8px;
-          }
-          .MuiSelect-icon {
-            color: ${colors.grayText};
           }
         `}
       </style>
