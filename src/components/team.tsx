@@ -231,7 +231,12 @@ export default function Team() {
               style={{
                 background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                 borderRadius: "50%",
-                padding: "6px",
+                padding: "8px",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 animation: "iconPulse 3s ease-in-out infinite",
               }}
             >

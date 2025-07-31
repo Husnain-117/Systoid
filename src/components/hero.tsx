@@ -209,8 +209,14 @@ export default function Hero() {
               style={{
                 background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                 borderRadius: "50%",
-                padding: "6px",
+                padding: "8px",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 animation: "iconSpin 3s ease-in-out infinite",
+                boxShadow: `0 0 20px ${colors.electricCyan}60`,
               }}
             >
               <Zap

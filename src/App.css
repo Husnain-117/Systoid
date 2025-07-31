@@ -70,3 +70,13 @@ html {
 .read-the-docs {
   color: #888;
 }
+
+/* Custom column span utilities replacing Tailwind col-span */
+@media (min-width: 1024px) {
+  .col-span-lg-1 {
+    grid-column: span 1 / span 1;
+  }
+  .col-span-lg-2 {
+    grid-column: span 2 / span 2;
+  }
+}

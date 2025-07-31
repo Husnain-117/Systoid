@@ -146,8 +146,11 @@ export default function Contact() {
     <section
       id="contact"
       style={{
-        paddingTop: "80px",
-        paddingBottom: "80px",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "40px 0",
         background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
         position: "relative",
         overflow: "hidden",
@@ -213,7 +216,7 @@ export default function Contact() {
           ref={headerRef}
           style={{
             textAlign: "center",
-            marginBottom: "60px",
+            marginBottom: "24px",
             opacity: headerInView ? 1 : 0,
             transform: headerInView ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
@@ -230,7 +233,7 @@ export default function Contact() {
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
-              marginBottom: "24px",
+              marginBottom: "16px",
               boxShadow: `0 8px 32px ${colors.accentGlow}`,
             }}
           >
@@ -238,7 +241,12 @@ export default function Contact() {
               style={{
                 background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                 borderRadius: "50%",
-                padding: "6px",
+                padding: "8px",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 animation: "iconPulse 3s ease-in-out infinite",
               }}
             >
@@ -259,7 +267,7 @@ export default function Contact() {
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
               color: colors.pureWhite,
-              marginBottom: "24px",
+              marginBottom: "16px",
               textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
@@ -286,8 +294,8 @@ export default function Contact() {
           className="contact-main-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
-            gap: "40px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gap: "32px",
             opacity: mainContentInView ? 1 : 0,
             transform: mainContentInView ? "translateY(0)" : "translateY(20px)",
             transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
@@ -295,7 +303,7 @@ export default function Contact() {
           }}
         >
           {/* Enhanced Contact Information */}
-          <div className="lg:col-span-1">
+          <div className="col-span-lg-1">
             <div style={{ marginBottom: "32px" }}>
               <h3
                 style={{
@@ -414,7 +422,7 @@ export default function Contact() {
                   borderRadius: "12px",
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                  boxShadow: `0 8px 32px ${colors.accentGlow}`,
                   textTransform: "none",
                   "&:hover": {
                     background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
@@ -454,7 +462,7 @@ export default function Contact() {
           </div>
 
           {/* Enhanced Contact Form */}
-          <div className="lg:col-span-2">
+          <div className="col-span-lg-2">
             <Card
               style={{
                 backgroundColor: colors.cardBg,
@@ -995,6 +1003,12 @@ export default function Contact() {
               flex-direction: row !important;
               gap: 16px !important;
             }
+          }
+          .col-span-lg-1 {
+            grid-column: 1 / 2;
+          }
+          .col-span-lg-2 {
+            grid-column: 1 / 3;
           }
         `}
       </style>

@@ -179,8 +179,17 @@ export default function About() {
               style={{
                 background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
                 borderRadius: "50%",
-                padding: "6px",
+                padding: "8px",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 animation: "heartbeat 2s ease-in-out infinite",
+                boxShadow: `0 0 20px ${colors.electricCyan}60`,
+                
+                
+                
               }}
             >
               <Heart style={{ height: "16px", width: "16px", color: colors.pureWhite }} />

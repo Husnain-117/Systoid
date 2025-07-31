@@ -144,7 +144,7 @@ export default function Footer() {
             className="footer-main-grid"
           >
             {/* Enhanced Company Info */}
-            <div className="lg:col-span-2">
+            <div className="col-span-lg-2">
               <div
                 style={{
                   display: "flex",
@@ -552,7 +552,7 @@ export default function Footer() {
                 textAlign: "center",
               }}
             >
-              © {currentYear} Systoid. All rights reserved.
+              &copy; {currentYear} Systoid. All rights reserved.
             </div>
 
             {/* Enhanced Social Links */}
@@ -688,6 +688,14 @@ export default function Footer() {
           @media (min-width: 768px) {
             .footer-bottom-flex {
               flex-direction: row !important;
+            }
+          }
+          .col-span-lg-2 {
+            grid-column: span 2;
+          }
+          @media (min-width: 1024px) {
+            .col-span-lg-2 {
+              grid-column: span 1;
             }
           }
         `}
