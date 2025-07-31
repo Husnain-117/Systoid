@@ -267,7 +267,7 @@ export default function Footer() {
                   }}
                 >
                   <Mail style={{ height: "16px", width: "16px", color: colors.electricCyan }} />
-                  <span>hello@systoid.com</span>
+                  <span>systoid.pk@gmail.com</span>
                 </div>
                 <div
                   style={{
@@ -288,7 +288,7 @@ export default function Footer() {
                   }}
                 >
                   <Phone style={{ height: "16px", width: "16px", color: colors.electricCyan }} />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+923027893040</span>
                 </div>
                 <div
                   style={{
@@ -309,7 +309,7 @@ export default function Footer() {
                   }}
                 >
                   <MapPin style={{ height: "16px", width: "16px", color: colors.electricCyan }} />
-                  <span>123 Tech Street, Silicon Valley, CA</span>
+                  <span>16-W Scheme No.2, Farid Town Sahiwal, Pakistan</span>
                 </div>
               </div>
             </div>

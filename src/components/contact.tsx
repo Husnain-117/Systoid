@@ -1,13 +1,12 @@
 "use client"
+
 import Card from "@mui/material/Card"
 import type React from "react"
 import CardContent from "@mui/material/CardContent"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Calendar, Globe } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Calendar, Globe } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
-
-
 
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
@@ -25,18 +24,15 @@ function useInView() {
         threshold: 0.1,
       },
     )
-
     if (ref.current) {
       observer.observe(ref.current)
     }
-
     return () => {
       if (ref.current) {
         observer.unobserve(ref.current)
       }
     }
   }, [])
-
   return [ref, inView] as const
 }
 
@@ -48,7 +44,6 @@ export default function Contact() {
     service: "",
     message: "",
   })
-
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
@@ -79,11 +74,9 @@ export default function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitStatus("idle")
-
     try {
       // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000))
       setSubmitStatus("success")
       setFormData({
         name: "",
@@ -150,7 +143,6 @@ export default function Contact() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "40px 0",
         background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
         position: "relative",
         overflow: "hidden",
@@ -163,16 +155,15 @@ export default function Contact() {
             position: "absolute",
             inset: 0,
             backgroundImage: `
-              radial-gradient(circle at 25% 40%, ${colors.electricCyan}10 1px, transparent 1px),
-              radial-gradient(circle at 75% 20%, ${colors.vibrantGreen}08 1px, transparent 1px),
-              radial-gradient(circle at 50% 80%, ${colors.electricCyan}06 1px, transparent 1px)
-            `,
+            radial-gradient(circle at 25% 40%, ${colors.electricCyan}10 1px, transparent 1px),
+            radial-gradient(circle at 75% 20%, ${colors.vibrantGreen}08 1px, transparent 1px),
+            radial-gradient(circle at 50% 80%, ${colors.electricCyan}06 1px, transparent 1px)
+          `,
             backgroundSize: "160px 160px, 200px 200px, 180px 180px",
             animation: "contactGalaxy 20s linear infinite",
             opacity: 0.4,
           }}
         />
-        
         <div
           style={{
             position: "absolute",
@@ -200,15 +191,14 @@ export default function Contact() {
           }}
         />
       </div>
-
       <div
         className="contact-container-inner"
         style={{
           maxWidth: "1280px",
           margin: "0 auto",
-          padding: "0 16px",
           position: "relative",
           zIndex: 2,
+          padding: "20px 16px", // Responsive padding
         }}
       >
         {/* Enhanced Section Header */}
@@ -288,13 +278,12 @@ export default function Contact() {
             achieve your goals.
           </p>
         </div>
-
         <div
           ref={mainContentRef}
           className="contact-main-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", // Default for smaller screens
             gap: "32px",
             opacity: mainContentInView ? 1 : 0,
             transform: mainContentInView ? "translateY(0)" : "translateY(20px)",
@@ -303,7 +292,7 @@ export default function Contact() {
           }}
         >
           {/* Enhanced Contact Information */}
-          <div className="col-span-lg-1">
+          <div className="contact-info-col">
             <div style={{ marginBottom: "32px" }}>
               <h3
                 style={{
@@ -327,7 +316,6 @@ export default function Contact() {
                 We're here to help and answer any question you might have. We look forward to hearing from you.
               </p>
             </div>
-            
             {/* Enhanced Contact Details */}
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {contactInfo.map((info, index) => (
@@ -409,7 +397,6 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-
             {/* Enhanced Quick Actions */}
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", paddingTop: "32px" }}>
               <Button
@@ -460,369 +447,428 @@ export default function Contact() {
               </Button>
             </div>
           </div>
-
           {/* Enhanced Contact Form */}
-          <div className="col-span-lg-2">
-            <Card
-              style={{
-                backgroundColor: colors.cardBg,
-                backdropFilter: "blur(20px) saturate(180%)",
-                border: `1px solid ${colors.cardBorder}`,
-                transition: "all 0.3s ease",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-                borderRadius: "20px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = `${colors.electricCyan}60`
-                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.25)"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = colors.cardBorder
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
-              }}
-            >
-              <CardContent style={{ padding: "32px" }}>
-                <h3
+          <Card
+            className="contact-form-col"
+            style={{
+              backgroundColor: colors.deepNavy, // Changed to deepNavy for solid background
+              backdropFilter: "blur(20px) saturate(180%)",
+              border: `1px solid ${colors.electricCyan}60`, // Adjusted border color
+              transition: "all 0.3s ease",
+              boxShadow: `0 0 40px ${colors.electricCyan}20`, // Adjusted shadow
+              borderRadius: "20px",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = `${colors.electricCyan}60`
+              e.currentTarget.style.boxShadow = `0 0 60px ${colors.electricCyan}40` // Enhanced hover shadow
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = `${colors.electricCyan}60`
+              e.currentTarget.style.boxShadow = `0 0 40px ${colors.electricCyan}20`
+            }}
+          >
+            <CardContent style={{ padding: "32px" }}>
+              <h3
+                style={{
+                  fontSize: "1.4rem",
+                  fontWeight: "800",
+                  color: colors.pureWhite,
+                  marginBottom: "24px",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                Send us a Message
+              </h3>
+              {/* Status Messages */}
+              {submitStatus === "success" && (
+                <div
                   style={{
-                    fontSize: "1.4rem",
-                    fontWeight: "800",
-                    color: colors.pureWhite,
+                    padding: "16px",
+                    backgroundColor: `${colors.vibrantGreen}20`,
+                    border: `1px solid ${colors.vibrantGreen}60`,
+                    borderRadius: "12px",
                     marginBottom: "24px",
-                    letterSpacing: "-0.01em",
+                    color: colors.vibrantGreen,
+                    fontSize: "0.95rem",
                   }}
                 >
-                  Send us a Message
-                </h3>
-
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div
-                    style={{
-                      padding: "16px",
-                      backgroundColor: `${colors.vibrantGreen}20`,
-                      border: `1px solid ${colors.vibrantGreen}60`,
-                      borderRadius: "12px",
-                      marginBottom: "24px",
-                      color: colors.vibrantGreen,
-                      fontSize: "0.95rem",
-                    }}
-                  >
-                    ✅ Message sent successfully! We'll get back to you soon.
-                  </div>
-                )}
-
-                {submitStatus === "error" && (
-                  <div
-                    style={{
-                      padding: "16px",
-                      backgroundColor: "rgba(220, 53, 69, 0.1)",
-                      border: "1px solid rgba(220, 53, 69, 0.3)",
-                      borderRadius: "12px",
-                      marginBottom: "24px",
-                      color: "#dc3545",
-                      fontSize: "0.95rem",
-                    }}
-                  >
-                    ❌ Failed to send message. Please try again or contact us directly.
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                  {/* Name and Email */}
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
-                      gap: "20px",
-                    }}
-                    className="form-grid-cols"
-                  >
-                    <div>
-                      <TextField
-                        id="name"
-                        name="name"
-                        label="Full Name *"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        InputLabelProps={{
-                          style: { color: colors.warmGray },
-                          sx: {
-                            "&.Mui-focused": {
-                              color: `${colors.electricCyan} !important`,
-                            },
-                          },
-                        }}
-                        InputProps={{
-                          style: {
-                            color: colors.pureWhite,
-                            background: colors.inputBg,
-                            borderRadius: "12px",
-                          },
-                          sx: {
-                            "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          },
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <TextField
-                        id="email"
-                        name="email"
-                        label="Email Address *"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        InputLabelProps={{
-                          style: { color: colors.warmGray },
-                          sx: {
-                            "&.Mui-focused": {
-                              color: `${colors.electricCyan} !important`,
-                            },
-                          },
-                        }}
-                        InputProps={{
-                          style: {
-                            color: colors.pureWhite,
-                            background: colors.inputBg,
-                            borderRadius: "12px",
-                          },
-                          sx: {
-                            "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          },
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Company and Service */}
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
-                      gap: "20px",
-                    }}
-                    className="form-grid-cols"
-                  >
-                    <div>
-                      <TextField
-                        id="company"
-                        name="company"
-                        label="Company Name"
-                        value={formData.company}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        InputLabelProps={{
-                          style: { color: colors.warmGray },
-                          sx: {
-                            "&.Mui-focused": {
-                              color: `${colors.electricCyan} !important`,
-                            },
-                          },
-                        }}
-                        InputProps={{
-                          style: {
-                            color: colors.pureWhite,
-                            background: colors.inputBg,
-                            borderRadius: "12px",
-                          },
-                          sx: {
-                            "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          },
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <TextField
-                        id="service"
-                        name="service"
-                        select
-                        label="Service Interested In *"
-                        required
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        InputLabelProps={{
-                          style: { color: colors.warmGray },
-                          sx: {
-                            "&.Mui-focused": {
-                              color: `${colors.electricCyan} !important`,
-                            },
-                          },
-                        }}
-                        InputProps={{
-                          style: {
-                            color: colors.pureWhite,
-                            background: colors.inputBg,
-                            borderRadius: "12px",
-                          },
-                          sx: {
-                            "& fieldset": { borderColor: colors.inputBorder },
-                            "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                            "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          },
-                        }}
-                        SelectProps={{
-                          native: true,
-                          style: { color: colors.pureWhite },
-                        }}
-                      >
-                        <option value="" style={{ backgroundColor: colors.inputBg, color: colors.warmGray }}>
-                          Select a service
-                        </option>
-                        {services.map((service, index) => (
-                          <option
-                            key={index}
-                            value={service}
-                            style={{ backgroundColor: colors.inputBg, color: colors.pureWhite }}
-                          >
-                            {service}
-                          </option>
-                        ))}
-                      </TextField>
-                    </div>
-                  </div>
-
-                  {/* Message */}
+                  {"✅ Message sent successfully! We'll get back to you soon."}
+                </div>
+              )}
+              {submitStatus === "error" && (
+                <div
+                  style={{
+                    padding: "16px",
+                    backgroundColor: "rgba(220, 53, 69, 0.1)",
+                    border: "1px solid rgba(220, 53, 69, 0.3)",
+                    borderRadius: "12px",
+                    marginBottom: "24px",
+                    color: "#dc3545",
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  {"❌ Failed to send message. Please try again or contact us directly."}
+                </div>
+              )}
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                {/* Name and Email */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+                    gap: "20px",
+                  }}
+                  className="form-grid-cols"
+                >
                   <div>
                     <TextField
-                      id="message"
-                      name="message"
-                      label="Project Details *"
+                      id="name"
+                      name="name"
+                      label="Full Name *"
                       required
-                      multiline
-                      rows={5}
-                      value={formData.message}
+                      value={formData.name}
                       onChange={handleInputChange}
                       fullWidth
-                      margin="normal"
-                      variant="outlined"
+                      margin="none" // Adjusted margin
+                      variant="filled" // Changed to filled variant
                       InputLabelProps={{
                         style: { color: colors.warmGray },
                         sx: {
                           "&.Mui-focused": {
                             color: `${colors.electricCyan} !important`,
                           },
+                          "&.MuiInputLabel-shrink": {
+                            transform: "translate(14px, 10px) scale(0.75)", // Adjust for smaller, inside label
+                          },
                         },
                       }}
                       InputProps={{
+                        disableUnderline: true, // Remove underline for filled variant
                         style: {
                           color: colors.pureWhite,
                           background: colors.inputBg,
                           borderRadius: "12px",
+                          padding: "16px 14px", // Adjust padding for label inside
                         },
                         sx: {
                           "& fieldset": { borderColor: colors.inputBorder },
                           "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
                           "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.MuiFilledInput-root": {
+                            backgroundColor: colors.inputBg,
+                            "&:hover": { backgroundColor: colors.inputBg },
+                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                          },
+                          border: `1px solid ${colors.inputBorder}`, // Add explicit border
+                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
                         },
                       }}
                     />
                   </div>
-
-                  {/* Enhanced Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    sx={{
-                      width: "100%",
-                      background: isSubmitting
-                        ? colors.warmGray
-                        : `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                      color: colors.deepNavy,
-                      fontWeight: "800",
-                      padding: "16px 24px",
-                      borderRadius: "12px",
-                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                      transform: "scale(1)",
-                      boxShadow: `0 8px 25px ${colors.electricCyan}40`,
-                      textTransform: "none",
-                      fontSize: "1.05rem",
-                      "&:hover": !isSubmitting
-                        ? {
-                            background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
-                            transform: "scale(1.02) translateY(-2px)",
-                            boxShadow: `0 12px 30px ${colors.electricCyan}60`,
-                          }
-                        : {},
-                      "&:disabled": {
-                        background: colors.warmGray,
-                        color: colors.pureWhite,
-                        opacity: 0.7,
-                      },
-                    }}
-                  >
-                    <Send
-                      style={{
-                        marginRight: "8px",
-                        height: "18px",
-                        width: "18px",
-                        transition: "transform 0.3s ease",
+                  <div>
+                    <TextField
+                      id="email"
+                      name="email"
+                      label="Email Address *"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      fullWidth
+                      margin="none" // Adjusted margin
+                      variant="filled" // Changed to filled variant
+                      InputLabelProps={{
+                        style: { color: colors.warmGray },
+                        sx: {
+                          "&.Mui-focused": {
+                            color: `${colors.electricCyan} !important`,
+                          },
+                          "&.MuiInputLabel-shrink": {
+                            transform: "translate(14px, 10px) scale(0.75)",
+                          },
+                        },
+                      }}
+                      InputProps={{
+                        disableUnderline: true,
+                        style: {
+                          color: colors.pureWhite,
+                          background: colors.inputBg,
+                          borderRadius: "12px",
+                          padding: "16px 14px",
+                        },
+                        sx: {
+                          "& fieldset": { borderColor: colors.inputBorder },
+                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.MuiFilledInput-root": {
+                            backgroundColor: colors.inputBg,
+                            "&:hover": { backgroundColor: colors.inputBg },
+                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                          },
+                          border: `1px solid ${colors.inputBorder}`,
+                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                        },
                       }}
                     />
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-
-                {/* Enhanced Additional Info */}
+                  </div>
+                </div>
+                {/* Company and Service */}
                 <div
                   style={{
-                    marginTop: "32px",
-                    padding: "24px",
-                    backgroundColor: `${colors.electricCyan}10`,
-                    borderRadius: "16px",
-                    border: `1px solid ${colors.cardBorder}`,
+                    display: "grid",
+                    gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
+                    gap: "20px",
+                  }}
+                  className="form-grid-cols"
+                >
+                  <div>
+                    <TextField
+                      id="company"
+                      name="company"
+                      label="Company Name"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      fullWidth
+                      margin="none" // Adjusted margin
+                      variant="filled" // Changed to filled variant
+                      InputLabelProps={{
+                        style: { color: colors.warmGray },
+                        sx: {
+                          "&.Mui-focused": {
+                            color: `${colors.electricCyan} !important`,
+                          },
+                          "&.MuiInputLabel-shrink": {
+                            transform: "translate(14px, 10px) scale(0.75)",
+                          },
+                        },
+                      }}
+                      InputProps={{
+                        disableUnderline: true,
+                        style: {
+                          color: colors.pureWhite,
+                          background: colors.inputBg,
+                          borderRadius: "12px",
+                          padding: "16px 14px",
+                        },
+                        sx: {
+                          "& fieldset": { borderColor: colors.inputBorder },
+                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.MuiFilledInput-root": {
+                            backgroundColor: colors.inputBg,
+                            "&:hover": { backgroundColor: colors.inputBg },
+                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                          },
+                          border: `1px solid ${colors.inputBorder}`,
+                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                        },
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="service"
+                      name="service"
+                      select
+                      label="Select a service..." // Adjusted label
+                      required
+                      value={formData.service}
+                      onChange={handleInputChange}
+                      fullWidth
+                      margin="none" // Adjusted margin
+                      variant="filled" // Changed to filled variant
+                      InputLabelProps={{
+                        style: { color: colors.warmGray },
+                        sx: {
+                          "&.Mui-focused": {
+                            color: `${colors.electricCyan} !important`,
+                          },
+                          "&.MuiInputLabel-shrink": {
+                            transform: "translate(14px, 10px) scale(0.75)",
+                          },
+                        },
+                      }}
+                      InputProps={{
+                        disableUnderline: true,
+                        style: {
+                          color: colors.pureWhite,
+                          background: colors.inputBg,
+                          borderRadius: "12px",
+                          padding: "16px 14px",
+                        },
+                        sx: {
+                          "& fieldset": { borderColor: colors.inputBorder },
+                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "&.MuiFilledInput-root": {
+                            backgroundColor: colors.inputBg,
+                            "&:hover": { backgroundColor: colors.inputBg },
+                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                          },
+                          border: `1px solid ${colors.inputBorder}`,
+                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                        },
+                      }}
+                      SelectProps={{
+                        native: true,
+                        style: { color: colors.pureWhite },
+                        sx: {
+                          "& .MuiSelect-icon": { color: colors.warmGray }, // Style dropdown arrow
+                        },
+                      }}
+                    >
+                      <option value="" style={{ backgroundColor: colors.inputBg, color: colors.warmGray }}>
+                        Select a service...
+                      </option>
+                      {services.map((service, index) => (
+                        <option
+                          key={index}
+                          value={service}
+                          style={{ backgroundColor: colors.inputBg, color: colors.pureWhite }}
+                        >
+                          {service}
+                        </option>
+                      ))}
+                    </TextField>
+                  </div>
+                </div>
+                {/* Message */}
+                <div>
+                  <TextField
+                    id="message"
+                    name="message"
+                    label="Project Details *"
+                    required
+                    multiline
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="none" // Adjusted margin
+                    variant="filled" // Changed to filled variant
+                    InputLabelProps={{
+                      style: { color: colors.warmGray },
+                      sx: {
+                        "&.Mui-focused": {
+                          color: `${colors.electricCyan} !important`,
+                        },
+                        "&.MuiInputLabel-shrink": {
+                          transform: "translate(14px, 10px) scale(0.75)",
+                        },
+                      },
+                    }}
+                    InputProps={{
+                      disableUnderline: true,
+                      style: {
+                        color: colors.pureWhite,
+                        background: colors.inputBg,
+                        borderRadius: "12px",
+                        padding: "16px 14px",
+                      },
+                      sx: {
+                        "& fieldset": { borderColor: colors.inputBorder },
+                        "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
+                        "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                        "&.MuiFilledInput-root": {
+                          backgroundColor: colors.inputBg,
+                          "&:hover": { backgroundColor: colors.inputBg },
+                          "&.Mui-focused": { backgroundColor: colors.inputBg },
+                        },
+                        border: `1px solid ${colors.inputBorder}`,
+                        "&:hover": { border: `1px solid ${colors.electricCyan}` },
+                        "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                      },
+                    }}
+                  />
+                </div>
+                {/* Enhanced Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  sx={{
+                    width: "100%",
+                    background: isSubmitting
+                      ? colors.warmGray
+                      : `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    color: colors.deepNavy,
+                    fontWeight: "800",
+                    padding: "16px 24px",
+                    borderRadius: "12px",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    transform: "scale(1)",
+                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    textTransform: "none",
+                    fontSize: "1.05rem",
+                    "&:hover": !isSubmitting
+                      ? {
+                          background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                          transform: "scale(1.02) translateY(-2px)",
+                          boxShadow: `0 12px 30px ${colors.electricCyan}60`,
+                        }
+                      : {},
+                    "&:disabled": {
+                      background: colors.warmGray,
+                      color: colors.pureWhite,
+                      opacity: 0.7,
+                    },
                   }}
                 >
-                  <h4
+                  <Send
                     style={{
-                      color: colors.pureWhite,
-                      fontWeight: "700",
-                      marginBottom: "12px",
-                      fontSize: "1.05rem",
+                      marginRight: "8px",
+                      height: "18px",
+                      width: "18px",
+                      transition: "transform 0.3s ease",
                     }}
-                  >
-                    What happens next?
-                  </h4>
-                  <ul
-                    style={{
-                      color: colors.warmGray,
-                      fontSize: "0.9rem",
-                      listStyle: "none",
-                      padding: 0,
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
-                    <li>• We'll review your message within 24 hours</li>
-                    <li>• Schedule a discovery call to discuss your project</li>
-                    <li>• Provide a detailed proposal and timeline</li>
-                    <li>• Start building your dream project</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                  />
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
+              </form>
+              {/* Enhanced Additional Info */}
+              <div
+                style={{
+                  marginTop: "32px",
+                  padding: "24px",
+                  backgroundColor: colors.deepNavy, // Changed to deepNavy for solid background
+                  borderRadius: "16px",
+                  border: `1px solid ${colors.electricCyan}60`, // Adjusted border color
+                  boxShadow: `0 0 40px ${colors.electricCyan}20`, // Adjusted shadow
+                }}
+              >
+                <h4
+                  style={{
+                    color: colors.pureWhite,
+                    fontWeight: "700",
+                    marginBottom: "12px",
+                    fontSize: "1.05rem",
+                  }}
+                >
+                  What happens next?
+                </h4>
+                <ul
+                  style={{
+                    color: colors.warmGray,
+                    fontSize: "0.9rem",
+                    listStyle: "none",
+                    padding: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "8px",
+                  }}
+                >
+                  <li>{"• We'll review your message within 24 hours"}</li>
+                  <li>{"• Schedule a discovery call to discuss your project"}</li>
+                  <li>{"• Provide a detailed proposal and timeline"}</li>
+                  <li>{"• Start building your dream project"}</li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-
         {/* Enhanced Bottom CTA */}
         <div
           ref={bottomCtaRef}
@@ -836,11 +882,11 @@ export default function Contact() {
         >
           <Card
             style={{
-              background: colors.glassMorphism,
+              background: colors.deepNavy,
               backdropFilter: "blur(20px) saturate(180%)",
-              border: `1px solid ${colors.cardBorder}`,
+              border: `1px solid ${colors.electricCyan}60`,
               borderRadius: "24px",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+              boxShadow: `0 0 40px ${colors.electricCyan}20`,
               position: "relative",
               overflow: "hidden",
             }}
@@ -851,7 +897,7 @@ export default function Contact() {
                 inset: 0,
                 background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
                 animation: "ctaRotate 20s linear infinite",
-                opacity: 0.3,
+                opacity: 0,
               }}
             />
             <CardContent style={{ padding: "40px", textAlign: "center", position: "relative", zIndex: 2 }}>
@@ -898,7 +944,7 @@ export default function Contact() {
                     borderRadius: "12px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     transform: "scale(1)",
-                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    boxShadow: `0 0 30px ${colors.electricCyan}40`,
                     textTransform: "none",
                     fontSize: "1.05rem",
                     "&:hover": {
@@ -912,24 +958,24 @@ export default function Contact() {
                   Book a Call
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   href="mailto:husnainakram336@gmail.com"
                   sx={{
-                    borderColor: colors.warmGray,
-                    color: colors.warmGray,
-                    backgroundColor: colors.cardBg,
-                    backdropFilter: "blur(20px) saturate(180%)",
+                    backgroundColor: colors.deepNavy,
+                    color: colors.pureWhite,
+                    border: `1px solid ${colors.electricCyan}60`, // Added explicit border
                     padding: "16px 32px",
                     borderRadius: "12px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     textTransform: "none",
                     fontSize: "1.05rem",
+                    boxShadow: `0 0 30px ${colors.electricCyan}20`,
                     "&:hover": {
-                      backgroundColor: colors.electricCyan,
-                      color: colors.deepNavy,
-                      borderColor: colors.electricCyan,
+                      background: `${colors.electricCyan}20`,
+                      color: `${colors.electricCyan}`,
+                      borderColor: `${colors.electricCyan}`,
                       transform: "translateY(-2px)",
-                      boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                      boxShadow: `0 0 40px ${colors.electricCyan}40`,
                     },
                   }}
                 >
@@ -941,76 +987,79 @@ export default function Contact() {
           </Card>
         </div>
       </div>
-
-      {/* Enhanced Animations */}
+      {/* Enhanced Animations and Responsive Styles */}
       <style>
         {`
-          @keyframes contactGalaxy {
-            0% { transform: translateY(0px) translateX(0px); }
-            33% { transform: translateY(-8px) translateX(5px); }
-            66% { transform: translateY(-16px) translateX(-3px); }
-            100% { transform: translateY(0px) translateX(0px); }
+        @keyframes contactGalaxy {
+          0% { transform: translateY(0px) translateX(0px); }
+          33% { transform: translateY(-8px) translateX(5px); }
+          66% { transform: translateY(-16px) translateX(-3px); }
+          100% { transform: translateY(0px) translateX(0px); }
+        }
+        @keyframes contactFloat {
+          0%, 100% { 
+            transform: translateY(0px) translateX(0px); 
+            opacity: 0.6;
           }
+          50% { 
+            transform: translateY(-15px) translateX(8px); 
+            opacity: 0.8;
+          }
+        }
+        @keyframes iconPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+        }
+        @keyframes ctaRotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
 
-          @keyframes contactFloat {
-            0%, 100% { 
-              transform: translateY(0px) translateX(0px); 
-              opacity: 0.6;
-            }
-            50% { 
-              transform: translateY(-15px) translateX(8px); 
-              opacity: 0.8;
-            }
+        /* Responsive adjustments */
+        @media (max-width: 767px) { /* For small screens */
+          #contact {
+            padding: 20px 0 !important; /* Reduce vertical padding */
           }
+          .contact-container-inner {
+            padding: 0 10px !important; /* Reduce horizontal padding */
+          }
+          .contact-main-grid {
+            gap: 20px !important; /* Reduce gap */
+          }
+          .form-grid-cols {
+            grid-template-columns: repeat(1, minmax(0, 1fr)) !important; /* Ensure single column on small screens */
+          }
+          .bottom-cta-buttons {
+            flex-direction: column !important; /* Ensure buttons stack */
+          }
+        }
 
-          @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        @media (min-width: 768px) { /* For medium screens */
+          .contact-container-inner {
+            padding-left: 24px;
+            padding-right: 24px;
           }
+          .form-grid-cols {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important; /* Two columns for form fields */
+          }
+        }
 
-          @keyframes ctaRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @media (min-width: 1024px) { /* For large screens */
+          .contact-container-inner {
+            padding-left: 32px;
+            padding-right: 32px;
           }
-
-          @media (min-width: 640px) {
-            .contact-container-inner {
-              padding-left: 24px;
-              padding-right: 24px;
-            }
+          .contact-main-grid {
+            grid-template-columns: 1fr 2fr !important; /* 1/3 for info, 2/3 for form */
           }
-          @media (min-width: 1024px) {
-            .contact-container-inner {
-              padding-left: 32px;
-              padding-right: 32px;
-            }
+          .contact-info-col {
+            grid-column: span 1;
           }
-
-          @media (min-width: 1024px) {
-            .contact-main-grid {
-              grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            }
+          .contact-form-col {
+            grid-column: span 1 / span 2; /* Span the remaining 2/3 of the grid */
           }
-
-          @media (min-width: 768px) {
-            .form-grid-cols {
-              grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            }
-          }
-
-          @media (min-width: 640px) {
-            .bottom-cta-buttons {
-              flex-direction: row !important;
-              gap: 16px !important;
-            }
-          }
-          .col-span-lg-1 {
-            grid-column: 1 / 2;
-          }
-          .col-span-lg-2 {
-            grid-column: 1 / 3;
-          }
-        `}
+        }
+      `}
       </style>
     </section>
   )
