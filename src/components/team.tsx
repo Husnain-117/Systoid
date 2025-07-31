@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Github, Linkedin, Twitter, Mail, Users, Facebook } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail, Users } from "lucide-react"
 import husnain from "../assets/husnian.jpg"
 import azeem from "../assets/azeem.jpg"
 import arham from "../assets/arham.jpg"
