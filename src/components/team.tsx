@@ -2,7 +2,11 @@
 import { useEffect, useState, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Github, Linkedin, Twitter, Mail, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail, Users, Facebook } from "lucide-react"
+import husnain from "../assets/husnian.jpg"
+import azeem from "../assets/azeem.jpg"
+import arham from "../assets/arham.jpg"
+import arshad from "../assets/arsahd.jpg"
 
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
@@ -55,75 +59,51 @@ export default function Team() {
 
   const teamMembers = [
     {
-      name: "Alex Johnson",
-      role: "CEO & Founder",
-      bio: "Visionary leader with 10+ years in software development and business strategy.",
-      imageQuery: "professional businessman headshot smiling portrait",
+      name: "MUHAMMAD ARSHAD",
+      role: "Founder, CEO",
+      bio: "Visionary leader with 10+ years in business strategy.",
+      image: arshad, // Changed from imageQuery to image
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "alex@systoid.com",
+        email: "systoid.pk@gmail.com",
       },
     },
     {
-      name: "Sarah Chen",
-      role: "CTO",
+      name: "Husnain Akram",
+      role: "Co-Founder, CTO",
       bio: "Technical architect specializing in scalable systems and emerging technologies.",
-      imageQuery: "professional woman software engineer coding portrait",
+      image: husnain, // Changed from imageQuery to image
       social: {
-        linkedin: "#",
+        linkedin: "",
         twitter: "#",
-        github: "#",
-        email: "sarah@systoid.com",
+        github: "https://github.com/Husnain-117",
+        email: "husnainn.akram@gmail.com",
       },
     },
     {
-      name: "Michael Rodriguez",
-      role: "Lead Developer",
-      bio: "Full-stack developer passionate about creating elegant solutions to complex problems.",
-      imageQuery: "hispanic man developer working on computer portrait",
+      name: "Muhammad Azeem",
+      role: "Director Software & RND",
+      bio: "Creating elegant solutions to complex problems.",
+      image: azeem, // Changed from imageQuery to image
       social: {
         linkedin: "#",
         twitter: "#",
         github: "#",
-        email: "michael@systoid.com",
+        email: "azeemjee@gmail.com",
       },
     },
     {
-      name: "Emily Davis",
-      role: "UI/UX Designer",
-      bio: "Creative designer focused on user-centered design and exceptional user experiences.",
-      imageQuery: "woman designer working on tablet creative portrait",
+      name: "Muhammad Arham",
+      role: "Director Digital Marketing",
+      bio: "Great marketing strategist with proven track record in digital campaigns and brand growth.",
+      image: arham, // Changed from imageQuery to image
       social: {
         linkedin: "#",
-        twitter: "#",
+        facebook: "https://www.facebook.com/profile.php?id=61564974240513", // Fixed capitalization
         github: "#",
-        email: "emily@systoid.com",
-      },
-    },
-    {
-      name: "David Kim",
-      role: "Mobile Developer",
-      bio: "Mobile app specialist with expertise in iOS, Android, and cross-platform development.",
-      imageQuery: "asian man mobile developer with smartphone portrait",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#",
-        email: "david@systoid.com",
-      },
-    },
-    {
-      name: "Lisa Thompson",
-      role: "Digital Marketing Lead",
-      bio: "Marketing strategist with proven track record in digital campaigns and brand growth.",
-      imageQuery: "professional woman analyzing marketing data charts portrait",
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#",
-        email: "lisa@systoid.com",
+        email: "marhamahmad25@gmail.com",
       },
     },
   ]
@@ -351,7 +331,7 @@ export default function Team() {
               {/* Member Image - Portrait View */}
               <div style={{ position: "relative", overflow: "hidden", height: "380px" }}>
                 <img
-                  src={`/placeholder.svg?height=380&width=280&query=${currentMember.imageQuery}`}
+                  src={currentMember.image}
                   alt={currentMember.name}
                   style={{
                     width: "100%",
@@ -535,78 +515,102 @@ export default function Team() {
             style={{
               position: "absolute",
               top: "50%",
-              left: "-50px", // Position outside the card
+              left: "-70px", // More spacing from card
               transform: "translateY(-50%)",
-              background: colors.glassMorphism,
+              background: `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`,
               backdropFilter: "blur(15px) saturate(180%)",
-              border: `1px solid ${colors.cardBorder}`,
-              borderRadius: "50%",
-              width: "48px",
-              height: "48px",
+              border: `2px solid ${colors.electricCyan}`,
+              borderRadius: "12px",
+              width: "44px",
+              height: "44px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
               transition: "all 0.3s ease",
-              boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+              boxShadow: `0 6px 20px ${colors.electricCyan}40`,
               zIndex: 10,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
-              e.currentTarget.style.color = colors.deepNavy
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"
-              e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.05) translateX(-2px)"
+              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.electricCyan}60`
+              const arrow = e.currentTarget.querySelector("div")
+              if (arrow) arrow.style.borderRightColor = colors.deepNavy
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = colors.glassMorphism
-              e.currentTarget.style.color = colors.warmGray
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`
               e.currentTarget.style.transform = "translateY(-50%) scale(1)"
-              e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}40`
+              const arrow = e.currentTarget.querySelector("div")
+              if (arrow) arrow.style.borderRightColor = colors.electricCyan
             }}
           >
-            <ChevronLeft style={{ height: "24px", width: "24px", color: colors.pureWhite }} />
+            {/* CSS Arrow pointing left */}
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "8px solid transparent",
+                borderBottom: "8px solid transparent",
+                borderRight: `12px solid ${colors.electricCyan}`,
+                transition: "border-right-color 0.3s ease",
+              }}
+            />
           </button>
           <button
             onClick={nextMember}
             style={{
               position: "absolute",
               top: "50%",
-              right: "-50px", // Position outside the card
+              right: "-70px", // More spacing from card
               transform: "translateY(-50%)",
-              background: colors.glassMorphism,
+              background: `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`,
               backdropFilter: "blur(15px) saturate(180%)",
-              border: `1px solid ${colors.cardBorder}`,
-              borderRadius: "50%",
-              width: "48px",
-              height: "48px",
+              border: `2px solid ${colors.electricCyan}`,
+              borderRadius: "12px",
+              width: "44px",
+              height: "44px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               cursor: "pointer",
               transition: "all 0.3s ease",
-              boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+              boxShadow: `0 6px 20px ${colors.electricCyan}40`,
               zIndex: 10,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
-              e.currentTarget.style.color = colors.deepNavy
-              e.currentTarget.style.transform = "translateY(-50%) scale(1.1)"
-              e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.05) translateX(2px)"
+              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.electricCyan}60`
+              const arrow = e.currentTarget.querySelector("div")
+              if (arrow) arrow.style.borderLeftColor = colors.deepNavy
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = colors.glassMorphism
-              e.currentTarget.style.color = colors.warmGray
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`
               e.currentTarget.style.transform = "translateY(-50%) scale(1)"
-              e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}40`
+              const arrow = e.currentTarget.querySelector("div")
+              if (arrow) arrow.style.borderLeftColor = colors.electricCyan
             }}
           >
-            <ChevronRight style={{ height: "24px", width: "24px", color: colors.pureWhite }} />
+            {/* CSS Arrow pointing right */}
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderTop: "8px solid transparent",
+                borderBottom: "8px solid transparent",
+                borderLeft: `12px solid ${colors.electricCyan}`,
+                transition: "border-left-color 0.3s ease",
+              }}
+            />
           </button>
 
-          {/* Testimonial Indicators (dots) */}
-          <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "32px" }}>
+          {/* Team Member Progress Indicators */}
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px", marginTop: "32px", flexWrap: "wrap" }}>
             {teamMembers.map((_, index) => (
-              <button
+              <div
                 key={index}
                 onClick={() => {
                   setIsAnimating(true)
@@ -616,16 +620,30 @@ export default function Team() {
                   }, 500)
                 }}
                 style={{
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "50%",
-                  border: "none",
+                  position: "relative",
+                  height: "4px",
+                  width: "60px",
+                  backgroundColor: colors.warmGray + "30",
+                  borderRadius: "2px",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
-                  backgroundColor: index === currentMemberIndex ? colors.electricCyan : colors.warmGray,
-                  transform: index === currentMemberIndex ? "scale(1.2)" : "scale(1)",
+                  overflow: "hidden",
                 }}
-              />
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: index === currentMemberIndex ? "100%" : "0%",
+                    background: `linear-gradient(90deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    borderRadius: "2px",
+                    transition: "width 0.5s ease",
+                    boxShadow: index === currentMemberIndex ? `0 0 8px ${colors.electricCyan}60` : "none",
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>

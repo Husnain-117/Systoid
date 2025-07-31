@@ -133,12 +133,8 @@ export default function Header() {
             <div
               className="logo-icon"
               style={{
-                /* Rich layered background: deep navy base with faint cyan + green accents */
-                background: `
-                  radial-gradient(circle at 30% 30%, ${colors.electricCyan}33 0%, transparent 60%),
-                  radial-gradient(circle at 70% 70%, ${colors.vibrantGreen}26 0%, transparent 60%),
-                  ${colors.deepNavy}
-                `,
+                /* Completely invisible background - only logo and glow visible */
+                background: "none",
                 padding: "12px",            // a little more breathing room
                 borderRadius: "20px",        // smoother pill-box corners
                 transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",

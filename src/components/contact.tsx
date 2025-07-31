@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField"
 import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Calendar, Globe } from 'lucide-react'
 import { useState, useEffect, useRef } from "react"
 
+
+
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
@@ -102,19 +104,19 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email Us",
-      details: "husnainn.akram@gmail.com",
+      details: "systoid.pk@gmail.com",
       subDetails: "We reply within 24 hours",
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+923087816472",
+      details: "+923027893040",
       subDetails: "Mon-Fri 9AM-6PM EST",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "Sahiwal, Pakistan",
+      details: "16-W Scheme No.2, Farid Town Sahiwal, Pakistan",
       subDetails: "Postal Code : 57000",
     },
     {

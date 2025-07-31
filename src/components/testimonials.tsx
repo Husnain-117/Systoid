@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react"
+import { Star, Quote } from "lucide-react"
 
 // Import profile images
 import profile1 from "../assets/person1.jpg";
@@ -349,27 +349,42 @@ export default function Testimonials() {
                       width: "40px",
                       height: "40px",
                       borderRadius: "12px",
-                      border: `1px solid ${colors.cardBorder}`,
-                      backgroundColor: colors.cardBg,
-                      color: colors.warmGray,
+                      border: `2px solid ${colors.electricCyan}`,
+                      backgroundColor: `${colors.electricCyan}20`,
+                      color: colors.electricCyan,
                       cursor: "pointer",
                       transition: "all 0.3s ease",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}30`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = colors.electricCyan
                       e.currentTarget.style.color = colors.deepNavy
                       e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.transform = "scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}50`
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.cardBg
-                      e.currentTarget.style.color = colors.warmGray
-                      e.currentTarget.style.borderColor = colors.cardBorder
+                      e.currentTarget.style.backgroundColor = `${colors.electricCyan}20`
+                      e.currentTarget.style.color = colors.electricCyan
+                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.transform = "scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
                     }}
                   >
-                    <ChevronLeft style={{ height: "20px", width: "20px" }} />
+                    {/* CSS Arrow pointing left */}
+                    <div
+                      style={{
+                        width: 0,
+                        height: 0,
+                        borderTop: "6px solid transparent",
+                        borderBottom: "6px solid transparent",
+                        borderRight: `10px solid currentColor`,
+                        transition: "all 0.3s ease",
+                      }}
+                    />
                   </button>
                   <button
                     onClick={nextTestimonial}
@@ -377,27 +392,42 @@ export default function Testimonials() {
                       width: "40px",
                       height: "40px",
                       borderRadius: "12px",
-                      border: `1px solid ${colors.cardBorder}`,
-                      backgroundColor: colors.cardBg,
-                      color: colors.warmGray,
+                      border: `2px solid ${colors.electricCyan}`,
+                      backgroundColor: `${colors.electricCyan}20`,
+                      color: colors.electricCyan,
                       cursor: "pointer",
                       transition: "all 0.3s ease",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      boxShadow: `0 4px 15px ${colors.electricCyan}30`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = colors.electricCyan
                       e.currentTarget.style.color = colors.deepNavy
                       e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.transform = "scale(1.1)"
+                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}50`
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.cardBg
-                      e.currentTarget.style.color = colors.warmGray
-                      e.currentTarget.style.borderColor = colors.cardBorder
+                      e.currentTarget.style.backgroundColor = `${colors.electricCyan}20`
+                      e.currentTarget.style.color = colors.electricCyan
+                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.transform = "scale(1)"
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
                     }}
                   >
-                    <ChevronRight style={{ height: "20px", width: "20px" }} />
+                    {/* CSS Arrow pointing right */}
+                    <div
+                      style={{
+                        width: 0,
+                        height: 0,
+                        borderTop: "6px solid transparent",
+                        borderBottom: "6px solid transparent",
+                        borderLeft: `10px solid currentColor`,
+                        transition: "all 0.3s ease",
+                      }}
+                    />
                   </button>
                 </div>
               </div>
@@ -443,25 +473,39 @@ export default function Testimonials() {
                 "{testimonials[currentTestimonial].text}"
               </blockquote>
 
-              {/* Testimonial Indicators */}
-              <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "32px" }}>
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    style={{
-                      width: "12px",
-                      height: "12px",
-                      borderRadius: "50%",
-                      border: "none",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      backgroundColor: index === currentTestimonial ? colors.electricCyan : colors.warmGray,
-                      transform: index === currentTestimonial ? "scale(1.2)" : "scale(1)",
-                    }}
-                  />
-                ))}
-              </div>
+              {/* Testimonial Progress Indicators */}
+<div style={{ display: "flex", justifyContent: "center", gap: "12px", marginTop: "32px", flexWrap: "wrap" }}>
+  {testimonials.map((_, index) => (
+    <div
+      key={index}
+      onClick={() => setCurrentTestimonial(index)}
+      style={{
+        position: "relative",
+        height: "4px",
+        width: "50px",
+        backgroundColor: colors.warmGray + "30",
+        borderRadius: "2px",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: index === currentTestimonial ? "100%" : "0%",
+          background: `linear-gradient(90deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+          borderRadius: "2px",
+          transition: "width 0.5s ease",
+          boxShadow: index === currentTestimonial ? `0 0 8px ${colors.electricCyan}60` : "none",
+        }}
+      />
+    </div>
+  ))}
+</div>
             </CardContent>
           </Card>
         </div>
