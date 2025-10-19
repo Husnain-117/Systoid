@@ -45,18 +45,22 @@ function useInView() {
 export default function Testimonials() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const testimonials = [
@@ -127,54 +131,15 @@ export default function Testimonials() {
       style={{
         paddingTop: "80px",
         paddingBottom: "80px",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Galaxy Background */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `
-              radial-gradient(circle at 35% 25%, ${colors.electricCyan}10 1px, transparent 1px),
-              radial-gradient(circle at 65% 75%, ${colors.vibrantGreen}08 1px, transparent 1px),
-              radial-gradient(circle at 15% 85%, ${colors.electricCyan}06 1px, transparent 1px)
-            `,
-            backgroundSize: "140px 140px, 180px 180px, 120px 120px",
-            animation: "testimonialsGalaxy 24s linear infinite",
-            opacity: 0.4,
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            left: "10%",
-            width: "140px",
-            height: "140px",
-            background: `radial-gradient(circle, ${colors.electricCyan}15, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(35px)",
-            animation: "testimonialsFloat1 11s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "25%",
-            right: "12%",
-            width: "180px",
-            height: "180px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}12, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(45px)",
-            animation: "testimonialsFloat2 15s ease-in-out infinite reverse",
-          }}
-        />
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 240, height: 240, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)` }} />
+        <div style={{ position: "absolute", bottom: "-80px", left: "-60px", width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primary}22, transparent)` }} />
       </div>
 
       <div
@@ -187,7 +152,7 @@ export default function Testimonials() {
           zIndex: 2,
         }}
       >
-        {/* Enhanced Section Header */}
+        {/* Section Header */}
         <div
           ref={headerRef}
           style={{
@@ -204,18 +169,17 @@ export default function Testimonials() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "24px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -223,15 +187,14 @@ export default function Testimonials() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                animation: "iconPulse 3s ease-in-out infinite",
               }}
             >
-              <Quote style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <Quote style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -242,9 +205,8 @@ export default function Testimonials() {
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "24px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
           >
@@ -253,7 +215,7 @@ export default function Testimonials() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "700px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -264,7 +226,7 @@ export default function Testimonials() {
           </p>
         </div>
 
-        {/* Enhanced Featured Testimonial */}
+        {/* Featured Testimonial */}
         <div
           ref={featuredTestimonialRef}
           style={{
@@ -278,10 +240,9 @@ export default function Testimonials() {
           <Card
             style={{
               backgroundColor: colors.cardBg,
-              backdropFilter: "blur(20px) saturate(180%)",
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "24px",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+              boxShadow: colors.subtleShadow,
               position: "relative",
               overflow: "hidden",
               maxWidth: "900px",
@@ -292,7 +253,7 @@ export default function Testimonials() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                background: `conic-gradient(from 0deg, ${colors.primaryLight}08, ${colors.primary}08, transparent)`,
                 animation: "testimonialRotate 25s linear infinite",
                 opacity: 0.3,
               }}
@@ -310,8 +271,8 @@ export default function Testimonials() {
                       height: "80px",
                       borderRadius: "50%",
                       objectFit: "cover",
-                      border: `3px solid ${colors.electricCyan}`,
-                      boxShadow: `0 0 20px ${colors.electricCyan}40`,
+                      border: `3px solid ${colors.primary}`,
+                      boxShadow: `0 0 20px ${colors.primaryLight}40`,
                     }}
                   />
                   <div>
@@ -319,7 +280,7 @@ export default function Testimonials() {
                       style={{
                         fontSize: "1.3rem",
                         fontWeight: "800",
-                        color: colors.pureWhite,
+                        color: colors.heading,
                         marginBottom: "4px",
                         letterSpacing: "-0.01em",
                       }}
@@ -328,7 +289,7 @@ export default function Testimonials() {
                     </h3>
                     <p
                       style={{
-                        color: colors.electricCyan,
+                        color: colors.primary,
                         fontWeight: "600",
                         fontSize: "1rem",
                       }}
@@ -337,7 +298,7 @@ export default function Testimonials() {
                     </p>
                     <p
                       style={{
-                        color: colors.warmGray,
+                        color: colors.textLight,
                         fontSize: "0.9rem",
                       }}
                     >
@@ -354,29 +315,29 @@ export default function Testimonials() {
                       width: "40px",
                       height: "40px",
                       borderRadius: "12px",
-                      border: `2px solid ${colors.electricCyan}`,
-                      backgroundColor: `${colors.electricCyan}20`,
-                      color: colors.electricCyan,
+                      border: `2px solid ${colors.primary}`,
+                      background: `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`,
+                      color: colors.primary,
                       cursor: "pointer",
                       transition: "all 0.3s ease",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}30`,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.electricCyan
-                      e.currentTarget.style.color = colors.deepNavy
-                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
+                      e.currentTarget.style.color = '#FFFFFF'
+                      e.currentTarget.style.borderColor = colors.primary
                       e.currentTarget.style.transform = "scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}50`
+                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = `${colors.electricCyan}20`
-                      e.currentTarget.style.color = colors.electricCyan
-                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`
+                      e.currentTarget.style.color = colors.primary
+                      e.currentTarget.style.borderColor = colors.primary
                       e.currentTarget.style.transform = "scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}30`
                     }}
                   >
                     {/* CSS Arrow pointing left */}
@@ -397,29 +358,29 @@ export default function Testimonials() {
                       width: "40px",
                       height: "40px",
                       borderRadius: "12px",
-                      border: `2px solid ${colors.electricCyan}`,
-                      backgroundColor: `${colors.electricCyan}20`,
-                      color: colors.electricCyan,
+                      border: `2px solid ${colors.primary}`,
+                      background: `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`,
+                      color: colors.primary,
                       cursor: "pointer",
                       transition: "all 0.3s ease",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}30`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}30`,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.electricCyan
-                      e.currentTarget.style.color = colors.deepNavy
-                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
+                      e.currentTarget.style.color = '#FFFFFF'
+                      e.currentTarget.style.borderColor = colors.primary
                       e.currentTarget.style.transform = "scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}50`
+                      e.currentTarget.style.boxShadow = `0 6px 20px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = `${colors.electricCyan}20`
-                      e.currentTarget.style.color = colors.electricCyan
-                      e.currentTarget.style.borderColor = colors.electricCyan
+                      e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`
+                      e.currentTarget.style.color = colors.primary
+                      e.currentTarget.style.borderColor = colors.primary
                       e.currentTarget.style.transform = "scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}30`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}30`
                     }}
                   >
                     {/* CSS Arrow pointing right */}
@@ -445,8 +406,8 @@ export default function Testimonials() {
                     style={{
                       height: "20px",
                       width: "20px",
-                      fill: colors.vibrantGreen,
-                      color: colors.vibrantGreen,
+                      fill: colors.primary,
+                      color: colors.primary,
                     }}
                   />
                 ))}
@@ -457,7 +418,7 @@ export default function Testimonials() {
                 style={{
                   fontSize: "1.2rem",
                   lineHeight: "1.8",
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   fontStyle: "italic",
                   position: "relative",
                   paddingLeft: "32px",
@@ -471,7 +432,7 @@ export default function Testimonials() {
                     top: "0",
                     height: "24px",
                     width: "24px",
-                    color: colors.electricCyan,
+                    color: colors.primary,
                     opacity: 0.6,
                   }}
                 />
@@ -479,43 +440,43 @@ export default function Testimonials() {
               </blockquote>
 
               {/* Testimonial Progress Indicators */}
-<div style={{ display: "flex", justifyContent: "center", gap: "12px", marginTop: "32px", flexWrap: "wrap" }}>
-  {testimonials.map((_, index) => (
-    <div
-      key={index}
-      onClick={() => setCurrentTestimonial(index)}
-      style={{
-        position: "relative",
-        height: "4px",
-        width: "50px",
-        backgroundColor: colors.warmGray + "30",
-        borderRadius: "2px",
-        cursor: "pointer",
-        transition: "all 0.3s ease",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: "100%",
-          width: index === currentTestimonial ? "100%" : "0%",
-          background: `linear-gradient(90deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-          borderRadius: "2px",
-          transition: "width 0.5s ease",
-          boxShadow: index === currentTestimonial ? `0 0 8px ${colors.electricCyan}60` : "none",
-        }}
-      />
-    </div>
-  ))}
-</div>
+              <div style={{ display: "flex", justifyContent: "center", gap: "12px", marginTop: "32px", flexWrap: "wrap" }}>
+                {testimonials.map((_, index) => (
+                  <div
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    style={{
+                      position: "relative",
+                      height: "4px",
+                      width: "60px",
+                      backgroundColor: colors.textLight + "33",
+                      borderRadius: "2px",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        height: "100%",
+                        width: index === currentTestimonial ? "100%" : "0%",
+                        background: `linear-gradient(90deg, ${colors.primary}, ${colors.primaryLight})`,
+                        borderRadius: "2px",
+                        transition: "width 0.5s ease",
+                        boxShadow: index === currentTestimonial ? `0 0 8px ${colors.primaryLight}60` : "none",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Enhanced All Testimonials Grid */}
+        {/* All Testimonials Grid */}
         <div
           ref={allTestimonialsGridRef}
           className="testimonials-grid"
@@ -534,22 +495,21 @@ export default function Testimonials() {
               key={index}
               style={{
                 backgroundColor: colors.cardBg,
-                backdropFilter: "blur(20px) saturate(180%)",
                 border: `1px solid ${colors.cardBorder}`,
                 borderRadius: "20px",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                boxShadow: colors.subtleShadow,
                 transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                 cursor: "pointer",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-8px)"
-                e.currentTarget.style.borderColor = colors.electricCyan
-                e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.25), 0 0 0 1px ${colors.electricCyan}60`
+                e.currentTarget.style.borderColor = colors.primary
+                e.currentTarget.style.boxShadow = String(colors.shadow)
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)"
                 e.currentTarget.style.borderColor = colors.cardBorder
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
+                e.currentTarget.style.boxShadow = String(colors.subtleShadow)
               }}
             >
               <CardContent style={{ padding: "24px" }}>
@@ -562,7 +522,7 @@ export default function Testimonials() {
                       height: "60px",
                       borderRadius: "50%",
                       objectFit: "cover",
-                      border: `2px solid ${colors.electricCyan}`,
+                      border: `2px solid ${colors.primary}`,
                     }}
                   />
                   <div>
@@ -570,7 +530,7 @@ export default function Testimonials() {
                       style={{
                         fontSize: "1.1rem",
                         fontWeight: "800",
-                        color: colors.pureWhite,
+                        color: colors.heading,
                         marginBottom: "4px",
                         letterSpacing: "-0.01em",
                       }}
@@ -579,7 +539,7 @@ export default function Testimonials() {
                     </h4>
                     <p
                       style={{
-                        color: colors.electricCyan,
+                        color: colors.primary,
                         fontWeight: "600",
                         fontSize: "0.9rem",
                       }}
@@ -596,8 +556,8 @@ export default function Testimonials() {
                       style={{
                         height: "16px",
                         width: "16px",
-                        fill: colors.vibrantGreen,
-                        color: colors.vibrantGreen,
+                        fill: colors.primary,
+                        color: colors.primary,
                       }}
                     />
                   ))}
@@ -605,7 +565,7 @@ export default function Testimonials() {
 
                 <p
                   style={{
-                    color: colors.warmGray,
+                    color: colors.paragraph,
                     fontSize: "0.95rem",
                     lineHeight: "1.6",
                     fontStyle: "italic",

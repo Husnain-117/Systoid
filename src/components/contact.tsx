@@ -47,20 +47,22 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
-    inputBg: "#0F1419",
-    inputBorder: "#8B9DC3",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -143,53 +145,15 @@ export default function Contact() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Galaxy Background */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `
-            radial-gradient(circle at 25% 40%, ${colors.electricCyan}10 1px, transparent 1px),
-            radial-gradient(circle at 75% 20%, ${colors.vibrantGreen}08 1px, transparent 1px),
-            radial-gradient(circle at 50% 80%, ${colors.electricCyan}06 1px, transparent 1px)
-          `,
-            backgroundSize: "160px 160px, 200px 200px, 180px 180px",
-            animation: "contactGalaxy 20s linear infinite",
-            opacity: 0.4,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "30%",
-            right: "20%",
-            width: "160px",
-            height: "160px",
-            background: `radial-gradient(circle, ${colors.electricCyan}15, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(40px)",
-            animation: "contactFloat 10s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "25%",
-            left: "15%",
-            width: "200px",
-            height: "200px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}12, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(50px)",
-            animation: "contactFloat 14s ease-in-out infinite reverse",
-          }}
-        />
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 240, height: 240, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)` }} />
+        <div style={{ position: "absolute", bottom: "-80px", left: "-60px", width: 300, height: 300, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primary}22, transparent)` }} />
       </div>
       <div
         className="contact-container-inner"
@@ -201,7 +165,7 @@ export default function Contact() {
           padding: "20px 16px", // Responsive padding
         }}
       >
-        {/* Enhanced Section Header */}
+        {/* Section Header */}
         <div
           ref={headerRef}
           style={{
@@ -218,18 +182,17 @@ export default function Contact() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "16px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -240,12 +203,12 @@ export default function Contact() {
                 animation: "iconPulse 3s ease-in-out infinite",
               }}
             >
-              <MessageCircle style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <MessageCircle style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -256,9 +219,8 @@ export default function Contact() {
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "16px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
           >
@@ -267,7 +229,7 @@ export default function Contact() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "700px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -298,7 +260,7 @@ export default function Contact() {
                 style={{
                   fontSize: "1.4rem",
                   fontWeight: "800",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "20px",
                   letterSpacing: "-0.01em",
                 }}
@@ -307,7 +269,7 @@ export default function Contact() {
               </h3>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.textLight,
                   marginBottom: "32px",
                   lineHeight: "1.6",
                   fontSize: "1rem",
@@ -327,46 +289,45 @@ export default function Contact() {
                     gap: "16px",
                     padding: "20px",
                     backgroundColor: colors.cardBg,
-                    backdropFilter: "blur(20px) saturate(180%)",
                     border: `1px solid ${colors.cardBorder}`,
                     borderRadius: "16px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateX(6px)"
-                    e.currentTarget.style.borderColor = colors.electricCyan
-                    e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}30`
+                    e.currentTarget.style.borderColor = colors.primary
+                    e.currentTarget.style.boxShadow = String(colors.shadow)
                     const title = e.currentTarget.querySelector(".info-title") as HTMLElement
-                    if (title) title.style.color = colors.electricCyan
+                    if (title) title.style.color = colors.primary
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateX(0)"
                     e.currentTarget.style.borderColor = colors.cardBorder
-                    e.currentTarget.style.boxShadow = "none"
+                    e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                     const title = e.currentTarget.querySelector(".info-title") as HTMLElement
-                    if (title) title.style.color = colors.pureWhite
+                    if (title) title.style.color = colors.heading
                   }}
                 >
                   <div
                     style={{
                       width: "44px",
                       height: "44px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       borderRadius: "12px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       flexShrink: 0,
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                     }}
                   >
-                    <info.icon style={{ height: "20px", width: "20px", color: colors.pureWhite }} />
+                    <info.icon style={{ height: "20px", width: "20px", color: "#FFFFFF" }} />
                   </div>
                   <div>
                     <h4
                       className="info-title"
                       style={{
-                        color: colors.pureWhite,
+                        color: colors.heading,
                         fontWeight: "700",
                         marginBottom: "4px",
                         transition: "color 0.3s ease",
@@ -377,7 +338,7 @@ export default function Contact() {
                     </h4>
                     <p
                       style={{
-                        color: colors.electricCyan,
+                        color: colors.primary,
                         fontWeight: "600",
                         marginBottom: "4px",
                         fontSize: "0.95rem",
@@ -387,7 +348,7 @@ export default function Contact() {
                     </p>
                     <p
                       style={{
-                        color: colors.warmGray,
+                        color: colors.textLight,
                         fontSize: "0.85rem",
                       }}
                     >
@@ -402,19 +363,19 @@ export default function Contact() {
               <Button
                 sx={{
                   width: "100%",
-                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                  color: colors.deepNavy,
+                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                  color: "#FFFFFF",
                   fontWeight: "700",
                   padding: "14px 24px",
                   borderRadius: "12px",
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: `0 8px 32px ${colors.accentGlow}`,
+                  boxShadow: `0 8px 32px ${colors.primaryLight}40`,
                   textTransform: "none",
                   "&:hover": {
-                    background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                    background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
                     transform: "scale(1.02) translateY(-2px)",
-                    boxShadow: `0 12px 30px ${colors.electricCyan}60`,
+                    boxShadow: `0 12px 30px ${colors.primaryLight}60`,
                   },
                 }}
               >
@@ -425,20 +386,19 @@ export default function Contact() {
                 variant="outlined"
                 sx={{
                   width: "100%",
-                  borderColor: colors.warmGray,
-                  color: colors.warmGray,
+                  borderColor: colors.cardBorder,
+                  color: colors.textLight,
                   backgroundColor: colors.cardBg,
-                  backdropFilter: "blur(20px) saturate(180%)",
                   padding: "14px 24px",
                   borderRadius: "12px",
                   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   textTransform: "none",
                   "&:hover": {
-                    backgroundColor: colors.electricCyan,
-                    color: colors.deepNavy,
-                    borderColor: colors.electricCyan,
+                    backgroundColor: colors.primary,
+                    color: "#FFFFFF",
+                    borderColor: colors.primary,
                     transform: "translateY(-2px)",
-                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    boxShadow: `0 8px 25px ${colors.primaryLight}40`,
                   },
                 }}
               >
@@ -451,20 +411,19 @@ export default function Contact() {
           <Card
             className="contact-form-col"
             style={{
-              backgroundColor: colors.deepNavy, // Changed to deepNavy for solid background
-              backdropFilter: "blur(20px) saturate(180%)",
-              border: `1px solid ${colors.electricCyan}60`, // Adjusted border color
+              backgroundColor: colors.cardBg,
+              border: `1px solid ${colors.cardBorder}`,
               transition: "all 0.3s ease",
-              boxShadow: `0 0 40px ${colors.electricCyan}20`, // Adjusted shadow
+              boxShadow: colors.subtleShadow,
               borderRadius: "20px",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = `${colors.electricCyan}60`
-              e.currentTarget.style.boxShadow = `0 0 60px ${colors.electricCyan}40` // Enhanced hover shadow
+              e.currentTarget.style.borderColor = colors.primary
+              e.currentTarget.style.boxShadow = String(colors.shadow)
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = `${colors.electricCyan}60`
-              e.currentTarget.style.boxShadow = `0 0 40px ${colors.electricCyan}20`
+              e.currentTarget.style.borderColor = colors.cardBorder
+              e.currentTarget.style.boxShadow = String(colors.subtleShadow)
             }}
           >
             <CardContent style={{ padding: "32px" }}>
@@ -472,7 +431,7 @@ export default function Contact() {
                 style={{
                   fontSize: "1.4rem",
                   fontWeight: "800",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "24px",
                   letterSpacing: "-0.01em",
                 }}
@@ -484,11 +443,11 @@ export default function Contact() {
                 <div
                   style={{
                     padding: "16px",
-                    backgroundColor: `${colors.vibrantGreen}20`,
-                    border: `1px solid ${colors.vibrantGreen}60`,
+                    backgroundColor: `${colors.primaryLight}20`,
+                    border: `1px solid ${colors.primaryLight}60`,
                     borderRadius: "12px",
                     marginBottom: "24px",
-                    color: colors.vibrantGreen,
+                    color: colors.primary,
                     fontSize: "0.95rem",
                   }}
                 >
@@ -529,39 +488,39 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       fullWidth
-                      margin="none" // Adjusted margin
-                      variant="filled" // Changed to filled variant
+                      margin="none"
+                      variant="filled"
                       InputLabelProps={{
-                        style: { color: colors.warmGray },
+                        style: { color: colors.textLight },
                         sx: {
                           "&.Mui-focused": {
-                            color: `${colors.electricCyan} !important`,
+                            color: `${colors.primary} !important`,
                           },
                           "&.MuiInputLabel-shrink": {
-                            transform: "translate(14px, 10px) scale(0.75)", // Adjust for smaller, inside label
+                            transform: "translate(14px, 10px) scale(0.75)",
                           },
                         },
                       }}
                       InputProps={{
                         disableUnderline: true, // Remove underline for filled variant
                         style: {
-                          color: colors.pureWhite,
-                          background: colors.inputBg,
+                          color: colors.textDark,
+                          background: colors.cardBg,
                           borderRadius: "12px",
                           padding: "16px 14px", // Adjust padding for label inside
                         },
                         sx: {
-                          "& fieldset": { borderColor: colors.inputBorder },
-                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "& fieldset": { borderColor: colors.cardBorder },
+                          "&:hover fieldset": { borderColor: `${colors.primary} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.primary} !important` },
                           "&.MuiFilledInput-root": {
-                            backgroundColor: colors.inputBg,
-                            "&:hover": { backgroundColor: colors.inputBg },
-                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                            backgroundColor: colors.cardBg,
+                            "&:hover": { backgroundColor: colors.cardBg },
+                            "&.Mui-focused": { backgroundColor: colors.cardBg },
                           },
-                          border: `1px solid ${colors.inputBorder}`, // Add explicit border
-                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
-                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                          border: `1px solid ${colors.cardBorder}`, // Add explicit border
+                          "&:hover": { border: `1px solid ${colors.primary}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.primary}` },
                         },
                       }}
                     />
@@ -576,13 +535,13 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       fullWidth
-                      margin="none" // Adjusted margin
-                      variant="filled" // Changed to filled variant
+                      margin="none"
+                      variant="filled"
                       InputLabelProps={{
-                        style: { color: colors.warmGray },
+                        style: { color: colors.textLight },
                         sx: {
                           "&.Mui-focused": {
-                            color: `${colors.electricCyan} !important`,
+                            color: `${colors.primary} !important`,
                           },
                           "&.MuiInputLabel-shrink": {
                             transform: "translate(14px, 10px) scale(0.75)",
@@ -592,23 +551,23 @@ export default function Contact() {
                       InputProps={{
                         disableUnderline: true,
                         style: {
-                          color: colors.pureWhite,
-                          background: colors.inputBg,
+                          color: colors.textDark,
+                          background: colors.cardBg,
                           borderRadius: "12px",
                           padding: "16px 14px",
                         },
                         sx: {
-                          "& fieldset": { borderColor: colors.inputBorder },
-                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "& fieldset": { borderColor: colors.cardBorder },
+                          "&:hover fieldset": { borderColor: `${colors.primary} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.primary} !important` },
                           "&.MuiFilledInput-root": {
-                            backgroundColor: colors.inputBg,
-                            "&:hover": { backgroundColor: colors.inputBg },
-                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                            backgroundColor: colors.cardBg,
+                            "&:hover": { backgroundColor: colors.cardBg },
+                            "&.Mui-focused": { backgroundColor: colors.cardBg },
                           },
-                          border: `1px solid ${colors.inputBorder}`,
-                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
-                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                          border: `1px solid ${colors.cardBorder}`,
+                          "&:hover": { border: `1px solid ${colors.primary}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.primary}` },
                         },
                       }}
                     />
@@ -631,13 +590,13 @@ export default function Contact() {
                       value={formData.company}
                       onChange={handleInputChange}
                       fullWidth
-                      margin="none" // Adjusted margin
-                      variant="filled" // Changed to filled variant
+                      margin="none"
+                      variant="filled"
                       InputLabelProps={{
-                        style: { color: colors.warmGray },
+                        style: { color: colors.textLight },
                         sx: {
                           "&.Mui-focused": {
-                            color: `${colors.electricCyan} !important`,
+                            color: `${colors.primary} !important`,
                           },
                           "&.MuiInputLabel-shrink": {
                             transform: "translate(14px, 10px) scale(0.75)",
@@ -647,23 +606,23 @@ export default function Contact() {
                       InputProps={{
                         disableUnderline: true,
                         style: {
-                          color: colors.pureWhite,
-                          background: colors.inputBg,
+                          color: colors.textDark,
+                          background: colors.cardBg,
                           borderRadius: "12px",
                           padding: "16px 14px",
                         },
                         sx: {
-                          "& fieldset": { borderColor: colors.inputBorder },
-                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "& fieldset": { borderColor: colors.cardBorder },
+                          "&:hover fieldset": { borderColor: `${colors.primary} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.primary} !important` },
                           "&.MuiFilledInput-root": {
-                            backgroundColor: colors.inputBg,
-                            "&:hover": { backgroundColor: colors.inputBg },
-                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                            backgroundColor: colors.cardBg,
+                            "&:hover": { backgroundColor: colors.cardBg },
+                            "&.Mui-focused": { backgroundColor: colors.cardBg },
                           },
-                          border: `1px solid ${colors.inputBorder}`,
-                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
-                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                          border: `1px solid ${colors.cardBorder}`,
+                          "&:hover": { border: `1px solid ${colors.primary}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.primary}` },
                         },
                       }}
                     />
@@ -678,13 +637,13 @@ export default function Contact() {
                       value={formData.service}
                       onChange={handleInputChange}
                       fullWidth
-                      margin="none" // Adjusted margin
-                      variant="filled" // Changed to filled variant
+                      margin="none"
+                      variant="filled"
                       InputLabelProps={{
-                        style: { color: colors.warmGray },
+                        style: { color: colors.textLight },
                         sx: {
                           "&.Mui-focused": {
-                            color: `${colors.electricCyan} !important`,
+                            color: `${colors.primary} !important`,
                           },
                           "&.MuiInputLabel-shrink": {
                             transform: "translate(14px, 10px) scale(0.75)",
@@ -694,41 +653,41 @@ export default function Contact() {
                       InputProps={{
                         disableUnderline: true,
                         style: {
-                          color: colors.pureWhite,
-                          background: colors.inputBg,
+                          color: colors.textDark,
+                          background: colors.cardBg,
                           borderRadius: "12px",
                           padding: "16px 14px",
                         },
                         sx: {
-                          "& fieldset": { borderColor: colors.inputBorder },
-                          "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                          "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                          "& fieldset": { borderColor: colors.cardBorder },
+                          "&:hover fieldset": { borderColor: `${colors.primary} !important` },
+                          "&.Mui-focused fieldset": { borderColor: `${colors.primary} !important` },
                           "&.MuiFilledInput-root": {
-                            backgroundColor: colors.inputBg,
-                            "&:hover": { backgroundColor: colors.inputBg },
-                            "&.Mui-focused": { backgroundColor: colors.inputBg },
+                            backgroundColor: colors.cardBg,
+                            "&:hover": { backgroundColor: colors.cardBg },
+                            "&.Mui-focused": { backgroundColor: colors.cardBg },
                           },
-                          border: `1px solid ${colors.inputBorder}`,
-                          "&:hover": { border: `1px solid ${colors.electricCyan}` },
-                          "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                          border: `1px solid ${colors.cardBorder}`,
+                          "&:hover": { border: `1px solid ${colors.primary}` },
+                          "&.Mui-focused": { border: `1px solid ${colors.primary}` },
                         },
                       }}
                       SelectProps={{
                         native: true,
-                        style: { color: colors.pureWhite },
+                        style: { color: colors.textDark },
                         sx: {
-                          "& .MuiSelect-icon": { color: colors.warmGray }, // Style dropdown arrow
+                          "& .MuiSelect-icon": { color: colors.textLight }, // Style dropdown arrow
                         },
                       }}
                     >
-                      <option value="" style={{ backgroundColor: colors.inputBg, color: colors.warmGray }}>
+                      <option value="" style={{ backgroundColor: colors.cardBg, color: colors.textLight }}>
                         Select a service...
                       </option>
                       {services.map((service, index) => (
                         <option
                           key={index}
                           value={service}
-                          style={{ backgroundColor: colors.inputBg, color: colors.pureWhite }}
+                          style={{ backgroundColor: colors.cardBg, color: colors.textDark }}
                         >
                           {service}
                         </option>
@@ -751,10 +710,10 @@ export default function Contact() {
                     margin="none" // Adjusted margin
                     variant="filled" // Changed to filled variant
                     InputLabelProps={{
-                      style: { color: colors.warmGray },
+                      style: { color: colors.textLight },
                       sx: {
                         "&.Mui-focused": {
-                          color: `${colors.electricCyan} !important`,
+                          color: `${colors.primary} !important`,
                         },
                         "&.MuiInputLabel-shrink": {
                           transform: "translate(14px, 10px) scale(0.75)",
@@ -764,23 +723,23 @@ export default function Contact() {
                     InputProps={{
                       disableUnderline: true,
                       style: {
-                        color: colors.pureWhite,
-                        background: colors.inputBg,
+                        color: colors.textDark,
+                        background: colors.cardBg,
                         borderRadius: "12px",
                         padding: "16px 14px",
                       },
                       sx: {
-                        "& fieldset": { borderColor: colors.inputBorder },
-                        "&:hover fieldset": { borderColor: `${colors.electricCyan} !important` },
-                        "&.Mui-focused fieldset": { borderColor: `${colors.electricCyan} !important` },
+                        "& fieldset": { borderColor: colors.cardBorder },
+                        "&:hover fieldset": { borderColor: `${colors.primary} !important` },
+                        "&.Mui-focused fieldset": { borderColor: `${colors.primary} !important` },
                         "&.MuiFilledInput-root": {
-                          backgroundColor: colors.inputBg,
-                          "&:hover": { backgroundColor: colors.inputBg },
-                          "&.Mui-focused": { backgroundColor: colors.inputBg },
+                          backgroundColor: colors.cardBg,
+                          "&:hover": { backgroundColor: colors.cardBg },
+                          "&.Mui-focused": { backgroundColor: colors.cardBg },
                         },
-                        border: `1px solid ${colors.inputBorder}`,
-                        "&:hover": { border: `1px solid ${colors.electricCyan}` },
-                        "&.Mui-focused": { border: `1px solid ${colors.electricCyan}` },
+                        border: `1px solid ${colors.cardBorder}`,
+                        "&:hover": { border: `1px solid ${colors.primary}` },
+                        "&.Mui-focused": { border: `1px solid ${colors.primary}` },
                       },
                     }}
                   />
@@ -792,27 +751,20 @@ export default function Contact() {
                   sx={{
                     width: "100%",
                     background: isSubmitting
-                      ? colors.warmGray
-                      : `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                    color: colors.deepNavy,
+                      ? colors.textLight
+                      : `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                    color: "#FFFFFF",
                     fontWeight: "800",
                     padding: "16px 24px",
                     borderRadius: "12px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     transform: "scale(1)",
-                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    boxShadow: `0 8px 25px ${colors.primaryLight}40`,
                     textTransform: "none",
                     fontSize: "1.05rem",
-                    "&:hover": !isSubmitting
-                      ? {
-                          background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
-                          transform: "scale(1.02) translateY(-2px)",
-                          boxShadow: `0 12px 30px ${colors.electricCyan}60`,
-                        }
-                      : {},
-                    "&:disabled": {
-                      background: colors.warmGray,
-                      color: colors.pureWhite,
+                    '&.Mui-disabled': {
+                      background: colors.textLight,
+                      color: '#FFFFFF',
                       opacity: 0.7,
                     },
                   }}
@@ -833,15 +785,15 @@ export default function Contact() {
                 style={{
                   marginTop: "32px",
                   padding: "24px",
-                  backgroundColor: colors.deepNavy, // Changed to deepNavy for solid background
+                  backgroundColor: colors.cardBg,
                   borderRadius: "16px",
-                  border: `1px solid ${colors.electricCyan}60`, // Adjusted border color
-                  boxShadow: `0 0 40px ${colors.electricCyan}20`, // Adjusted shadow
+                  border: `1px solid ${colors.cardBorder}`,
+                  boxShadow: String(colors.subtleShadow),
                 }}
               >
                 <h4
                   style={{
-                    color: colors.pureWhite,
+                    color: colors.heading,
                     fontWeight: "700",
                     marginBottom: "12px",
                     fontSize: "1.05rem",
@@ -851,7 +803,7 @@ export default function Contact() {
                 </h4>
                 <ul
                   style={{
-                    color: colors.warmGray,
+                    color: colors.textLight,
                     fontSize: "0.9rem",
                     listStyle: "none",
                     padding: 0,
@@ -882,11 +834,10 @@ export default function Contact() {
         >
           <Card
             style={{
-              background: colors.deepNavy,
-              backdropFilter: "blur(20px) saturate(180%)",
-              border: `1px solid ${colors.electricCyan}60`,
+              background: colors.cardBg,
+              border: `1px solid ${colors.cardBorder}`,
               borderRadius: "24px",
-              boxShadow: `0 0 40px ${colors.electricCyan}20`,
+              boxShadow: String(colors.subtleShadow),
               position: "relative",
               overflow: "hidden",
             }}
@@ -895,9 +846,9 @@ export default function Contact() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                background: `conic-gradient(from 0deg, ${colors.primaryLight}08, ${colors.primary}08, transparent)`,
                 animation: "ctaRotate 20s linear infinite",
-                opacity: 0,
+                opacity: 0.3,
               }}
             />
             <CardContent style={{ padding: "40px", textAlign: "center", position: "relative", zIndex: 2 }}>
@@ -905,16 +856,15 @@ export default function Contact() {
                 style={{
                   fontSize: "1.75rem",
                   fontWeight: "900",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "16px",
-                  textShadow: `0 0 30px ${colors.electricCyan}40`,
                 }}
               >
                 Prefer to Talk Directly?
               </h3>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   marginBottom: "32px",
                   maxWidth: "600px",
                   margin: "0 auto 32px auto",
@@ -937,20 +887,20 @@ export default function Contact() {
               >
                 <Button
                   sx={{
-                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                    color: colors.deepNavy,
+                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                    color: "#FFFFFF",
                     fontWeight: "800",
                     padding: "16px 32px",
                     borderRadius: "12px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     transform: "scale(1)",
-                    boxShadow: `0 0 30px ${colors.electricCyan}40`,
+                    boxShadow: `0 0 30px ${colors.primaryLight}40`,
                     textTransform: "none",
                     fontSize: "1.05rem",
                     "&:hover": {
-                      background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                      background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
                       transform: "scale(1.05) translateY(-2px)",
-                      boxShadow: `0 12px 30px ${colors.electricCyan}60`,
+                      boxShadow: `0 12px 30px ${colors.primaryLight}60`,
                     },
                   }}
                 >
@@ -961,21 +911,21 @@ export default function Contact() {
                   variant="contained"
                   href="mailto:husnainakram336@gmail.com"
                   sx={{
-                    backgroundColor: colors.deepNavy,
-                    color: colors.pureWhite,
-                    border: `1px solid ${colors.electricCyan}60`, // Added explicit border
+                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                    color: "#FFFFFF",
+                    border: `1px solid ${colors.primary}`,
                     padding: "16px 32px",
                     borderRadius: "12px",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     textTransform: "none",
                     fontSize: "1.05rem",
-                    boxShadow: `0 0 30px ${colors.electricCyan}20`,
+                    boxShadow: `0 0 30px ${colors.primaryLight}20`,
                     "&:hover": {
-                      background: `${colors.electricCyan}20`,
-                      color: `${colors.electricCyan}`,
-                      borderColor: `${colors.electricCyan}`,
+                      background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
+                      color: "#FFFFFF",
+                      borderColor: colors.primary,
                       transform: "translateY(-2px)",
-                      boxShadow: `0 0 40px ${colors.electricCyan}40`,
+                      boxShadow: `0 0 40px ${colors.primaryLight}40`,
                     },
                   }}
                 >

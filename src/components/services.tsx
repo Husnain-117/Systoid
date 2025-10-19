@@ -46,18 +46,25 @@ function useInView() {
 export default function Services() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    accentMint: "#83C7AF",
+    accentGreen: "#0D716C",
+    accentOrange: "#E6A15C",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const services = [
@@ -68,7 +75,7 @@ export default function Services() {
         "Custom web applications built with modern technologies like React, Next.js, and Node.js for scalable solutions.",
       features: ["Responsive Design", "Progressive Web Apps", "E-commerce Solutions", "CMS Development"],
       image: webImg,
-      gradient: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+      gradient: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
     },
     {
       icon: Smartphone,
@@ -77,7 +84,7 @@ export default function Services() {
         "Native and cross-platform mobile applications for iOS and Android with exceptional user experience.",
       features: ["Native iOS/Android", "React Native", "Flutter", "App Store Optimization"],
       image: mobileImg,
-      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+      gradient: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
     },
     {
       icon: Monitor,
@@ -86,7 +93,7 @@ export default function Services() {
         "Powerful desktop applications for Windows, macOS, and Linux using modern frameworks and technologies.",
       features: ["Cross-platform", "Electron Apps", "Native Performance", "Auto-updates"],
       image: desktopImg,
-      gradient: `linear-gradient(135deg, ${colors.electricCyan}CC, ${colors.vibrantGreen}CC)`,
+      gradient: `linear-gradient(135deg, ${colors.primary}CC, ${colors.primaryLight}CC)`,
     },
     {
       icon: Megaphone,
@@ -95,7 +102,7 @@ export default function Services() {
         "Comprehensive digital marketing strategies to boost your online presence and drive business growth.",
       features: ["SEO Optimization", "Social Media Marketing", "PPC Campaigns", "Content Strategy"],
       image: marketingImg,
-      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}CC, ${colors.electricCyan}CC)`,
+      gradient: `linear-gradient(135deg, ${colors.primaryLight}CC, ${colors.primary}CC)`,
     },
     {
       icon: Cog,
@@ -104,7 +111,7 @@ export default function Services() {
         "Custom software solutions tailored to your business needs with enterprise-grade security and scalability.",
       features: ["Enterprise Software", "API Development", "Cloud Solutions", "DevOps Services"],
       image: softwareImg,
-      gradient: `linear-gradient(135deg, ${colors.electricCyan}DD, ${colors.vibrantGreen}AA)`,
+      gradient: `linear-gradient(135deg, ${colors.primary}DD, ${colors.primaryLight}AA)`,
     },
     {
       icon: Palette,
@@ -112,7 +119,7 @@ export default function Services() {
       description: "Beautiful and intuitive user interfaces designed to enhance user experience and drive engagement.",
       features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
       image: designImg,
-      gradient: `linear-gradient(135deg, ${colors.vibrantGreen}DD, ${colors.electricCyan}AA)`,
+      gradient: `linear-gradient(135deg, ${colors.primaryLight}DD, ${colors.primary}AA)`,
     },
   ]
 
@@ -136,57 +143,15 @@ export default function Services() {
       style={{
         paddingTop: "80px",
         paddingBottom: "80px",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Galaxy Background */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
-        {/* Galaxy Dots Pattern */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `
-              radial-gradient(circle at 25% 25%, ${colors.electricCyan}12 1px, transparent 1px),
-              radial-gradient(circle at 75% 75%, ${colors.vibrantGreen}10 1px, transparent 1px),
-              radial-gradient(circle at 50% 10%, ${colors.electricCyan}08 1px, transparent 1px),
-              radial-gradient(circle at 10% 60%, ${colors.vibrantGreen}06 1px, transparent 1px)
-            `,
-            backgroundSize: "150px 150px, 200px 200px, 180px 180px, 220px 220px",
-            animation: "galaxyDrift 20s linear infinite",
-            opacity: 0.3,
-          }}
-        />
-        
-        {/* Floating Elements */}
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            right: "15%",
-            width: "250px",
-            height: "250px",
-            background: `radial-gradient(circle, ${colors.electricCyan}18, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(60px)",
-            animation: "serviceFloat1 14s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "30%",
-            left: "10%",
-            width: "300px",
-            height: "300px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(80px)",
-            animation: "serviceFloat2 18s ease-in-out infinite reverse",
-          }}
-        />
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1 }}>
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 260, height: 260, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)` }} />
+        <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: 320, height: 320, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primary}22, transparent)` }} />
       </div>
 
       <div
@@ -199,7 +164,7 @@ export default function Services() {
           zIndex: 2,
         }}
       >
-        {/* Enhanced Section Header */}
+        {/* Section Header */}
         <div
           ref={headerRef}
           style={{
@@ -215,18 +180,17 @@ export default function Services() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "24px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -234,16 +198,15 @@ export default function Services() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                animation: "iconSpin 3s ease-in-out infinite",
-                boxShadow: `0 0 20px ${colors.electricCyan}60`,
+                boxShadow: `0 0 20px ${colors.primaryLight}60`,
               }}
             >
-              <Zap style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <Zap style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -254,9 +217,8 @@ export default function Services() {
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "24px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
           >
@@ -265,7 +227,7 @@ export default function Services() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "700px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -285,8 +247,8 @@ export default function Services() {
             display: "grid",
             gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
             gap: "24px", // Reduced gap
-            maxHeight: "80vh", // Limit height to fit on screen
-            overflowY: "auto", // Add scroll if needed
+            maxHeight: "80vh", // Restore vertical scroll as before
+            overflowY: "auto",
           }}
         >
           {services.map((service, index) => (
@@ -294,20 +256,16 @@ export default function Services() {
               key={index}
               style={{
                 backgroundColor: colors.cardBg,
-                backdropFilter: "blur(20px) saturate(180%)",
                 border: `1px solid ${colors.cardBorder}`,
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 transform: servicesGridInView
                   ? hoveredCard === index
-                    ? "scale(1.02) translateY(-8px)" // Reduced scale
+                    ? "translateY(-6px)"
                     : "scale(1)"
                   : "scale(0.95) translateY(20px)",
                 opacity: servicesGridInView ? 1 : 0,
                 transitionDelay: servicesGridInView ? `${index * 0.1}s` : "0s",
-                boxShadow:
-                  hoveredCard === index
-                    ? `0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px ${colors.electricCyan}60`
-                    : "0 8px 25px rgba(0,0,0,0.15)",
+                boxShadow: hoveredCard === index ? colors.shadow : colors.subtleShadow,
                 cursor: "pointer",
                 borderRadius: "20px", // Smaller border radius
                 overflow: "hidden",
@@ -324,7 +282,7 @@ export default function Services() {
                   position: "absolute",
                   inset: 0,
                   background: service.gradient,
-                  opacity: hoveredCard === index ? 0.08 : 0,
+                  opacity: hoveredCard === index ? 0.06 : 0,
                   transition: "opacity 0.5s ease",
                   zIndex: 1,
                 }}
@@ -356,7 +314,7 @@ export default function Services() {
                     inset: 0,
                     background:
                       hoveredCard === index
-                        ? `linear-gradient(45deg, ${colors.electricCyan}25, ${colors.vibrantGreen}25)`
+                        ? `linear-gradient(45deg, ${colors.primaryLight}25, ${colors.primary}25)`
                         : "transparent",
                     transition: "all 0.4s ease",
                   }}
@@ -380,20 +338,20 @@ export default function Services() {
                       hoveredCard === index ? "scale(1.08) rotate(3deg) translateY(-4px)" : "scale(1) rotate(0deg)",
                     boxShadow:
                       hoveredCard === index
-                        ? `0 15px 30px ${colors.electricCyan}40`
-                        : `0 8px 20px ${colors.electricCyan}25`,
+                        ? `0 15px 30px ${colors.primaryLight}40`
+                        : `0 8px 20px ${colors.primaryLight}25`,
                     position: "relative",
                     overflow: "hidden",
                   }}
                 >
                   <service.icon
-                    style={{ height: "30px", width: "30px", color: colors.pureWhite, position: "relative", zIndex: 2 }} // Reduced size
+                    style={{ height: "30px", width: "30px", color: "#FFFFFF", position: "relative", zIndex: 2 }} // Reduced size
                   />
                   <div
                     style={{
                       position: "absolute",
                       inset: 0,
-                      background: `conic-gradient(from 0deg, ${colors.electricCyan}60, ${colors.vibrantGreen}60, ${colors.electricCyan}60)`,
+                      background: `conic-gradient(from 0deg, ${colors.primaryLight}60, ${colors.primary}60, ${colors.primaryLight}60)`,
                       animation: hoveredCard === index ? "iconRotate 2s linear infinite" : "none",
                       opacity: 0.3,
                     }}
@@ -405,7 +363,7 @@ export default function Services() {
                   style={{
                     fontSize: "1.25rem", // Reduced size
                     fontWeight: "800",
-                    color: hoveredCard === index ? colors.electricCyan : colors.pureWhite,
+                    color: hoveredCard === index ? colors.primary : colors.heading,
                     marginBottom: "12px", // Reduced margin
                     transition: "color 0.3s ease",
                     letterSpacing: "-0.01em",
@@ -417,7 +375,7 @@ export default function Services() {
                 {/* Smaller Description */}
                 <p
                   style={{
-                    color: colors.warmGray,
+                    color: colors.paragraph,
                     marginBottom: "20px", // Reduced margin
                     lineHeight: "1.6",
                     fontSize: "0.95rem", // Reduced size
@@ -435,7 +393,7 @@ export default function Services() {
                         display: "flex",
                         alignItems: "center",
                         fontSize: "0.85rem", // Reduced size
-                        color: colors.warmGray,
+                        color: colors.textLight,
                         marginBottom: "8px", // Reduced margin
                         transition: "all 0.3s ease",
                         transform: hoveredCard === index ? "translateX(6px)" : "translateX(0)",
@@ -446,12 +404,12 @@ export default function Services() {
                         style={{
                           width: "6px", // Reduced size
                           height: "6px",
-                          background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                          background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                           borderRadius: "50%",
                           marginRight: "12px",
                           transition: "all 0.3s ease",
                           transform: hoveredCard === index ? "scale(1.3)" : "scale(1)",
-                          boxShadow: hoveredCard === index ? `0 0 8px ${colors.electricCyan}60` : "none",
+                          boxShadow: hoveredCard === index ? `0 0 8px ${colors.primaryLight}60` : "none",
                         }}
                       />
                       {feature}
@@ -464,7 +422,7 @@ export default function Services() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    color: colors.electricCyan,
+                    color: colors.primary,
                     fontWeight: "700",
                     transition: "all 0.3s ease",
                     transform: hoveredCard === index ? "translateX(8px)" : "translateX(0)",
@@ -489,7 +447,7 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Enhanced CTA Section */}
+        {/* CTA Section */}
         <div
           ref={ctaRef}
           style={{
@@ -502,14 +460,13 @@ export default function Services() {
         >
           <div
             style={{
-              background: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              background: colors.cardBg,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "24px",
               padding: "40px 32px", // Reduced padding
               maxWidth: "800px", // Reduced max width
               margin: "0 auto",
-              boxShadow: `0 20px 40px rgba(0,0,0,0.25)`,
+              boxShadow: colors.subtleShadow,
               position: "relative",
               overflow: "hidden",
             }}
@@ -518,7 +475,7 @@ export default function Services() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                background: `conic-gradient(from 0deg, ${colors.primaryLight}08, ${colors.primary}08, transparent)`,
                 animation: "ctaRotate 25s linear infinite",
                 opacity: 0.3,
               }}
@@ -528,16 +485,15 @@ export default function Services() {
                 style={{
                   fontSize: "1.75rem", // Reduced size
                   fontWeight: "900",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "16px",
-                  textShadow: `0 0 30px ${colors.electricCyan}40`,
                 }}
               >
                 Ready to Transform Your Business?
               </h3>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   marginBottom: "32px",
                   fontSize: "1.05rem", // Reduced size
                   lineHeight: "1.6",
@@ -551,8 +507,8 @@ export default function Services() {
               <button
                 onClick={scrollToContact}
                 style={{
-                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                  color: colors.deepNavy,
+                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                  color: "#FFFFFF",
                   fontWeight: "800",
                   padding: "16px 40px",
                   borderRadius: "12px",
@@ -560,18 +516,18 @@ export default function Services() {
                   cursor: "pointer",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: `0 10px 30px ${colors.electricCyan}40`,
+                  boxShadow: `0 10px 30px ${colors.primaryLight}40`,
                   fontSize: "1.1rem",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`
                   e.currentTarget.style.transform = "scale(1.05) translateY(-2px)"
-                  e.currentTarget.style.boxShadow = `0 15px 40px ${colors.electricCyan}60`
+                  e.currentTarget.style.boxShadow = `0 15px 40px ${colors.primaryLight}60`
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
                   e.currentTarget.style.transform = "scale(1)"
-                  e.currentTarget.style.boxShadow = `0 10px 30px ${colors.electricCyan}40`
+                  e.currentTarget.style.boxShadow = `0 10px 30px ${colors.primaryLight}40`
                 }}
               >
                 Get Free Consultation

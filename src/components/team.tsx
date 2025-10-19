@@ -43,18 +43,22 @@ export default function Team() {
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const teamMembers = [
@@ -141,54 +145,15 @@ export default function Team() {
       style={{
         paddingTop: "80px",
         paddingBottom: "80px",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Galaxy Background */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `
-              radial-gradient(circle at 15% 35%, ${colors.electricCyan}12 1px, transparent 1px),
-              radial-gradient(circle at 85% 15%, ${colors.vibrantGreen}10 1px, transparent 1px),
-              radial-gradient(circle at 45% 85%, ${colors.electricCyan}08 1px, transparent 1px)
-            `,
-            backgroundSize: "200px 200px, 180px 180px, 240px 240px",
-            animation: "teamGalaxy 18s linear infinite",
-            opacity: 0.4,
-          }}
-        />
-
-        <div
-          style={{
-            position: "absolute",
-            top: "25%",
-            left: "12%",
-            width: "180px",
-            height: "180px",
-            background: `radial-gradient(circle, ${colors.electricCyan}18, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(50px)",
-            animation: "teamFloat1 14s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "35%",
-            right: "15%",
-            width: "220px",
-            height: "220px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(60px)",
-            animation: "teamFloat2 18s ease-in-out infinite reverse",
-          }}
-        />
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 260, height: 260, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)` }} />
+        <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: 320, height: 320, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primary}22, transparent)` }} />
       </div>
 
       <div
@@ -201,7 +166,7 @@ export default function Team() {
           zIndex: 2,
         }}
       >
-        {/* Enhanced Section Header */}
+        {/* Section Header */}
         <div
           ref={headerRef}
           style={{
@@ -218,18 +183,17 @@ export default function Team() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "24px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -237,15 +201,14 @@ export default function Team() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                animation: "iconPulse 3s ease-in-out infinite",
               }}
             >
-              <Users style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <Users style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -256,9 +219,8 @@ export default function Team() {
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "24px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
           >
@@ -267,7 +229,7 @@ export default function Team() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "700px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -296,9 +258,8 @@ export default function Team() {
             key={currentMemberIndex} // Key to force re-render and trigger transition
             style={{
               backgroundColor: colors.cardBg,
-              backdropFilter: "blur(20px) saturate(180%)",
               border: `1px solid ${colors.cardBorder}`,
-              boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+              boxShadow: colors.subtleShadow,
               borderRadius: "20px",
               overflow: "hidden",
               cursor: "pointer",
@@ -308,8 +269,8 @@ export default function Team() {
               animation: isAnimating ? "slideOut 0.5s forwards" : "slideIn 0.5s forwards",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = colors.electricCyan
-              e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.25), 0 0 0 1px ${colors.electricCyan}60`
+              e.currentTarget.style.borderColor = colors.primary
+              e.currentTarget.style.boxShadow = String(colors.shadow)
               const image = e.currentTarget.querySelector(".member-image") as HTMLElement
               if (image) image.style.transform = "scale(1.08)"
               const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
@@ -317,11 +278,11 @@ export default function Team() {
               const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
               if (socialLinks) socialLinks.style.opacity = "1"
               const name = e.currentTarget.querySelector(".member-name") as HTMLElement
-              if (name) name.style.color = colors.electricCyan
+              if (name) name.style.color = colors.primary
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = colors.cardBorder
-              e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
+              e.currentTarget.style.boxShadow = String(colors.subtleShadow)
               const image = e.currentTarget.querySelector(".member-image") as HTMLElement
               if (image) image.style.transform = "scale(1)"
               const overlay = e.currentTarget.querySelector(".member-overlay") as HTMLElement
@@ -329,7 +290,7 @@ export default function Team() {
               const socialLinks = e.currentTarget.querySelector(".social-links") as HTMLElement
               if (socialLinks) socialLinks.style.opacity = "0"
               const name = e.currentTarget.querySelector(".member-name") as HTMLElement
-              if (name) name.style.color = colors.pureWhite
+              if (name) name.style.color = colors.heading
             }}
           >
             <CardContent style={{ padding: "0", flexGrow: 1 }}>
@@ -350,7 +311,7 @@ export default function Team() {
                   style={{
                     position: "absolute",
                     inset: "0",
-                    background: `linear-gradient(45deg, ${colors.deepNavy}cc, transparent)`,
+                    background: `linear-gradient(45deg, ${colors.primary}1A, transparent)`,
                     opacity: 0,
                     transition: "opacity 0.4s ease",
                   }}
@@ -359,6 +320,7 @@ export default function Team() {
 
                 {/* Social Links */}
                 <div
+                  className="social-links"
                   style={{
                     position: "absolute",
                     bottom: "16px",
@@ -369,7 +331,6 @@ export default function Team() {
                     opacity: 0,
                     transition: "all 0.4s ease",
                   }}
-                  className="social-links"
                 >
                   <a
                     href={currentMember.social.linkedin}
@@ -378,24 +339,24 @@ export default function Team() {
                     style={{
                       width: "36px",
                       height: "36px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       borderRadius: "10px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.3s ease",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0) scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}40`
                     }}
                   >
-                    <Linkedin style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                    <Linkedin style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
                   </a>
                   <a
                     href={currentMember.social.twitter}
@@ -404,24 +365,24 @@ export default function Team() {
                     style={{
                       width: "36px",
                       height: "36px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       borderRadius: "10px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.3s ease",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0) scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}40`
                     }}
                   >
-                    <Twitter style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                    <Twitter style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
                   </a>
                   <a
                     href={currentMember.social.github}
@@ -430,52 +391,51 @@ export default function Team() {
                     style={{
                       width: "36px",
                       height: "36px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       borderRadius: "10px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.3s ease",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0) scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}40`
                     }}
                   >
-                    <Github style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                    <Github style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
                   </a>
                   <a
                     href={`mailto:${currentMember.social.email}`}
                     style={{
                       width: "36px",
                       height: "36px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       borderRadius: "10px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.3s ease",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px) scale(1.1)"
-                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}60`
+                      e.currentTarget.style.boxShadow = `0 8px 25px ${colors.primaryLight}60`
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0) scale(1)"
-                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.electricCyan}40`
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${colors.primaryLight}40`
                     }}
                   >
-                    <Mail style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+                    <Mail style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
                   </a>
                 </div>
               </div>
-
               {/* Content */}
               <div style={{ padding: "20px" }}>
                 <h3
@@ -483,7 +443,7 @@ export default function Team() {
                   style={{
                     fontSize: "1.2rem",
                     fontWeight: "800",
-                    color: colors.pureWhite,
+                    color: colors.heading,
                     marginBottom: "6px",
                     transition: "color 0.3s ease",
                     letterSpacing: "-0.01em",
@@ -493,7 +453,7 @@ export default function Team() {
                 </h3>
                 <div
                   style={{
-                    color: colors.electricCyan,
+                    color: colors.primary,
                     fontWeight: "600",
                     marginBottom: "10px",
                     fontSize: "0.9rem",
@@ -503,7 +463,7 @@ export default function Team() {
                 </div>
                 <p
                   style={{
-                    color: colors.warmGray,
+                    color: colors.paragraph,
                     fontSize: "0.85rem",
                     lineHeight: "1.6",
                   }}
@@ -522,9 +482,9 @@ export default function Team() {
               top: "50%",
               left: "-70px", // More spacing from card
               transform: "translateY(-50%)",
-              background: `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`,
+              background: `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`,
               backdropFilter: "blur(15px) saturate(180%)",
-              border: `2px solid ${colors.electricCyan}`,
+              border: `2px solid ${colors.primary}`,
               borderRadius: "12px",
               width: "44px",
               height: "44px",
@@ -533,22 +493,22 @@ export default function Team() {
               justifyContent: "center",
               cursor: "pointer",
               transition: "all 0.3s ease",
-              boxShadow: `0 6px 20px ${colors.electricCyan}40`,
+              boxShadow: `0 6px 20px ${colors.primaryLight}40`,
               zIndex: 10,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
               e.currentTarget.style.transform = "translateY(-50%) scale(1.05) translateX(-2px)"
-              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.electricCyan}60`
+              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.primaryLight}60`
               const arrow = e.currentTarget.querySelector("div")
-              if (arrow) arrow.style.borderRightColor = colors.deepNavy
+              if (arrow) arrow.style.borderRightColor = "#FFFFFF"
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`
               e.currentTarget.style.transform = "translateY(-50%) scale(1)"
-              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}40`
+              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.primaryLight}40`
               const arrow = e.currentTarget.querySelector("div")
-              if (arrow) arrow.style.borderRightColor = colors.electricCyan
+              if (arrow) arrow.style.borderRightColor = colors.primary
             }}
           >
             {/* CSS Arrow pointing left */}
@@ -558,7 +518,7 @@ export default function Team() {
                 height: 0,
                 borderTop: "8px solid transparent",
                 borderBottom: "8px solid transparent",
-                borderRight: `12px solid ${colors.electricCyan}`,
+                borderRight: `12px solid ${colors.primary}`,
                 transition: "border-right-color 0.3s ease",
               }}
             />
@@ -570,9 +530,9 @@ export default function Team() {
               top: "50%",
               right: "-70px", // More spacing from card
               transform: "translateY(-50%)",
-              background: `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`,
+              background: `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`,
               backdropFilter: "blur(15px) saturate(180%)",
-              border: `2px solid ${colors.electricCyan}`,
+              border: `2px solid ${colors.primary}`,
               borderRadius: "12px",
               width: "44px",
               height: "44px",
@@ -581,22 +541,22 @@ export default function Team() {
               justifyContent: "center",
               cursor: "pointer",
               transition: "all 0.3s ease",
-              boxShadow: `0 6px 20px ${colors.electricCyan}40`,
+              boxShadow: `0 6px 20px ${colors.primaryLight}40`,
               zIndex: 10,
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
               e.currentTarget.style.transform = "translateY(-50%) scale(1.05) translateX(2px)"
-              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.electricCyan}60`
+              e.currentTarget.style.boxShadow = `0 8px 30px ${colors.primaryLight}60`
               const arrow = e.currentTarget.querySelector("div")
-              if (arrow) arrow.style.borderLeftColor = colors.deepNavy
+              if (arrow) arrow.style.borderLeftColor = "#FFFFFF"
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}20, ${colors.vibrantGreen}20)`
+              e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}14, ${colors.primaryLight}14)`
               e.currentTarget.style.transform = "translateY(-50%) scale(1)"
-              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.electricCyan}40`
+              e.currentTarget.style.boxShadow = `0 6px 20px ${colors.primaryLight}40`
               const arrow = e.currentTarget.querySelector("div")
-              if (arrow) arrow.style.borderLeftColor = colors.electricCyan
+              if (arrow) arrow.style.borderLeftColor = colors.primary
             }}
           >
             {/* CSS Arrow pointing right */}
@@ -606,7 +566,7 @@ export default function Team() {
                 height: 0,
                 borderTop: "8px solid transparent",
                 borderBottom: "8px solid transparent",
-                borderLeft: `12px solid ${colors.electricCyan}`,
+                borderLeft: `12px solid ${colors.primary}`,
                 transition: "border-left-color 0.3s ease",
               }}
             />
@@ -628,7 +588,7 @@ export default function Team() {
                   position: "relative",
                   height: "4px",
                   width: "60px",
-                  backgroundColor: colors.warmGray + "30",
+                  backgroundColor: colors.textLight + "33",
                   borderRadius: "2px",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
@@ -642,10 +602,10 @@ export default function Team() {
                     left: 0,
                     height: "100%",
                     width: index === currentMemberIndex ? "100%" : "0%",
-                    background: `linear-gradient(90deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    background: `linear-gradient(90deg, ${colors.primary}, ${colors.primaryLight})`,
                     borderRadius: "2px",
                     transition: "width 0.5s ease",
-                    boxShadow: index === currentMemberIndex ? `0 0 8px ${colors.electricCyan}60` : "none",
+                    boxShadow: index === currentMemberIndex ? `0 0 8px ${colors.primaryLight}60` : "none",
                   }}
                 />
               </div>
@@ -667,14 +627,13 @@ export default function Team() {
         >
           <div
             style={{
-              background: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              background: colors.cardBg,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "24px",
               padding: "40px 32px",
               maxWidth: "800px",
               margin: "0 auto",
-              boxShadow: `0 20px 40px rgba(0,0,0,0.2)`,
+              boxShadow: colors.subtleShadow,
               position: "relative",
               overflow: "hidden",
             }}
@@ -683,7 +642,7 @@ export default function Team() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                background: `conic-gradient(from 0deg, ${colors.primaryLight}08, ${colors.primary}08, transparent)`,
                 animation: "ctaRotate 20s linear infinite",
                 opacity: 0.3,
               }}
@@ -693,16 +652,15 @@ export default function Team() {
                 style={{
                   fontSize: "1.75rem",
                   fontWeight: "900",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "16px",
-                  textShadow: `0 0 30px ${colors.electricCyan}40`,
                 }}
               >
                 Join Our Growing Team
               </h3>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   marginBottom: "32px",
                   fontSize: "1.05rem",
                   lineHeight: "1.6",
@@ -714,8 +672,8 @@ export default function Team() {
               </p>
               <button
                 style={{
-                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                  color: colors.deepNavy,
+                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                  color: "#FFFFFF",
                   fontWeight: "800",
                   padding: "16px 40px",
                   borderRadius: "12px",
@@ -723,18 +681,18 @@ export default function Team() {
                   cursor: "pointer",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                  boxShadow: `0 8px 25px ${colors.primaryLight}40`,
                   fontSize: "1.1rem",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`
                   e.currentTarget.style.transform = "scale(1.05) translateY(-2px)"
-                  e.currentTarget.style.boxShadow = `0 15px 35px ${colors.electricCyan}60`
+                  e.currentTarget.style.boxShadow = `0 15px 35px ${colors.primaryLight}60`
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`
+                  e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`
                   e.currentTarget.style.transform = "scale(1)"
-                  e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}40`
+                  e.currentTarget.style.boxShadow = `0 8px 25px ${colors.primaryLight}40`
                 }}
               >
                 View Open Positions

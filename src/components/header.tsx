@@ -10,14 +10,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Enhanced professional color palette
+  // Header palette aligned with Footer's dark theme
   const colors = {
     deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
     pureWhite: "#FFFFFF",
     warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
+    electricCyan: "#00D9FF",
+    vibrantGreen: "#00FF88",
+    glassDark: "rgba(26, 29, 41, 0.85)",
+    borderColor: "rgba(139, 157, 195, 0.2)",
     accentGlow: "rgba(0, 217, 255, 0.2)",
   }
 
@@ -79,10 +80,10 @@ export default function Header() {
         width: "100%",
         zIndex: 50,
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-        backgroundColor: isScrolled ? colors.glassMorphism : "transparent",
-        backdropFilter: isScrolled ? "blur(20px) saturate(180%)" : "none",
-        boxShadow: isScrolled ? `0 8px 32px ${colors.accentGlow}` : "none",
-        borderBottom: isScrolled ? `1px solid ${colors.electricCyan}20` : "none",
+        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        backdropFilter: isScrolled ? "blur(10px)" : "none",
+        boxShadow: isScrolled ? `0 8px 24px ${colors.accentGlow}` : "none",
+        borderBottom: `1px solid ${colors.borderColor}`,
       }}
     >
       <div
@@ -114,65 +115,30 @@ export default function Header() {
             onClick={scrollToHome}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "scale(1.05)"
-              const iconDiv = e.currentTarget.querySelector(".logo-icon") as HTMLElement
-              if (iconDiv) {
-                iconDiv.style.transform = "rotate(360deg) scale(1.1)"
-                iconDiv.style.boxShadow = `0 0 30px ${colors.electricCyan}80, 0 0 60px ${colors.vibrantGreen}40`
-              }
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "scale(1)"
-              const iconDiv = e.currentTarget.querySelector(".logo-icon") as HTMLElement
-              if (iconDiv) {
-                iconDiv.style.transform = "rotate(0deg) scale(1)"
-                iconDiv.style.boxShadow = `0 0 20px ${colors.electricCyan}60`
-              }
             }}
           >
-            {/* User-provided Logo */}
-            <div
-              className="logo-icon"
+            {/* Simple logo (no boxed tile) */}
+            <img
+              src={Logo}
+              alt="Systoid Logo"
               style={{
-                /* Completely invisible background - only logo and glow visible */
-                background: "none",
-                padding: "12px",            // a little more breathing room
-                borderRadius: "20px",        // smoother pill-box corners
-                transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-                /* layered glow for depth */
-                boxShadow: `0 0 12px ${colors.electricCyan}40, 0 0 24px ${colors.vibrantGreen}30`,
-                position: "relative",
-                overflow: "hidden",
-                width: "56px",               // slightly larger icon
-                height: "56px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                width: "40px",
+                height: "40px",
+                objectFit: "contain",
               }}
-            >
-              <img
-                src={Logo}
-                alt="Systoid Logo"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                  borderRadius: "10px",   // subtle rounding so it integrates with container radius
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              />
-              {/* animated neon halo */}
-              <div className="logo-glow" />
-            </div>
+            />
             <span
               className="logo-text"
               style={{
-                fontSize: "1.75rem",
-                fontWeight: "800",
+                fontSize: "1.4rem",
                 color: colors.pureWhite,
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                letterSpacing: "-0.02em",
-                textShadow: `0 0 20px ${colors.electricCyan}40`,
+                marginLeft: "10px",
+                fontFamily: '"Poppins", sans-serif',
+                letterSpacing: "-0.3px",
+                fontWeight: 700
               }}
             >
               Systoid
@@ -265,7 +231,7 @@ export default function Header() {
             }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = colors.accentGlow
+              e.currentTarget.style.backgroundColor = colors.glassDark
               e.currentTarget.style.transform = "scale(1.1)"
               e.currentTarget.style.boxShadow = `0 0 20px ${colors.electricCyan}40`
             }}
@@ -292,9 +258,9 @@ export default function Header() {
               left: 0,
               right: 0,
               top: "100%",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
-              border: `1px solid ${colors.electricCyan}30`,
+              backgroundColor: colors.glassDark,
+              backdropFilter: "blur(12px)",
+              border: `1px solid ${colors.borderColor}`,
               boxShadow: `0 20px 40px ${colors.accentGlow}`,
               borderRadius: "0 0 20px 20px",
             }}
@@ -323,7 +289,7 @@ export default function Header() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = colors.electricCyan
-                    e.currentTarget.style.backgroundColor = colors.accentGlow
+                    e.currentTarget.style.backgroundColor = colors.glassDark
                     e.currentTarget.style.transform = "translateX(8px)"
                     e.currentTarget.style.textShadow = `0 0 10px ${colors.electricCyan}60`
                   }}
@@ -360,16 +326,10 @@ export default function Header() {
             </div>
           </div>
         )}
-      </div>
 
-      {/* Enhanced Animations */}
-      <style>
-        {`
-          @keyframes logoSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-
+        {/* Enhanced Animations */}
+        <style>
+          {`
           .nav-link-item::after {
             content: '';
             position: absolute;
@@ -437,7 +397,8 @@ export default function Header() {
             }
           }
         `}
-      </style>
+        </style>
+      </div>
     </header>
   )
 }

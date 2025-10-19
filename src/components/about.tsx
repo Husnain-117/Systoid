@@ -36,18 +36,25 @@ function useInView() {
 }
 
 export default function About() {
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    accentMint: "#83C7AF",
+    accentGreen: "#0D716C",
+    accentOrange: "#E6A15C",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const values = [
@@ -74,10 +81,10 @@ export default function About() {
   ]
 
   const stats = [
-    { icon: TrendingUp, number: "500+", label: "Projects Completed", color: colors.electricCyan },
-    { icon: Users, number: "50+", label: "Happy Clients", color: colors.vibrantGreen },
-    { icon: Clock, number: "5+", label: "Years Experience", color: colors.electricCyan },
-    { icon: Shield, number: "99%", label: "Success Rate", color: colors.vibrantGreen },
+    { icon: TrendingUp, number: "500+", label: "Projects Completed", color: colors.primary },
+    { icon: Users, number: "50+", label: "Happy Clients", color: colors.primaryLight },
+    { icon: Clock, number: "5+", label: "Years Experience", color: colors.primary },
+    { icon: Shield, number: "99%", label: "Success Rate", color: colors.primaryLight },
   ]
 
   const [headerRef, headerInView] = useInView()
@@ -90,51 +97,35 @@ export default function About() {
       style={{
         paddingTop: "100px",
         paddingBottom: "100px",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Background Elements */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1, pointerEvents: "none" }}>
         <div
           style={{
             position: "absolute",
-            top: "15%",
-            left: "8%",
-            width: "250px",
-            height: "250px",
-            background: `radial-gradient(circle, ${colors.electricCyan}20, transparent 70%)`,
+            top: "-60px",
+            left: "-60px",
+            width: "260px",
+            height: "260px",
+            background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)`,
             borderRadius: "50%",
-            filter: "blur(60px)",
-            animation: "aboutFloat1 14s ease-in-out infinite",
+            filter: "blur(0px)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: "25%",
-            right: "12%",
-            width: "300px",
-            height: "300px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}15, transparent 70%)`,
+            bottom: "-80px",
+            right: "-80px",
+            width: "320px",
+            height: "320px",
+            background: `radial-gradient(closest-side, ${colors.primary}22, transparent)`,
             borderRadius: "50%",
-            filter: "blur(80px)",
-            animation: "aboutFloat2 18s ease-in-out infinite reverse",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "500px",
-            height: "500px",
-            background: `conic-gradient(from 45deg, ${colors.electricCyan}12, transparent, ${colors.vibrantGreen}12)`,
-            borderRadius: "50%",
-            filter: "blur(100px)",
-            animation: "aboutRotate 30s linear infinite",
+            filter: "blur(0px)",
           }}
         />
       </div>
@@ -165,19 +156,17 @@ export default function About() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "32px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
-              animation: "badgeFloat 4s ease-in-out infinite",
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -185,19 +174,15 @@ export default function About() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                animation: "heartbeat 2s ease-in-out infinite",
-                boxShadow: `0 0 20px ${colors.electricCyan}60`,
-                
-                
-                
+                boxShadow: `0 0 20px ${colors.primaryLight}60`,
               }}
             >
-              <Heart style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <Heart style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -208,11 +193,9 @@ export default function About() {
             style={{
               fontSize: "clamp(2.5rem, 5vw, 4rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "32px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
-              animation: "titleGlow 3s ease-in-out infinite alternate",
             }}
           >
             Crafting Digital Excellence Since 2019
@@ -220,7 +203,7 @@ export default function About() {
           <p
             style={{
               fontSize: "1.2rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "800px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -260,9 +243,8 @@ export default function About() {
               style={{
                 fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
                 fontWeight: "900",
-                color: colors.pureWhite,
+                color: colors.heading,
                 marginBottom: "32px",
-                textShadow: `0 0 30px ${colors.electricCyan}30`,
                 letterSpacing: "-0.01em",
               }}
             >
@@ -271,18 +253,18 @@ export default function About() {
             <div style={{ marginBottom: "40px" }}>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   lineHeight: "1.8",
                   marginBottom: "24px",
                   fontSize: "1.1rem",
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.color = colors.heading
                   e.currentTarget.style.transform = "translateX(8px)"
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.color = colors.paragraph
                   e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
@@ -292,18 +274,18 @@ export default function About() {
               </p>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   lineHeight: "1.8",
                   marginBottom: "24px",
                   fontSize: "1.1rem",
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.color = colors.heading
                   e.currentTarget.style.transform = "translateX(8px)"
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.color = colors.paragraph
                   e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
@@ -314,17 +296,17 @@ export default function About() {
               </p>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   lineHeight: "1.8",
                   fontSize: "1.1rem",
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = colors.pureWhite
+                  e.currentTarget.style.color = colors.heading
                   e.currentTarget.style.transform = "translateX(8px)"
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.color = colors.paragraph
                   e.currentTarget.style.transform = "translateX(0)"
                 }}
               >
@@ -345,22 +327,22 @@ export default function About() {
               <div
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: "blur(20px) saturate(180%)",
                   border: `1px solid ${colors.cardBorder}`,
                   borderRadius: "20px",
                   padding: "32px 24px",
                   textAlign: "center",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "translateZ(0)",
+                  boxShadow: colors.subtleShadow,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateZ(20px) scale(1.05)"
-                  e.currentTarget.style.boxShadow = `0 20px 40px ${colors.electricCyan}30`
-                  e.currentTarget.style.borderColor = colors.electricCyan
+                  e.currentTarget.style.transform = "translateZ(10px) scale(1.03)"
+                  e.currentTarget.style.boxShadow = colors.shadow
+                  e.currentTarget.style.borderColor = colors.primary
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateZ(0) scale(1)"
-                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                   e.currentTarget.style.borderColor = colors.cardBorder
                 }}
               >
@@ -368,39 +350,38 @@ export default function About() {
                   style={{
                     fontSize: "2rem",
                     fontWeight: "900",
-                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                     backgroundClip: "text",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     marginBottom: "8px",
-                    textShadow: `0 0 20px ${colors.electricCyan}40`,
                   }}
                 >
                   100%
                 </div>
-                <div style={{ fontSize: "0.95rem", color: colors.warmGray, fontWeight: "600" }}>
+                <div style={{ fontSize: "0.95rem", color: colors.textLight, fontWeight: "600" }}>
                   Client Satisfaction
                 </div>
               </div>
               <div
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: "blur(20px) saturate(180%)",
                   border: `1px solid ${colors.cardBorder}`,
                   borderRadius: "20px",
                   padding: "32px 24px",
                   textAlign: "center",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "translateZ(0)",
+                  boxShadow: colors.subtleShadow,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateZ(20px) scale(1.05)"
-                  e.currentTarget.style.boxShadow = `0 20px 40px ${colors.vibrantGreen}30`
-                  e.currentTarget.style.borderColor = colors.vibrantGreen
+                  e.currentTarget.style.transform = "translateZ(10px) scale(1.03)"
+                  e.currentTarget.style.boxShadow = colors.shadow
+                  e.currentTarget.style.borderColor = colors.primaryLight
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateZ(0) scale(1)"
-                  e.currentTarget.style.boxShadow = "none"
+                  e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                   e.currentTarget.style.borderColor = colors.cardBorder
                 }}
               >
@@ -408,17 +389,16 @@ export default function About() {
                   style={{
                     fontSize: "2rem",
                     fontWeight: "900",
-                    background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                    background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
                     backgroundClip: "text",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     marginBottom: "8px",
-                    textShadow: `0 0 20px ${colors.vibrantGreen}40`,
                   }}
                 >
                   24/7
                 </div>
-                <div style={{ fontSize: "0.95rem", color: colors.warmGray, fontWeight: "600" }}>Support Available</div>
+                <div style={{ fontSize: "0.95rem", color: colors.textLight, fontWeight: "600" }}>Support Available</div>
               </div>
             </div>
           </div>
@@ -440,11 +420,10 @@ export default function About() {
                 key={index}
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: "blur(20px) saturate(180%)",
                   border: `1px solid ${colors.cardBorder}`,
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "translateZ(0)",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+                  boxShadow: colors.subtleShadow,
                   cursor: "pointer",
                   borderRadius: "24px",
                   animation: `cardFloat${index} ${6 + index}s ease-in-out infinite`,
@@ -453,8 +432,8 @@ export default function About() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateZ(30px) scale(1.05)"
-                  e.currentTarget.style.borderColor = stat.color
-                  e.currentTarget.style.boxShadow = `0 25px 50px ${stat.color}40`
+                  e.currentTarget.style.borderColor = colors.primary
+                  e.currentTarget.style.boxShadow = String(colors.shadow)
                   const iconDiv = e.currentTarget.querySelector(".stat-icon-div") as HTMLElement
                   if (iconDiv) {
                     iconDiv.style.transform = "scale(1.2) rotate(360deg)"
@@ -463,7 +442,7 @@ export default function About() {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateZ(0) scale(1)"
                   e.currentTarget.style.borderColor = colors.cardBorder
-                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.2)"
+                  e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                   const iconDiv = e.currentTarget.querySelector(".stat-icon-div") as HTMLElement
                   if (iconDiv) {
                     iconDiv.style.transform = "scale(1) rotate(0deg)"
@@ -474,7 +453,7 @@ export default function About() {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: `linear-gradient(135deg, ${stat.color}10, transparent)`,
+                    background: `linear-gradient(135deg, ${colors.primaryLight}26, transparent)`,
                     opacity: 0,
                     transition: "opacity 0.3s ease",
                   }}
@@ -488,26 +467,25 @@ export default function About() {
                       height: "64px",
                       margin: "0 auto 24px auto",
                       borderRadius: "20px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                      boxShadow: `0 10px 25px ${stat.color}40`,
+                      boxShadow: `0 10px 25px ${colors.primaryLight}40`,
                     }}
                   >
-                    <stat.icon style={{ height: "32px", width: "32px", color: colors.pureWhite }} />
+                    <stat.icon style={{ height: "32px", width: "32px", color: "#FFFFFF" }} />
                   </div>
                   <div
                     style={{
                       fontSize: "2.5rem",
                       fontWeight: "900",
                       marginBottom: "12px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       backgroundClip: "text",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
-                      textShadow: `0 0 20px ${stat.color}40`,
                     }}
                   >
                     {stat.number}
@@ -515,7 +493,7 @@ export default function About() {
                   <div
                     style={{
                       fontSize: "0.95rem",
-                      color: colors.warmGray,
+                      color: colors.textLight,
                       fontWeight: "600",
                     }}
                   >
@@ -541,10 +519,9 @@ export default function About() {
             style={{
               fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               textAlign: "center",
               marginBottom: "60px",
-              textShadow: `0 0 30px ${colors.electricCyan}30`,
               letterSpacing: "-0.01em",
             }}
           >
@@ -563,12 +540,11 @@ export default function About() {
                 key={index}
                 style={{
                   backgroundColor: colors.cardBg,
-                  backdropFilter: "blur(20px) saturate(180%)",
                   border: `1px solid ${colors.cardBorder}`,
                   transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: valuesInView ? "translateZ(0)" : "translateZ(-50px)",
                   transitionDelay: `${index * 0.1}s`,
-                  boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
+                  boxShadow: colors.subtleShadow,
                   cursor: "pointer",
                   borderRadius: "24px",
                   textAlign: "center",
@@ -577,28 +553,28 @@ export default function About() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateZ(20px) scale(1.03)"
-                  e.currentTarget.style.borderColor = colors.electricCyan
-                  e.currentTarget.style.boxShadow = `0 25px 50px ${colors.electricCyan}30`
+                  e.currentTarget.style.borderColor = colors.primary
+                  e.currentTarget.style.boxShadow = String(colors.shadow)
                   const iconDiv = e.currentTarget.querySelector(".value-icon-div") as HTMLElement
                   if (iconDiv) {
                     iconDiv.style.transform = "scale(1.2) rotate(10deg)"
                   }
                   const title = e.currentTarget.querySelector(".value-title") as HTMLElement
                   if (title) {
-                    title.style.color = colors.electricCyan
+                    title.style.color = colors.primary
                   }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateZ(0) scale(1)"
                   e.currentTarget.style.borderColor = colors.cardBorder
-                  e.currentTarget.style.boxShadow = "0 15px 35px rgba(0,0,0,0.2)"
+                  e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                   const iconDiv = e.currentTarget.querySelector(".value-icon-div") as HTMLElement
                   if (iconDiv) {
                     iconDiv.style.transform = "scale(1) rotate(0deg)"
                   }
                   const title = e.currentTarget.querySelector(".value-title") as HTMLElement
                   if (title) {
-                    title.style.color = colors.pureWhite
+                    title.style.color = colors.heading
                   }
                 }}
               >
@@ -610,22 +586,22 @@ export default function About() {
                       height: "80px",
                       margin: "0 auto 24px auto",
                       borderRadius: "20px",
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-                      boxShadow: `0 15px 30px ${colors.electricCyan}40`,
+                      boxShadow: `0 15px 30px ${colors.primaryLight}40`,
                     }}
                   >
-                    <value.icon style={{ height: "40px", width: "40px", color: colors.pureWhite }} />
+                    <value.icon style={{ height: "40px", width: "40px", color: "#FFFFFF" }} />
                   </div>
                   <h4
                     className="value-title"
                     style={{
                       fontSize: "1.4rem",
                       fontWeight: "800",
-                      color: colors.pureWhite,
+                      color: colors.heading,
                       marginBottom: "16px",
                       transition: "color 0.3s ease",
                       letterSpacing: "-0.01em",
@@ -635,7 +611,7 @@ export default function About() {
                   </h4>
                   <p
                     style={{
-                      color: colors.warmGray,
+                      color: colors.paragraph,
                       fontSize: "1rem",
                       lineHeight: "1.7",
                       fontWeight: "400",
@@ -690,10 +666,7 @@ export default function About() {
             50% { transform: scale(1.2); }
           }
 
-          @keyframes titleGlow {
-            0% { text-shadow: 0 0 40px ${colors.electricCyan}30; }
-            100% { text-shadow: 0 0 40px ${colors.vibrantGreen}30; }
-          }
+          /* Removed neon titleGlow for light theme */
 
           @keyframes cardFloat0 {
             0%, 100% { transform: translateY(0px); }

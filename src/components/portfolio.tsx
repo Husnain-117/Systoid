@@ -46,18 +46,22 @@ function useInView() {
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all")
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with Hero
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    greenGlow: "rgba(0, 255, 136, 0.2)",
+    bgLight: "#FFFFFF",
+    bgGradientStart: "#F0F9F7",
+    bgGradientEnd: "#F4FCFA",
+    heading: "#143c3c",
+    paragraph: "#2D4A4A",
+    primary: "#0D716C",
+    primaryLight: "#83C7AF",
+    primarySoft: "#E6F4F0",
+    cardBg: "#FFFFFF",
+    cardBorder: "#D0E0DF",
+    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
+    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
+    textDark: "#143c3c",
+    textLight: "#5D7A7A",
   }
 
   const filters = [
@@ -161,54 +165,15 @@ export default function Portfolio() {
       style={{
         paddingTop: "80px",
         paddingBottom: "80px",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(120deg, ${colors.bgGradientStart}, ${colors.bgGradientEnd})`,
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Enhanced Galaxy Background */}
-      <div style={{ position: "absolute", inset: "0", zIndex: 1 }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `
-              radial-gradient(circle at 30% 20%, ${colors.electricCyan}10 1px, transparent 1px),
-              radial-gradient(circle at 70% 80%, ${colors.vibrantGreen}08 1px, transparent 1px),
-              radial-gradient(circle at 20% 70%, ${colors.electricCyan}06 1px, transparent 1px)
-            `,
-            backgroundSize: "180px 180px, 220px 220px, 160px 160px",
-            animation: "portfolioGalaxy 22s linear infinite",
-            opacity: 0.4,
-          }}
-        />
-        
-        <div
-          style={{
-            position: "absolute",
-            top: "25%",
-            right: "15%",
-            width: "200px",
-            height: "200px",
-            background: `radial-gradient(circle, ${colors.electricCyan}15, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(50px)",
-            animation: "portfolioFloat 12s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "30%",
-            left: "10%",
-            width: "250px",
-            height: "250px",
-            background: `radial-gradient(circle, ${colors.vibrantGreen}12, transparent 70%)`,
-            borderRadius: "50%",
-            filter: "blur(60px)",
-            animation: "portfolioFloat 16s ease-in-out infinite reverse",
-          }}
-        />
+      {/* Subtle background decorations */}
+      <div style={{ position: "absolute", inset: "0", zIndex: 1, pointerEvents: "none" }}>
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 260, height: 260, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primaryLight}26, transparent)` }} />
+        <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: 320, height: 320, borderRadius: "50%", background: `radial-gradient(closest-side, ${colors.primary}22, transparent)` }} />
       </div>
 
       <div
@@ -221,7 +186,7 @@ export default function Portfolio() {
           zIndex: 2,
         }}
       >
-        {/* Enhanced Section Header */}
+        {/* Section Header */}
         <div
           ref={headerRef}
           style={{
@@ -238,18 +203,17 @@ export default function Portfolio() {
               display: "inline-flex",
               alignItems: "center",
               gap: "12px",
-              backgroundColor: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              backgroundColor: colors.primarySoft,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "9999px",
               padding: "12px 24px",
               marginBottom: "24px",
-              boxShadow: `0 8px 32px ${colors.accentGlow}`,
+              boxShadow: colors.subtleShadow,
             }}
           >
             <div
               style={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
                 borderRadius: "50%",
                 padding: "8px",
                 width: "32px",
@@ -257,15 +221,14 @@ export default function Portfolio() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                animation: "iconPulse 3s ease-in-out infinite",
               }}
             >
-              <Globe style={{ height: "16px", width: "16px", color: colors.pureWhite }} />
+              <Globe style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
             </div>
             <span
               style={{
                 fontSize: "0.95rem",
-                color: colors.warmGray,
+                color: colors.textDark,
                 fontWeight: "600",
               }}
             >
@@ -276,9 +239,8 @@ export default function Portfolio() {
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",
               fontWeight: "900",
-              color: colors.pureWhite,
+              color: colors.heading,
               marginBottom: "24px",
-              textShadow: `0 0 40px ${colors.electricCyan}30`,
               letterSpacing: "-0.02em",
             }}
           >
@@ -287,7 +249,7 @@ export default function Portfolio() {
           <p
             style={{
               fontSize: "1.1rem",
-              color: colors.warmGray,
+              color: colors.paragraph,
               maxWidth: "700px",
               margin: "0 auto",
               lineHeight: "1.7",
@@ -326,35 +288,33 @@ export default function Portfolio() {
                 borderRadius: "9999px",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                 fontWeight: "600",
-                border: "none",
+                border: `1px solid ${colors.cardBorder}`,
                 cursor: "pointer",
                 transform: filtersInView ? "translateY(0)" : "translateY(20px)",
                 transitionDelay: `${0.3 + index * 0.1}s`,
                 fontSize: "0.9rem",
                 ...(activeFilter === filter.id
                   ? {
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                      color: colors.deepNavy,
-                      boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                      color: "#FFFFFF",
+                      boxShadow: colors.subtleShadow,
                     }
                   : {
                       backgroundColor: colors.cardBg,
-                      color: colors.warmGray,
-                      backdropFilter: "blur(20px) saturate(180%)",
-                      border: `1px solid ${colors.cardBorder}`,
+                      color: colors.textLight,
                     }),
               }}
               onMouseEnter={(e) => {
                 if (activeFilter !== filter.id) {
-                  e.currentTarget.style.backgroundColor = colors.accentGlow
-                  e.currentTarget.style.color = colors.electricCyan
+                  e.currentTarget.style.backgroundColor = colors.primarySoft
+                  e.currentTarget.style.color = colors.primary
                   e.currentTarget.style.transform = "translateY(-2px)"
                 }
               }}
               onMouseLeave={(e) => {
                 if (activeFilter !== filter.id) {
                   e.currentTarget.style.backgroundColor = colors.cardBg
-                  e.currentTarget.style.color = colors.warmGray
+                  e.currentTarget.style.color = colors.textLight
                   e.currentTarget.style.transform = "translateY(0)"
                 }
               }}
@@ -380,39 +340,38 @@ export default function Portfolio() {
               key={project.id}
               style={{
                 backgroundColor: colors.cardBg,
-                backdropFilter: "blur(20px) saturate(180%)",
                 border: `1px solid ${colors.cardBorder}`,
                 transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
                 transform: projectsInView ? "scale(1) translateY(0)" : "scale(0.95) translateY(30px)",
                 opacity: projectsInView ? 1 : 0,
                 transitionDelay: projectsInView ? `${0.5 + index * 0.1}s` : "0s",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                boxShadow: colors.subtleShadow,
                 borderRadius: "20px",
                 overflow: "hidden",
                 cursor: "pointer",
                 position: "relative",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "scale(1.02) translateY(-8px)"
-                e.currentTarget.style.borderColor = colors.electricCyan
-                e.currentTarget.style.boxShadow = `0 20px 40px rgba(0,0,0,0.25), 0 0 0 1px ${colors.electricCyan}60`
+                e.currentTarget.style.transform = "translateY(-6px)"
+                e.currentTarget.style.borderColor = colors.primary
+                e.currentTarget.style.boxShadow = colors.shadow
                 const image = e.currentTarget.querySelector(".project-image") as HTMLElement
-                if (image) image.style.transform = "scale(1.08)"
+                if (image) image.style.transform = "scale(1.06)"
                 const overlay = e.currentTarget.querySelector(".project-overlay") as HTMLElement
                 if (overlay) overlay.style.opacity = "1"
                 const title = e.currentTarget.querySelector(".project-title") as HTMLElement
-                if (title) title.style.color = colors.electricCyan
+                if (title) title.style.color = colors.primary
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "scale(1) translateY(0)"
                 e.currentTarget.style.borderColor = colors.cardBorder
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.15)"
+                e.currentTarget.style.boxShadow = String(colors.subtleShadow)
                 const image = e.currentTarget.querySelector(".project-image") as HTMLElement
                 if (image) image.style.transform = "scale(1)"
                 const overlay = e.currentTarget.querySelector(".project-overlay") as HTMLElement
                 if (overlay) overlay.style.opacity = "0"
                 const title = e.currentTarget.querySelector(".project-title") as HTMLElement
-                if (title) title.style.color = colors.pureWhite
+                if (title) title.style.color = colors.heading
               }}
             >
               <div style={{ position: "relative", overflow: "hidden" }}>
@@ -431,7 +390,7 @@ export default function Portfolio() {
                   style={{
                     position: "absolute",
                     inset: "0",
-                    background: `linear-gradient(45deg, ${colors.deepNavy}cc, transparent)`,
+                    background: `linear-gradient(45deg, ${colors.primary}1A, transparent)`,
                     opacity: 0,
                     transition: "opacity 0.4s ease",
                     display: "flex",
@@ -447,16 +406,16 @@ export default function Portfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{
-                      background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                      color: colors.deepNavy,
+                      background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                      color: "#FFFFFF",
                       "&:hover": {
-                        background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
-                        transform: "scale(1.05)",
+                        background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
+                        transform: "scale(1.04)",
                       },
                       fontWeight: 700,
                       padding: "8px 16px",
                       borderRadius: "8px",
-                      boxShadow: `0 4px 15px ${colors.electricCyan}40`,
+                      boxShadow: `0 4px 15px ${colors.primaryLight}40`,
                       textTransform: "none",
                       fontSize: "0.85rem",
                     }}
@@ -471,15 +430,15 @@ export default function Portfolio() {
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{
-                      borderColor: colors.pureWhite,
-                      color: colors.pureWhite,
-                      background: "rgba(255,255,255,0.1)",
+                      borderColor: colors.primary,
+                      color: colors.primary,
+                      background: `${colors.primary}0F`,
                       backdropFilter: "blur(10px)",
                       "&:hover": {
-                        background: colors.pureWhite,
-                        color: colors.deepNavy,
-                        borderColor: colors.pureWhite,
-                        transform: "scale(1.05)",
+                        background: `${colors.primary}14`,
+                        color: colors.primary,
+                        borderColor: colors.primary,
+                        transform: "scale(1.03)",
                       },
                       padding: "8px 16px",
                       borderRadius: "8px",
@@ -498,7 +457,7 @@ export default function Portfolio() {
                   style={{
                     fontSize: "1.2rem",
                     fontWeight: "800",
-                    color: colors.pureWhite,
+                    color: colors.heading,
                     marginBottom: "10px",
                     transition: "color 0.3s ease",
                     letterSpacing: "-0.01em",
@@ -508,7 +467,7 @@ export default function Portfolio() {
                 </h3>
                 <p
                   style={{
-                    color: colors.warmGray,
+                    color: colors.paragraph,
                     marginBottom: "16px",
                     lineHeight: "1.6",
                     fontSize: "0.95rem",
@@ -522,20 +481,20 @@ export default function Portfolio() {
                       key={techIndex}
                       style={{
                         padding: "4px 10px",
-                        backgroundColor: `${colors.electricCyan}15`,
-                        color: colors.electricCyan,
+                        backgroundColor: `${colors.primaryLight}26`,
+                        color: colors.primary,
                         fontSize: "0.75rem",
                         fontWeight: "600",
                         borderRadius: "9999px",
-                        border: `1px solid ${colors.electricCyan}30`,
+                        border: `1px solid ${colors.cardBorder}`,
                         transition: "all 0.3s ease",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.electricCyan}30`
+                        e.currentTarget.style.backgroundColor = `${colors.primaryLight}33`
                         e.currentTarget.style.transform = "translateY(-1px)"
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = `${colors.electricCyan}15`
+                        e.currentTarget.style.backgroundColor = `${colors.primaryLight}26`
                         e.currentTarget.style.transform = "translateY(0)"
                       }}
                     >
@@ -548,7 +507,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Enhanced CTA Section */}
+        {/* CTA Section */}
         <div
           ref={ctaRef}
           style={{
@@ -562,14 +521,13 @@ export default function Portfolio() {
         >
           <div
             style={{
-              background: colors.glassMorphism,
-              backdropFilter: "blur(20px) saturate(180%)",
+              background: colors.cardBg,
               border: `1px solid ${colors.cardBorder}`,
               borderRadius: "24px",
               padding: "40px 32px",
               maxWidth: "800px",
               margin: "0 auto",
-              boxShadow: `0 20px 40px rgba(0,0,0,0.2)`,
+              boxShadow: colors.subtleShadow,
               position: "relative",
               overflow: "hidden",
             }}
@@ -578,7 +536,7 @@ export default function Portfolio() {
               style={{
                 position: "absolute",
                 inset: 0,
-                background: `conic-gradient(from 0deg, ${colors.electricCyan}08, ${colors.vibrantGreen}08, transparent)`,
+                background: `conic-gradient(from 0deg, ${colors.primaryLight}08, ${colors.primary}08, transparent)`,
                 animation: "ctaRotate 20s linear infinite",
                 opacity: 0.3,
               }}
@@ -588,16 +546,15 @@ export default function Portfolio() {
                 style={{
                   fontSize: "1.75rem",
                   fontWeight: "900",
-                  color: colors.pureWhite,
+                  color: colors.heading,
                   marginBottom: "16px",
-                  textShadow: `0 0 30px ${colors.electricCyan}40`,
                 }}
               >
                 Have a Project in Mind?
               </h3>
               <p
                 style={{
-                  color: colors.warmGray,
+                  color: colors.paragraph,
                   marginBottom: "32px",
                   fontSize: "1.05rem",
                   lineHeight: "1.6",
@@ -610,20 +567,20 @@ export default function Portfolio() {
               <Button
                 onClick={scrollToContact}
                 sx={{
-                  background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                  color: colors.deepNavy,
+                  background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
+                  color: "#FFFFFF",
                   fontWeight: "800",
                   padding: "16px 40px",
                   borderRadius: "12px",
                   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
                   transform: "scale(1)",
-                  boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                  boxShadow: `0 8px 25px ${colors.primaryLight}40`,
                   fontSize: "1.1rem",
                   textTransform: "none",
                   "&:hover": {
-                    background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
+                    background: `linear-gradient(135deg, ${colors.primaryLight}, ${colors.primary})`,
                     transform: "scale(1.05) translateY(-2px)",
-                    boxShadow: `0 15px 35px ${colors.electricCyan}60`,
+                    boxShadow: `0 15px 35px ${colors.primaryLight}60`,
                   },
                 }}
               >
