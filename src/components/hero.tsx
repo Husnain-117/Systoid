@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import Button from "@mui/material/Button"
-import { ArrowRight, Play, Star } from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
 import MarketingImg from "../assets/marketing.jpg"
 import AppImg from "../assets/app.jpg"
 
@@ -239,7 +239,7 @@ export default function Hero() {
             <div style={{ position: "absolute", left: -22, bottom: -65, background: colors.cardBg, border: `1px solid ${colors.cardBorder}`, boxShadow: colors.subtleShadow, borderRadius: 24, width: "min(460px, 40vw)", padding: 20 }}>
               <img src={AppImg} alt="Programming" style={{ width: "100%", height: 190, objectFit: "cover", borderRadius: 16 }} />
               <div style={{ padding: "14px 6px 0" }}>
-                <div style={{ fontWeight: 800, color: colors.heading }}>Programming</div>
+                <div style={{ fontWeight: 800, color: colors.heading }}>Development</div>
                 <div style={{ fontSize: 13, color: colors.paragraph }}>Crafting robust applications.</div>
               </div>
             </div>
