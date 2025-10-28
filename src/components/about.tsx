@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Target, Eye, Award, Users, Clock, Shield, TrendingUp, Heart } from "lucide-react"
+import { Target, Eye, Award, Users, Clock, Shield, TrendingUp } from "lucide-react"
 
 function useInView() {
   const ref = useRef<HTMLDivElement>(null)
