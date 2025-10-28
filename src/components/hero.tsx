@@ -13,23 +13,23 @@ export default function Hero() {
   // Professional color scheme
   const colors = {
     bgLight: "#FFFFFF",
-    bgGradientStart: "#F0F9F7",
-    bgGradientEnd: "#F4FCFA",
-    heading: "#143c3c",  // Updated to the requested color
-    paragraph: "#2D4A4A", // Darkened for better contrast
-    primary: "#0D716C",
-    primaryLight: "#83C7AF",
-    primarySoft: "#E6F4F0",
-    pillText: "#143c3c",  // Updated to match heading
+    bgGradientStart: "#F5F7FB",
+    bgGradientEnd: "#F7FAFC",
+    heading: "#0F172A",
+    paragraph: "#334155",
+    primary: "#1E40AF",
+    primaryLight: "#60A5FA",
+    primarySoft: "#EAF2FF",
+    pillText: "#0F172A",
     cardBg: "#FFFFFF",
-    cardBorder: "#D0E0DF", // Slightly darker for better definition
-    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
-    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
-    accentMint: "#83C7AF",
-    accentGreen: "#0D716C",
-    accentOrange: "#E6A15C",
-    textDark: "#143c3c",  // New consistent text color
-    textLight: "#5D7A7A"  // New muted text color
+    cardBorder: "#E5E7EB",
+    shadow: "0 15px 45px rgba(15, 23, 42, 0.1)",
+    subtleShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+    accentMint: "#A7F3D0",
+    accentGreen: "#10B981",
+    accentOrange: "#10B981",
+    textDark: "#0F172A",
+    textLight: "#64748B"
   }
 
   useEffect(() => {
@@ -40,6 +40,16 @@ export default function Hero() {
     const contactElement = document.getElementById("contact")
     if (contactElement) {
       contactElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
+  const scrollToServices = () => {
+    const servicesElement = document.getElementById("services")
+    if (servicesElement) {
+      servicesElement.scrollIntoView({
         behavior: "smooth",
         block: "start",
       })
@@ -63,8 +73,8 @@ export default function Hero() {
     >
       {/* Subtle background decorations */}
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 260, height: 260, borderRadius: "50%", background: "radial-gradient(closest-side, rgba(47,111,232,0.14), transparent)" }} />
-        <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(closest-side, rgba(57,230,188,0.16), transparent)" }} />
+        <div style={{ position: "absolute", top: "-80px", right: "-80px", width: 260, height: 260, borderRadius: "50%", background: "radial-gradient(closest-side, rgba(30,64,175,0.14), transparent)" }} />
+        <div style={{ position: "absolute", bottom: "-100px", left: "-60px", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(closest-side, rgba(16,185,129,0.16), transparent)" }} />
       </div>
 
       <div
@@ -127,7 +137,7 @@ export default function Hero() {
                 Get Started
               </Button>
 
-              <Button variant="outlined" sx={{
+              <Button variant="outlined" onClick={scrollToServices} sx={{
                 color: colors.primary,
                 borderColor: colors.primary,
                 textTransform: "none",
@@ -175,18 +185,18 @@ export default function Hero() {
                   fontSize: '14px',
                   flexShrink: 0
                 }}>
-                  10+
+                  New
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, color: colors.heading, fontSize: 14 }}>Years Experience</div>
-                  <div style={{ color: colors.paragraph, fontSize: 13 }}>Delivering Excellence</div>
+                  <div style={{ fontWeight: 700, color: colors.heading, fontSize: 14 }}>New Company</div>
+                  <div style={{ color: colors.paragraph, fontSize: 13 }}>Focused on quality</div>
                 </div>
               </div>
               
               <div style={{ 
                 height: 24, 
                 width: 1, 
-                background: '#E0E9E8',
+                background: '#E5E7EB',
                 display: 'inline-block'
               }} />
               
@@ -204,11 +214,11 @@ export default function Hero() {
                   fontSize: '14px',
                   flexShrink: 0
                 }}>
-                  500+
+                  Open
                 </div>
                 <div>
-                  <div style={{ fontWeight: 700, color: colors.heading, fontSize: 14 }}>Projects Completed</div>
-                  <div style={{ color: colors.paragraph, fontSize: 13 }}>Across 20+ Countries</div>
+                  <div style={{ fontWeight: 700, color: colors.heading, fontSize: 14 }}>Portfolio In Progress</div>
+                  <div style={{ color: colors.paragraph, fontSize: 13 }}>Open to collaborations</div>
                 </div>
               </div>
             </div>
@@ -219,7 +229,7 @@ export default function Hero() {
             {/* Decorative crosses */}
             <div style={{ position: "absolute", left: 52, top: 94, display: "grid", gridTemplateColumns: "repeat(3, 10px)", gap: 6 }}>
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} style={{ width: 10, height: 10, color: colors.accentGreen, fontWeight: 900 }}>x</div>
+                <div key={i} style={{ width: 10, height: 10, color: colors.primary, opacity: 0.45, fontWeight: 900 }}>x</div>
               ))}
             </div>
 
@@ -244,10 +254,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating orange stat badge */}
-            <div style={{ position: "absolute", right: "24%", bottom: -8, width: 54, height: 54, borderRadius: 12, background: colors.accentOrange, boxShadow: colors.subtleShadow, display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: 900 }}>
-              ▮▮▮
-            </div>
+            
 
             {/* Circular play badge with rotating text */}
             <div style={{ position: "absolute", right: 327, top: -70, width: 120, height: 120 }}>
@@ -288,7 +295,7 @@ export default function Hero() {
             position: absolute;
             inset: -6px;
             border-radius: 50%;
-            border: 2px solid rgba(47,111,232,.35);
+            border: 2px solid rgba(30,64,175,.35);
             animation: ringPulse 1.8s ease-out infinite;
           }
           @keyframes ringPulse {

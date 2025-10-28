@@ -6,18 +6,18 @@ import {  Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, Github } 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  // Enhanced professional color palette
+  // Light professional palette aligned with the rest of the site
   const colors = {
-    deepNavy: "#1A1D29",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    glassMorphism: "rgba(26, 29, 41, 0.85)",
-    cardBg: "rgba(139, 157, 195, 0.08)",
-    cardBorder: "rgba(0, 217, 255, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
-    borderColor: "rgba(139, 157, 195, 0.2)",
+    deepNavy: "#0F172A",             // used for some text; now dark slate
+    electricCyan: "#1E40AF",         // primary blue
+    vibrantGreen: "#10B981",         // accent green
+    pureWhite: "#0F172A",           // repurposed for heading/text in footer (dark)
+    warmGray: "#64748B",            // muted text
+    glassMorphism: "rgba(255, 255, 255, 0.85)",
+    cardBg: "#FFFFFF",
+    cardBorder: "#E5E7EB",
+    accentGlow: "rgba(30, 64, 175, 0.12)",
+    borderColor: "#E5E7EB",
   }
 
   const footerLinks = {
@@ -72,7 +72,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 50%, #FFFFFF 100%)`,
         borderTop: `1px solid ${colors.borderColor}`,
         position: "relative",
         overflow: "hidden",
@@ -578,7 +578,7 @@ export default function Footer() {
                     e.currentTarget.style.transform = "scale(1.1) translateY(-2px)"
                     e.currentTarget.style.boxShadow = `0 8px 25px ${colors.electricCyan}40`
                     const icon = e.currentTarget.querySelector("svg") as SVGElement
-                    if (icon) icon.style.color = colors.pureWhite
+                    if (icon) icon.style.color = "#FFFFFF"
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = colors.cardBg

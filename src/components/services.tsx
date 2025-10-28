@@ -1,7 +1,7 @@
 "use client"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Smartphone, Globe, Monitor, Megaphone, Cog, Palette, ArrowRight, Zap } from 'lucide-react'
+import { Smartphone, Globe, Monitor, Megaphone, Cog, Palette, ArrowRight } from 'lucide-react'
 import { useState, useEffect, useRef } from "react"
 
 // Local service illustrations (add/replace with your assets)
@@ -46,25 +46,25 @@ function useInView() {
 export default function Services() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
-  // Light professional palette aligned with Hero
+  // Light professional palette aligned with Hero/Header
   const colors = {
     bgLight: "#FFFFFF",
-    bgGradientStart: "#F0F9F7",
-    bgGradientEnd: "#F4FCFA",
-    heading: "#143c3c",
-    paragraph: "#2D4A4A",
-    primary: "#0D716C",
-    primaryLight: "#83C7AF",
-    primarySoft: "#E6F4F0",
+    bgGradientStart: "#F3FAF7",
+    bgGradientEnd: "#FFFFFF",
+    heading: "#0F172A",
+    paragraph: "#334155",
+    primary: "#1E40AF",
+    primaryLight: "#60A5FA",
+    primarySoft: "#EAF2FF",
     cardBg: "#FFFFFF",
-    cardBorder: "#D0E0DF",
-    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
-    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
-    accentMint: "#83C7AF",
-    accentGreen: "#0D716C",
-    accentOrange: "#E6A15C",
-    textDark: "#143c3c",
-    textLight: "#5D7A7A",
+    cardBorder: "#E5E7EB",
+    shadow: "0 15px 45px rgba(15, 23, 42, 0.1)",
+    subtleShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+    accentMint: "#A7F3D0",
+    accentGreen: "#10B981",
+    accentOrange: "#10B981",
+    textDark: "#0F172A",
+    textLight: "#64748B",
   }
 
   const services = [
@@ -175,44 +175,6 @@ export default function Services() {
             transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "12px",
-              backgroundColor: colors.primarySoft,
-              border: `1px solid ${colors.cardBorder}`,
-              borderRadius: "9999px",
-              padding: "12px 24px",
-              marginBottom: "24px",
-              boxShadow: colors.subtleShadow,
-            }}
-          >
-            <div
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
-                borderRadius: "50%",
-                padding: "8px",
-                width: "32px",
-                height: "32px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: `0 0 20px ${colors.primaryLight}60`,
-              }}
-            >
-              <Zap style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
-            </div>
-            <span
-              style={{
-                fontSize: "0.95rem",
-                color: colors.textDark,
-                fontWeight: "600",
-              }}
-            >
-              Our Services
-            </span>
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",

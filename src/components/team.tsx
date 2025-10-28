@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Github, Linkedin, Twitter, Mail, Users } from "lucide-react"
+import { Github, Linkedin, Twitter, Mail } from "lucide-react"
 import husnain from "../assets/husnian.jpg"
 import azeem from "../assets/azeem.jpg"
 import arham from "../assets/arham.jpg"
@@ -43,22 +43,22 @@ export default function Team() {
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Light professional palette aligned with Hero
+  // Light professional palette aligned with Hero/Header
   const colors = {
     bgLight: "#FFFFFF",
-    bgGradientStart: "#F0F9F7",
-    bgGradientEnd: "#F4FCFA",
-    heading: "#143c3c",
-    paragraph: "#2D4A4A",
-    primary: "#0D716C",
-    primaryLight: "#83C7AF",
-    primarySoft: "#E6F4F0",
+    bgGradientStart: "#F7F9FD",
+    bgGradientEnd: "#FFFFFF",
+    heading: "#0F172A",
+    paragraph: "#334155",
+    primary: "#1E40AF",
+    primaryLight: "#60A5FA",
+    primarySoft: "#EAF2FF",
     cardBg: "#FFFFFF",
-    cardBorder: "#D0E0DF",
-    shadow: "0 15px 45px rgba(20, 60, 60, 0.1)",
-    subtleShadow: "0 8px 24px rgba(20, 60, 60, 0.08)",
-    textDark: "#143c3c",
-    textLight: "#5D7A7A",
+    cardBorder: "#E5E7EB",
+    shadow: "0 15px 45px rgba(15, 23, 42, 0.1)",
+    subtleShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+    textDark: "#0F172A",
+    textLight: "#64748B",
   }
 
   const teamMembers = [
@@ -178,43 +178,6 @@ export default function Team() {
             transitionDelay: "0.1s",
           }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "12px",
-              backgroundColor: colors.primarySoft,
-              border: `1px solid ${colors.cardBorder}`,
-              borderRadius: "9999px",
-              padding: "12px 24px",
-              marginBottom: "24px",
-              boxShadow: colors.subtleShadow,
-            }}
-          >
-            <div
-              style={{
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight})`,
-                borderRadius: "50%",
-                padding: "8px",
-                width: "32px",
-                height: "32px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Users style={{ height: "16px", width: "16px", color: "#FFFFFF" }} />
-            </div>
-            <span
-              style={{
-                fontSize: "0.95rem",
-                color: colors.textDark,
-                fontWeight: "600",
-              }}
-            >
-              Our Team
-            </span>
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 5vw, 3.5rem)",

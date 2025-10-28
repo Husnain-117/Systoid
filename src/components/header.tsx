@@ -10,16 +10,16 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Header palette aligned with Footer's dark theme
+  // Header palette aligned with professional blue/green/neutral theme
   const colors = {
-    deepNavy: "#1A1D29",
-    pureWhite: "#FFFFFF",
-    warmGray: "#8B9DC3",
-    electricCyan: "#00D9FF",
-    vibrantGreen: "#00FF88",
-    glassDark: "rgba(26, 29, 41, 0.85)",
-    borderColor: "rgba(139, 157, 195, 0.2)",
-    accentGlow: "rgba(0, 217, 255, 0.2)",
+    deepNavy: "#FFFFFF",          // used as CTA text color -> white
+    pureWhite: "#0F172A",         // used as logo/nav text -> dark slate
+    warmGray: "#334155",          // muted nav text
+    electricCyan: "#1E40AF",      // primary blue
+    vibrantGreen: "#10B981",      // accent green
+    glassDark: "rgba(255, 255, 255, 0.85)", // light glass background
+    borderColor: "#E5E7EB",       // neutral border
+    accentGlow: "rgba(30, 64, 175, 0.12)", // subtle blue glow
   }
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export default function Header() {
         width: "100%",
         zIndex: 50,
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-        background: `linear-gradient(135deg, ${colors.deepNavy} 0%, #0F1419 50%, ${colors.deepNavy} 100%)`,
+        background: `linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 50%, #FFFFFF 100%)`,
         backdropFilter: isScrolled ? "blur(10px)" : "none",
         boxShadow: isScrolled ? `0 8px 24px ${colors.accentGlow}` : "none",
         borderBottom: `1px solid ${colors.borderColor}`,
@@ -195,20 +195,18 @@ export default function Header() {
             <Button
               onClick={scrollToContact}
               sx={{
-                background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                color: colors.deepNavy,
-                fontWeight: "700",
-                padding: "12px 28px",
-                borderRadius: "12px",
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                transform: "scale(1)",
-                boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                backgroundColor: colors.electricCyan,
+                color: "#FFFFFF",
+                fontWeight: 700,
+                padding: "10px 22px",
+                borderRadius: "8px",
+                transition: "background-color 0.2s ease, box-shadow 0.2s ease",
+                boxShadow: `0 2px 8px ${colors.electricCyan}30`,
                 textTransform: "none",
                 fontSize: "0.95rem",
                 "&:hover": {
-                  background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
-                  transform: "scale(1.05) translateY(-2px)",
-                  boxShadow: `0 12px 35px ${colors.electricCyan}60`,
+                  backgroundColor: "#1B3796",
+                  boxShadow: `0 4px 12px ${colors.electricCyan}35`,
                 },
               }}
             >
@@ -309,14 +307,16 @@ export default function Header() {
                   onClick={scrollToContact}
                   sx={{
                     width: "100%",
-                    background: `linear-gradient(135deg, ${colors.electricCyan}, ${colors.vibrantGreen})`,
-                    color: colors.deepNavy,
-                    fontWeight: "700",
-                    boxShadow: `0 8px 25px ${colors.electricCyan}40`,
+                    backgroundColor: colors.electricCyan,
+                    color: "#FFFFFF",
+                    fontWeight: 700,
+                    borderRadius: "8px",
+                    textTransform: "none",
+                    paddingY: "10px",
+                    boxShadow: `0 2px 8px ${colors.electricCyan}30`,
                     "&:hover": {
-                      background: `linear-gradient(135deg, ${colors.vibrantGreen}, ${colors.electricCyan})`,
-                      transform: "translateY(-2px)",
-                      boxShadow: `0 12px 35px ${colors.electricCyan}60`,
+                      backgroundColor: "#1B3796",
+                      boxShadow: `0 4px 12px ${colors.electricCyan}35`,
                     },
                   }}
                 >
